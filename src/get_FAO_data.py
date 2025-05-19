@@ -3,62 +3,36 @@ Download FAO data from the FAO website and save it to a CSV file.
 """
 
 import pandas as pd
-import requests
-import io
-import zipfile
-from tqdm.auto import tqdm
 import os
+import sys
+from tqdm.auto import tqdm
+from pathlib import Path
 
-def download_fao_crop_production_bulk():
+def load_local_fao_crop_production(data_path):
     """
-    Download FAO crop production data from the bulk download files.
-    This is more reliable than using the API when it's experiencing issues.
+    Load FAO crop production data from a local CSV file.
     
+    Args:
+        data_path (Path): Path to the FAOSTAT crop production CSV file
+        
     Returns:
         DataFrame: Complete crop production dataset
     """
-    # URL for bulk download of crop production data
-    url = "https://fenixservices.fao.org/faostat/static/bulkdownloads/Production_Crops_E_All_Data.zip"
-    
-    print(f"Downloading crop production data from FAOSTAT bulk files...")
-    print(f"URL: {url}")
-    print("This may take a few minutes depending on your internet connection...")
+    print(f"Loading crop production data from: {data_path}")
     
     try:
-        # Download the zip file
-        response = requests.get(url, stream=True)
-        total_size_in_bytes = int(response.headers.get('content-length', 0))
-        block_size = 1024  # 1 Kibibyte
-        progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
+        # Check if file exists
+        if not os.path.exists(data_path):
+            raise FileNotFoundError(f"Data file not found at: {data_path}")
         
-        # Check if the download was successful
-        if response.status_code != 200:
-            raise Exception(f"Failed to download data: Status code {response.status_code}")
+        # Load the CSV file
+        df = pd.read_csv(data_path)
         
-        # Download with progress bar
-        content = io.BytesIO()
-        for data in response.iter_content(block_size):
-            progress_bar.update(len(data))
-            content.write(data)
-        progress_bar.close()
-        
-        content.seek(0)
-        
-        # Extract the CSV file from the ZIP archive
-        print("Extracting data from zip file...")
-        z = zipfile.ZipFile(content)
-        csv_filename = [f for f in z.namelist() if f.endswith('.csv')][0]
-        
-        # Read the CSV into a pandas DataFrame
-        print(f"Processing file: {csv_filename}")
-        with z.open(csv_filename) as f:
-            df = pd.read_csv(f)
-        
-        print(f"Data loaded successfully: {len(df)} rows")
+        print(f"Data loaded successfully: {len(df):,} rows, {len(df.columns)} columns")
         return df
     
     except Exception as e:
-        print(f"Error downloading bulk data: {str(e)}")
+        print(f"Error loading data: {str(e)}")
         return None
 
 def filter_crops_of_interest(df, crop_list):
@@ -94,7 +68,17 @@ def filter_crops_of_interest(df, crop_list):
             # Also standardize the crop name
             filtered_df.loc[crop_mask, 'Crop Name'] = crop_name
     
-    print(f"Filtered to {len(filtered_df)} rows for the specified crops")
+    print(f"Filtered to {len(filtered_df):,} rows for the specified crops")
+    
+    # Report which crops were found and which weren't
+    found_crops = filtered_df['Crop Name'].unique()
+    print(f"Found data for {len(found_crops)} crops: {', '.join(sorted(found_crops))}")
+    
+    missing_crops = [crop for crop in flat_crop_list if crop not in found_crops]
+    if missing_crops:
+        print(f"Warning: No data found for {len(missing_crops)} crops: {', '.join(missing_crops)}")
+        print("Check if these crops use different names in the FAO dataset")
+    
     return filtered_df
 
 def clean_and_format_dataframe(df):
@@ -109,97 +93,41 @@ def clean_and_format_dataframe(df):
     """
     # Select and rename relevant columns
     try:
-        # Handle different column naming patterns in FAOSTAT data
-        if 'Area' in df.columns:
-            area_col = 'Area'
-        elif 'Country' in df.columns:
-            area_col = 'Country'
-        else:
-            area_col = df.columns[0]  # First column is typically the country
-            
-        if 'Item' in df.columns:
-            item_col = 'Item'
-        elif 'Crop' in df.columns:
-            item_col = 'Crop'
-        else:
-            # Try to find a column that might contain crop names
-            for col in df.columns:
-                if any(crop_term in col.lower() for crop_term in ['item', 'crop', 'commodity']):
-                    item_col = col
-                    break
-            else:
-                item_col = None
-                print("Warning: Could not identify the crop/item column")
-            
-        if 'Element' in df.columns:
-            element_col = 'Element'
-        else:
-            # Try to find a column that might identify the element (production, yield, etc.)
-            for col in df.columns:
-                if any(term in col.lower() for term in ['element', 'measure', 'metric']):
-                    element_col = col
-                    break
-            else:
-                element_col = None
-                print("Warning: Could not identify the element column")
-                
-        if 'Value' in df.columns:
-            value_col = 'Value'
-        else:
-            # Sometimes the value is in a column called something else
-            numeric_cols = df.select_dtypes(include=['number']).columns
-            # Exclude year column
-            numeric_cols = [col for col in numeric_cols if 'year' not in col.lower()]
-            if numeric_cols:
-                value_col = numeric_cols[0]
-            else:
-                value_col = None
-                print("Warning: Could not identify the value column")
-        
-        # Only keep rows related to production (not area harvested or yield)
-        if element_col and 'Production' in df[element_col].unique():
-            df = df[df[element_col].str.contains('Production', case=False)]
-        
         # Create a new cleaned DataFrame with standardized column names
         cleaned_df = pd.DataFrame()
         
         # Add standardized columns
-        if area_col:
-            cleaned_df['Area'] = df[area_col]
+        cleaned_df['Area'] = df['Area']
         
         if 'Area Code' in df.columns:
             cleaned_df['Area Code'] = df['Area Code']
-        elif 'Country Code' in df.columns:
-            cleaned_df['Area Code'] = df['Country Code']
             
-        if item_col:
-            cleaned_df['Item'] = df[item_col]
+        cleaned_df['Item'] = df['Item']
             
         if 'Item Code' in df.columns:
             cleaned_df['Item Code'] = df['Item Code']
             
-        # Extract the Year and Value columns
-        if 'Year' in df.columns:
-            cleaned_df['Year'] = pd.to_numeric(df['Year'], errors='coerce').astype('Int64')
-        else:
-            # Sometimes years are part of column names in wide format data
-            # For now we'll assume long format, but this could be expanded
-            print("Warning: Could not find 'Year' column")
-            
-        if value_col:
-            cleaned_df['Value'] = pd.to_numeric(df[value_col], errors='coerce')
+        # Extract Element information (Production, Area harvested, etc.)
+        if 'Element' in df.columns:
+            # Only keep "Production" rows (not Area harvested or Yield)
+            if 'Production' in df['Element'].unique():
+                # We'll add this filter only if we're certain it won't remove all data
+                production_mask = df['Element'].str.contains('Production', case=False)
+                if production_mask.sum() > 0:
+                    df = df[production_mask]
+                    cleaned_df['Element'] = df['Element']
+        
+        # Extract Year and Value
+        cleaned_df['Year'] = pd.to_numeric(df['Year'], errors='coerce').astype('Int64')
+        cleaned_df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
             
         if 'Unit' in df.columns:
             cleaned_df['Unit'] = df['Unit']
-        elif 'Element Unit' in df.columns:
-            cleaned_df['Unit'] = df['Element Unit']
             
         if 'Flag' in df.columns:
             cleaned_df['Flag'] = df['Flag']
-        elif 'Flag Description' in df.columns:
-            cleaned_df['Flag'] = df['Flag Description']
             
-        # Copy crop category and name if they exist
+        # Copy crop category and name
         if 'Crop Category' in df.columns:
             cleaned_df['Crop Category'] = df['Crop Category']
         
@@ -208,6 +136,15 @@ def clean_and_format_dataframe(df):
         
         # Sort by Area, Year, and Item
         cleaned_df = cleaned_df.sort_values(by=['Area', 'Year', 'Item'])
+        
+        # Report on data years
+        year_range = cleaned_df['Year'].dropna().astype(int)
+        if not year_range.empty:
+            print(f"Data spans from {year_range.min()} to {year_range.max()}")
+        
+        # Report on countries
+        country_count = cleaned_df['Area'].nunique()
+        print(f"Data includes {country_count} countries/regions")
         
         return cleaned_df
     
@@ -242,21 +179,24 @@ def reshape_for_analysis(df):
         print(f"Error reshaping data: {str(e)}")
         return df
 
-def save_data_to_csv(df, filename="fao_crop_production_data.csv"):
+def save_data_to_csv(df, output_path):
     """
     Save the DataFrame to a CSV file.
     
     Args:
         df (DataFrame): Data to save
-        filename (str): Name of the CSV file
+        output_path (Path): Path where to save the CSV file
     """
-    df.to_csv(filename, index=False)
-    print(f"Data saved to {filename}")
-
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    # Save the file
+    df.to_csv(output_path, index=False)
+    print(f"Data saved to {output_path}")
 
 def main():
     """
-    Main function to retrieve and process all crop production data.
+    Main function to process all crop production data.
 
     Download the FAO data for the most produced
     Cereals (Maize, Rice, Wheat, Barley, Sorghum),
@@ -268,6 +208,26 @@ def main():
     These are the top crops according to FAO data 
     https://openknowledge.fao.org/server/api/core/bitstreams/df90e6cf-4178-4361-97d4-5154a9213877/content
     """
+    # Setup paths relative to script location using Path for cross-platform compatibility
+    script_dir = Path(os.path.dirname(os.path.abspath(__file__)))
+    project_root = script_dir.parent
+    data_dir = project_root / "data"
+    
+    # Define input file path - adjust filename as needed
+    input_file = data_dir / "Production_Crops_Livestock_E_All_Data_NOFLAG.csv"
+    
+    # Define output file paths - saving to the data folder as requested
+    output_file_long = data_dir / "fao_crop_production_comprehensive.csv"
+    output_file_wide = data_dir / "fao_crop_production_wide_format.csv"
+    
+    # Print paths for verification
+    print(f"Project structure:")
+    print(f"- Script location: {script_dir}")
+    print(f"- Project root: {project_root}")
+    print(f"- Data directory: {data_dir}")
+    print(f"- Input file: {input_file}")
+    print(f"- Output files will be saved to: {data_dir}")
+    
     # Define crops of interest
     crop_list = {
         "Cereals": [
@@ -287,12 +247,11 @@ def main():
         ]
     }
     
-    # Try to download from bulk files first
-    print("Attempting to download data from FAOSTAT bulk files...")
-    full_production_data = download_fao_crop_production_bulk()
+    # Load the data
+    full_production_data = load_local_fao_crop_production(input_file)
     
     if full_production_data is None or len(full_production_data) == 0:
-        print("Bulk download failed or returned empty data.")
+        print("Failed to load data or data is empty.")
         return None
     
     # Filter to crops of interest
@@ -301,29 +260,19 @@ def main():
     # Clean and format the data
     cleaned_data = clean_and_format_dataframe(filtered_data)
     
-    # If you want to save the data
+    # Save the data
     if not cleaned_data.empty:
-        save_data_to_csv(cleaned_data, "fao_crop_production_comprehensive.csv")
+        save_data_to_csv(cleaned_data, output_file_long)
         
         # Create a wide-format version for analysis
         wide_data = reshape_for_analysis(cleaned_data)
-        save_data_to_csv(wide_data, "fao_crop_production_wide_format.csv")
+        save_data_to_csv(wide_data, output_file_wide)
         
         # Display sample of the data
-        print("\nSample of the retrieved data:")
-        print(cleaned_data.head())
-        
-        # Display some basic statistics
-        print("\nData summary:")
-        if 'Crop Name' in cleaned_data.columns:
-            summary = cleaned_data.groupby('Crop Name')['Value'].describe()
-        else:
-            summary = cleaned_data.groupby('Item')['Value'].describe()
-        print(summary)
-    
+        print("\nSample of the processed data:")
+        print(cleaned_data.head())  
     return cleaned_data
 
 if __name__ == "__main__":
     # Run the main function
     crop_data = main()
-
