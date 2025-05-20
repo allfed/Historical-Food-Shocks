@@ -23,19 +23,19 @@ class TestFAODataConsistency:
         """Fixture providing the list of 25 crops that should be present in the output."""
         return {
             "Cereals": [
-                "Maize", "Rice", "Wheat", "Barley", "Sorghum"
+                "Maize (corn)", "Rice", "Wheat", "Barley", "Sorghum"
             ],
             "Sugar crops": [
                 "Sugar cane", "Sugar beet"
             ],
             "Roots and tubers": [
-                "Potatoes", "Cassava", "Sweet potatoes", "Yams", "Taro"
+                "Potatoes", "Cassava, fresh", "Sweet potatoes", "Yams", "Taro"
             ],
             "Fruits": [
                 "Bananas", "Apples", "Oranges", "Grapes", "Watermelons"
             ],
             "Vegetables": [
-                "Tomatoes", "Onions", "Cucumbers", "Cabbages", "Eggplants"
+                "Tomatoes", "Onions and shallots, green", "Cucumbers and gherkins", "Cabbages", "Eggplants (aubergines)"
             ]
         }
     
@@ -72,15 +72,8 @@ class TestFAODataConsistency:
         # Flatten the expected crops list
         all_expected_crops = [crop for category, crops in expected_crops.items() for crop in crops]
         
-        # Find the column containing crop names (either 'Item' or 'Crop Name')
-        crop_column = None
-        if 'Crop Name' in df.columns:
-            crop_column = 'Crop Name'
-        elif 'Item' in df.columns:
-            crop_column = 'Item'
-        
-        assert crop_column is not None, "Could not find crop name column ('Item' or 'Crop Name')"
-        
+        crop_column = 'Item'
+
         # Get the unique crops in the data
         unique_crops = set(df[crop_column].unique())
         
@@ -107,6 +100,28 @@ class TestFAODataConsistency:
             print(f"Available crops: {', '.join(sorted(unique_crops))}")
         
         assert len(missing_crops) == 0, f"{len(missing_crops)} crops are missing from the output"
+
+    def test_contains_only_expected_crops(self, output_filepath, expected_crops):
+        """Test that the output contains only expected crops."""
+        # Load the data
+        df = pd.read_csv(output_filepath)
+        
+        # Flatten the expected crops list
+        all_expected_crops = [crop for category, crops in expected_crops.items() for crop in crops]
+        
+        crop_column = 'Item'
+        
+        # Get the unique crops in the data
+        unique_crops = set(df[crop_column].unique())
+        
+        # Check if any unexpected crops are present
+        unexpected_crops = [crop for crop in unique_crops if crop not in all_expected_crops]
+        
+        if unexpected_crops:
+            print(f"Unexpected crops found: {', '.join(unexpected_crops)}")
+            print(f"Expected crops: {', '.join(all_expected_crops)}")
+        
+        assert len(unexpected_crops) == 0, f"Found unexpected crops in the output: {', '.join(unexpected_crops)}"
     
     def test_contains_all_years(self, output_filepath, expected_year_range):
         """Test that the output contains data for all expected years."""
@@ -129,8 +144,8 @@ class TestFAODataConsistency:
                 print(f"Missing years: {missing_years}")
                 print(f"Available years: {unique_years[:5]} ... {unique_years[-5:]}")
             
-            # It's okay if we have more years than expected
-            assert len(missing_years) == 0, f"{len(missing_years)} years are missing from the output"
+            # Strict check: No missing years allowed
+            assert len(missing_years) == 0, f"{len(missing_years)} years are missing from the output: {missing_years}"
             
         else:
             # Wide format (years as columns)
@@ -161,13 +176,11 @@ class TestFAODataConsistency:
                 print(f"Missing years: {missing_years}")
                 print(f"Available years: {unique_years[:5]} ... {unique_years[-5:]}")
             
-            # It's okay if some of the most recent years are missing
-            # Let's check if at least 80% of expected years are present
-            coverage = len(unique_years) / len(expected_years) * 100
-            assert coverage >= 80, f"Only {coverage:.1f}% of expected years are present in the data"
+            # Strict check: No missing years allowed
+            assert len(missing_years) == 0, f"{len(missing_years)} years are missing from the output: {missing_years}"
     
-    def test_contains_sufficient_countries(self, output_filepath, expected_country_count):
-        """Test that the output contains data for a sufficient number of countries/areas."""
+    def test_contains_all_countries(self, output_filepath, expected_country_count):
+        """Test that the output contains data for all expected countries/areas."""
         # Load the data
         df = pd.read_csv(output_filepath)
         
@@ -183,14 +196,23 @@ class TestFAODataConsistency:
         # Get the unique countries/areas in the data
         unique_areas = df[area_column].unique()
         
+        # Check area code column if it exists
+        if 'Area Code' in df.columns:
+            unique_area_codes = df['Area Code'].unique()
+            print(f"Found {len(unique_area_codes)} unique area codes")
+        
         # Print some information
         print(f"Found {len(unique_areas)} unique countries/areas in the data")
         print(f"Sample areas: {', '.join(sorted(unique_areas)[:10])}...")
         
-        # Check if we have at least 80% of the expected countries
-        min_expected = int(expected_country_count * 0.8)
-        assert len(unique_areas) >= min_expected, \
-            f"Only {len(unique_areas)} countries/areas found, expected at least {min_expected}"
+        # Strict check: Must have all expected countries
+        assert len(unique_areas) >= expected_country_count, \
+            f"Only {len(unique_areas)} countries/areas found, expected {expected_country_count}"
+        
+        # If we have Area Code, check if we have all 244 unique codes
+        if 'Area Code' in df.columns:
+            assert len(unique_area_codes) >= expected_country_count, \
+                f"Only {len(unique_area_codes)} unique area codes found, expected {expected_country_count}"
     
     def test_data_completeness(self, output_filepath):
         """Test the overall completeness of the data (missing values)."""
@@ -214,9 +236,9 @@ class TestFAODataConsistency:
                 pct = (count / len(df)) * 100
                 print(f"  {col}: {count:,} ({pct:.1f}%)")
         
-        # It's normal to have some missing values in agricultural data
-        # Let's consider the data complete if less than 50% of values are missing
-        assert missing_percentage < 50, f"Too many missing values: {missing_percentage:.1f}%"
+        # Some missing values are expected in agricultural data
+        # Let's consider the data complete if less than 30% of values are missing (stricter threshold)
+        assert missing_percentage < 30, f"Too many missing values: {missing_percentage:.1f}%"
     
     def test_production_values_reasonable(self, output_filepath):
         """Test that the production values are within reasonable ranges."""
@@ -251,23 +273,44 @@ class TestFAODataConsistency:
             
             # Check for negative values (which would be invalid for production)
             neg_count = (values < 0).sum()
-            neg_percentage = (neg_count / len(values)) * 100 if len(values) > 0 else 0
             
             # Statistics for this column
             print(f"\nColumn {col}:")
             print(f"  Range: {values.min():,.1f} to {values.max():,.1f}")
             print(f"  Mean: {values.mean():,.1f}")
-            print(f"  Negative values: {neg_count:,} ({neg_percentage:.2f}%)")
+            print(f"  Negative values: {neg_count:,}")
             
-            # Should have very few or no negative values
-            assert neg_percentage < 1, f"Too many negative values in {col}: {neg_percentage:.2f}%"
+            # Strict check: Zero tolerance for negative values
+            assert neg_count == 0, f"Found {neg_count:,} negative values in {col}"
             
             # Check for extremely large values (potential data errors)
             # For agriculture production, values should typically be less than 1 billion (1e9) tonnes
-            extreme_count = (values > 1e9).sum()
-            extreme_percentage = (extreme_count / len(values)) * 100 if len(values) > 0 else 0
+            extreme_threshold = 2.5e9  # 2.5 billion (this should be the absolute max based on FAO data)
+            extreme_count = (values > extreme_threshold).sum()
             
-            print(f"  Extremely large values (>1B): {extreme_count:,} ({extreme_percentage:.2f}%)")
+            if extreme_count > 0:
+                print(f"  Values > {extreme_threshold:,.0f}: {extreme_count:,}")
+                extreme_values = values[values > extreme_threshold]
+                print(f"  Examples: {', '.join([f'{v:,.0f}' for v in extreme_values.head(3)])}")
             
-            # Should have very few or no extremely large values
-            assert extreme_percentage < 1, f"Too many extremely large values in {col}: {extreme_percentage:.2f}%"
+            # Should have no extremely large values that might indicate data errors
+            assert extreme_count == 0, f"Found {extreme_count:,} extremely large values (>{extreme_threshold:,.0f}) in {col}"
+    
+    def test_element_is_production(self, output_filepath):
+        """Test that the data is for production (not area harvested, yield, etc.)"""
+        # Load the data
+        df = pd.read_csv(output_filepath)
+        
+        # Check if Element column exists
+        if 'Element' not in df.columns:
+            pytest.skip("Element column not found in the data")
+        
+        # Check that all rows are for Production
+        non_production = df[~df['Element'].str.contains('Production', case=False)]
+        
+        if len(non_production) > 0:
+            print(f"Found {len(non_production)} rows with Element not 'Production':")
+            print(non_production['Element'].value_counts())
+        
+        assert len(non_production) == 0, \
+            f"Found {len(non_production)} rows where Element is not Production"

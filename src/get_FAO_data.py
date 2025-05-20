@@ -46,42 +46,27 @@ def extract_and_load_fao_data(zip_path, csv_filename):
 
 def filter_crops_of_interest(df, crop_list):
     """
-    Filter the raw production dataset to include only crops of interest.
+    Filter the dataset to include only crops in crop_list.
     
     Args:
-        df (DataFrame): Complete FAOSTAT crop production dataset
+        df (DataFrame): FAOSTAT crop production dataset
         crop_list (dict): Dictionary of crop categories and their names
         
     Returns:
-        DataFrame: Filtered dataset containing only crops of interest
+        DataFrame: Filtered dataset with only the crops of interest
     """
-    # Flatten the crop list for filtering
-    flat_crop_list = [crop_name for category, crops in crop_list.items() 
-                     for crop_name in crops]
+    # Create a flat list of all crop names
+    all_crops = []
+    for crops in crop_list.values():
+        all_crops.extend(crops)
     
-    # Find the column containing crop/item names (usually 'Item')
-    item_col = next((col for col in df.columns if col.lower() in ['item', 'item_name', 'item_code_name', 'commodity']), None)
+    # Filter rows where 'Item' exactly matches any crop name
+    filtered_df = df[df['Item'].isin(all_crops)].copy()
+      
+    # Keep only rows with 't' as the unit
+    filtered_df = filtered_df[filtered_df['Unit'] == 't']
     
-    if not item_col:
-        print("Warning: Could not find item column. Columns available:", df.columns.tolist())
-        return None
-    
-    # Filter to include only the crops of interest
-    mask = df[item_col].apply(lambda x: any(crop.lower() in str(x).lower() for crop in flat_crop_list))
-    filtered_df = df[mask].copy()
-    
-    # No reformatting, just add crop category information
-    filtered_df['Crop Category'] = 'Other'
-    for category, crops in crop_list.items():
-        for crop_name in crops:
-            crop_mask = filtered_df[item_col].str.contains(crop_name, case=False)
-            filtered_df.loc[crop_mask, 'Crop Category'] = category
-            filtered_df.loc[crop_mask, 'Crop Name'] = crop_name
-
-    # Only keep the rows with "t" as Unit
-    filtered_df = filtered_df[filtered_df['Unit'] == 't'].copy()
-    
-    print(f"Filtered to {len(filtered_df):,} rows for specified crops")    
+    print(f"Filtered to {len(filtered_df):,} rows for specified crops")
     return filtered_df
 
 def save_data_to_csv(df, output_path):
@@ -128,19 +113,19 @@ def main():
     # Define crops of interest
     crop_list = {
         "Cereals": [
-            "Maize", "Rice", "Wheat", "Barley", "Sorghum"
+            "Maize (corn)", "Rice", "Wheat", "Barley", "Sorghum"
         ],
         "Sugar crops": [
             "Sugar cane", "Sugar beet"
         ],
         "Roots and tubers": [
-            "Potatoes", "Cassava", "Sweet potatoes", "Yams", "Taro"
+            "Potatoes", "Cassava, fresh", "Sweet potatoes", "Yams", "Taro"
         ],
         "Fruits": [
             "Bananas", "Apples", "Oranges", "Grapes", "Watermelons"
         ],
         "Vegetables": [
-            "Tomatoes", "Onions", "Cucumbers", "Cabbages", "Eggplants"
+            "Tomatoes", "Onions and shallots, green", "Cucumbers and gherkins", "Cabbages", "Eggplants (aubergines)"
         ]
     }
     
@@ -169,3 +154,5 @@ if __name__ == "__main__":
 
     print(crop_data.describe(include='all'))
     print(crop_data.head())
+    print(crop_data["Item"].unique())
+    print(len(crop_data["Item"].unique()))
