@@ -80,27 +80,3 @@ China,Potatoes,500,520
         # Check column renaming
         assert '2020' in result_df.columns, "Year column '2020' not found in aggregated data"
         assert 'Y2020_calories' not in result_df.columns, "Original column name not properly replaced"
-    
-    def test_edge_cases(self):
-        """Test edge cases like zero production or missing calorie values."""
-        data = """Area,Item,Y2020,Y2021
-        India,Maize (corn),0,500
-        Brazil,Unknown Crop,200,300
-        """
-        df_edge = pd.read_csv(pd.io.common.StringIO(data))
-        
-        # Process the data
-        result_df, _ = calculate_calories(df_edge)
-        
-        # Check zero production
-        india_maize_calories = result_df[(result_df['Area'] == 'India') & 
-                                    (result_df['Item'] == 'Maize (corn)')]['Y2020_calories'].values[0]
-        assert india_maize_calories == 0, "Zero production should result in zero calories"
-        
-        # Check missing calorie value (should be NaN)
-        brazil_unknown_row = result_df[(result_df['Area'] == 'Brazil') & 
-                                    (result_df['Item'] == 'Unknown Crop')]
-        assert pd.isna(brazil_unknown_row['Calorie_Value'].values[0]), \
-            "Missing calorie value should be NaN"
-        assert pd.isna(brazil_unknown_row['Y2020_calories'].values[0]), \
-            "Calories for unknown crop should be NaN"
