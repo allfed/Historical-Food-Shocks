@@ -98,6 +98,16 @@ def aggregate_calories_by_country(df, calorie_cols):
         df_agg[col] = df_agg[col].replace(0, pd.NA)
         if df_agg[col].isna().all():
             print(f"Country {df_agg['Area'].unique()} has 0 production for {col}")
+
+    # Convert all columns to numeric, so we can do the interpolation
+    df_agg[calorie_cols] = df_agg[calorie_cols].apply(pd.to_numeric, errors='coerce')
+    # Make the index the country names
+    df_agg.set_index('Area', inplace=True)
+    # If a country has data gap between two years, do a linear interpolation
+    # to fill the gap
+    # This will only interpolate values that have at least one non-NaN value before and after
+    df_agg = df_agg.interpolate(method='linear', limit_area='inside', axis=1)
+    
     return df_agg.rename(columns=column_mapping)
 
 def main():
@@ -124,7 +134,7 @@ def main():
     
     # Save results
     output_path = os.path.join(RESULTS_DIR, OUTPUT_FILE)
-    df_agg.to_csv(output_path, index=False)
+    df_agg.to_csv(output_path)
 
 if __name__ == "__main__":
     main()
