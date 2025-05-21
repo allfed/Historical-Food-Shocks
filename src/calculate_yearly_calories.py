@@ -89,6 +89,15 @@ def aggregate_calories_by_country(df, calorie_cols):
     # Clean up column names
     column_mapping = {col: col.replace('Y', '').replace('_calories', '') 
                      for col in calorie_cols}
+    
+    # If a country has 0 production for a year, set it to nan
+    # Because if a country has 0 production, it means no data for that year
+    # And we don't to confuse it with 0 calories
+    # Also print all the countries that have 0 production
+    for col in calorie_cols:
+        df_agg[col] = df_agg[col].replace(0, pd.NA)
+        if df_agg[col].isna().all():
+            print(f"Country {df_agg['Area'].unique()} has 0 production for {col}")
     return df_agg.rename(columns=column_mapping)
 
 def main():
