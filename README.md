@@ -6,7 +6,7 @@
 
 Historical-Food-Shocks analyzes the frequency and magnitude of food production shocks at the country level. This project aims to demonstrate that food production shocks meeting the Global Catastrophic Food Failure (GCFF) threshold of 5% occur regularly at national scales, suggesting that global-scale events of similar magnitude are plausible and require preparation.
 
-The analysis uses data from the Food and Agriculture Organization of the United Nations (FAO) to estimate how much each year's yield deviates from expected trends, focusing on major crops (corn, rice, wheat, and soy) that account for approximately two-thirds of global calorie production.
+The analysis uses data from the Food and Agriculture Organization of the United Nations (FAO) to estimate how much each year's yield deviates from expected trends, focusing on major crops that account for approximately two-thirds of global calorie production.
 
 By visualizing historical shock patterns through choropleth maps, this project grounds future catastrophic food security risks in historical data, challenging the perception that GCFF-scale events are merely theoretical.
 
@@ -28,15 +28,14 @@ You can now use the kernel "food-shocks" to run the example notebooks or analyze
 
 ## How to use this
 
-The main interface of the analysis is provided through the scripts in the `scripts` directory. The analysis process consists of:
+The main implementation of the analysis is provided in the `src` directory. The analysis process consists of:
 
 1. Loading and preprocessing the FAO data
 2. Calculating smoothed yield baselines using a Savitzky-Golay filter
 3. Identifying irregular fluctuations (shocks) by comparing actual yields to the smoothed baseline
 4. Aggregating crops on a calorie basis to evaluate total calorie production shocks
-5. Visualizing results through choropleth maps and time series plots
 
-Example usage can be found in the Jupyter notebooks located in the `scripts` directory.
+The `scripts` directory contains Jupyter notebooks with visualization examples and use cases for the analysis.
 
 ### Running the analysis with custom parameters
 
@@ -49,17 +48,15 @@ You can customize the analysis by modifying parameters such as:
 
 ### Visualizing results
 
-The package includes various visualization tools to represent food production shocks:
+The package includes visualization tools in the `scripts` directory to represent food production shocks:
 
 - Choropleth maps showing shock magnitudes across countries
 - Time series plots of shocks for specific countries or regions
-- Comparison views of different crops or time periods
 
 ## Getting the data
 
 The repository comes with recent versions of the FAO data, but if you need the most up-to-date information, you can download the data from the FAO:
-1. [Production data](http://www.fao.org/faostat/en/#data/QC)
-2. [Population data](http://www.fao.org/faostat/en/#data/OA) (if analyzing per capita figures)
+- [Production data](http://www.fao.org/faostat/en/#data/QC)
 
 ## Project Structure
 
@@ -94,36 +91,17 @@ flowchart TD
     id_pre_1[Import FAO data] --> id_pre_2[Clean and format data]
     id_pre_2 --> id_pre_3[Calculate total calories]
     end
-    subgraph id_mod [Analysis]
+    subgraph id_mod [Shock Detection]
     direction TB
-        subgraph id_mod_sub_1 [Shock Detection]
-        direction LR
-        id_mod_1[Apply Savitzky-Golay filter] --> id_mod_2[Create smoothed baseline]
-        id_mod_2 --> id_mod_3[Calculate % difference from baseline]
-        id_mod_3 --> id_mod_4[Identify shocks > 5%]
-        end
-        id_mod_sub_1 --> id_mod_sub_2
-        subgraph id_mod_sub_2 [Aggregation]
-        direction LR
-        id_mod_5[Aggregate by crop] --> id_mod_6[Aggregate by country]
-        id_mod_6 --> id_mod_7[Calculate frequency metrics]
-        end
+    id_mod_1[Apply Savitzky-Golay filter] --> id_mod_2[Create smoothed baseline]
+    id_mod_2 --> id_mod_3[Calculate % difference from baseline]
+    id_mod_3 --> id_mod_4[Identify shocks > 5%]
     end
-    subgraph id_pos [Visualization]
-    direction LR
-    id_pos_1[Generate choropleth maps] --> id_pos_2[Create time series plots]
-    id_pos_1 --> id_pos_3[Export results]
-    end
+    
     FAO[(FAO data)] ==> id_pre
     id_pre ==> id_mod
-    id_mod ==> id_pos
-    id_pos ==o RES((Report))
 
     style id_pre fill:None,stroke:red,stroke-width:4px,stroke-dasharray: 5 5
     style id_mod fill:None,stroke:green,stroke-width:4px,stroke-dasharray: 5 5
-    style id_pos fill:None,stroke:blue,stroke-width:4px,stroke-dasharray: 5 5
-    style id_mod_sub_1 fill:None
-    style id_mod_sub_2 fill:None
-    style RES stroke:pink,stroke-width:4px
     style FAO stroke:yellow,stroke-width:4px
 ```
