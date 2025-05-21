@@ -109,15 +109,7 @@ flowchart TD
         id_mod_6 --> id_mod_7[Calculate frequency metrics]
         end
     end
-    subgraph id_pos [Visualization]
-    direction LR
-    id_pos_1[Generate choropleth maps] --> id_pos_2[Create time series plots]
-    id_pos_1 --> id_pos_3[Export results]
-    end
-    FAO[(FAO data)] ==> id_pre
-    id_pre ==> id_mod
-    id_mod ==> id_pos
-    id_pos ==o RES((Report))
+
 
     style id_pre fill:None,stroke:red,stroke-width:4px,stroke-dasharray: 5 5
     style id_mod fill:None,stroke:green,stroke-width:4px,stroke-dasharray: 5 5
