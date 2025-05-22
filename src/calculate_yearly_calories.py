@@ -193,7 +193,6 @@ def main():
         "Tuvalu",
         "Tokelau",
         "Tonga",
-
     ]
     # Remove countries with clearly incorrect data
     df_agg = df_agg[~df_agg.index.isin(countries_to_remove)]
