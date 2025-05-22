@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Calculate total calories from crop production for each country and year.
 
@@ -6,7 +5,6 @@ This script processes FAO crop production data to calculate the total calories
 produced by each country for each year based on a list of key crops and their
 calorie values.
 """
-
 import os
 import pandas as pd
 

@@ -1,8 +1,6 @@
-import os
 import sys
 import pytest
 import pandas as pd
-import numpy as np
 from pathlib import Path
 
 # Add src directory to path to import the main script
