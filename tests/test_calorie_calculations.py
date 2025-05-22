@@ -3,6 +3,7 @@ Pytest tests for calorie calculation script.
 This module provides tests to verify the accuracy of calorie calculations,
 focusing on unit conversions and aggregation logic.
 """
+
 import sys
 import pytest
 import pandas as pd

@@ -58,25 +58,6 @@ The package includes visualization tools in the `scripts` directory to represent
 The repository comes with recent versions of the FAO data, but if you need the most up-to-date information, you can download the data from the FAO:
 - [Production data](http://www.fao.org/faostat/en/#data/QC)
 
-## Project Structure
-
-```
-Historical-Food-Shocks/
-├── .github/workflows/    # GitHub Actions workflows for CI/CD
-├── data/                 # Data files from FAO and processed datasets
-├── docs/                 # Documentation files
-├── results/              # Generated analysis results and visualizations
-├── scripts/              # Analysis scripts and Jupyter notebooks
-├── src/                  # Source code for the analysis package
-├── tests/                # Test suite for the code
-├── .flake8               # Configuration for linting
-├── .gitignore            # Git ignore file
-├── LICENSE               # Project license
-├── README.md             # This file
-├── automate_mkdocs.py    # Script to update documentation
-└── environment.yml       # Conda environment specification
-```
-
 ## Having problems?
 
 If you encounter any issues, feel free to open an issue in the repository or contact the maintainers.
