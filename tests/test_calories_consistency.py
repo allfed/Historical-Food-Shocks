@@ -12,7 +12,7 @@ crop_dict = {
     "Sugar beet": 42400,
     "Sugar cane": 45000,
     "Watermelons": 63000,
-    "Wheat": 2279000
+    "Wheat": 2279000,
 }
 
 CALORIE_VALUES = {
@@ -42,8 +42,9 @@ CALORIE_VALUES = {
     "Onions and shallots, green": 31,
     "Cucumbers and gherkins": 13,
     "Cabbages": 19,
-    "Eggplants (aubergines)": 21
+    "Eggplants (aubergines)": 21,
 }
+
 
 def test_calories_values():
     # Read in the calories data from the CSV file in results
@@ -58,23 +59,27 @@ def test_calories_values():
         if crop in CALORIE_VALUES:
             expected_calories += ((production * 1000000) * CALORIE_VALUES[crop]) / 100
     # Compare the expected calories with the actual data
-    assert np.isclose(afghanistan_data, expected_calories, rtol=1e-5), \
-        f"Expected {expected_calories}, but got {afghanistan_data}"
+    assert np.isclose(
+        afghanistan_data, expected_calories, rtol=1e-5
+    ), f"Expected {expected_calories}, but got {afghanistan_data}"
 
     # Check if the values for the United States in 1961 are larger than Afghanistan
     us_data = df.loc["United States of America", "1961"]
     afghanistan_data = df.loc["Afghanistan", "1961"]
-    assert us_data > afghanistan_data, \
-        f"Expected US calories in 1961 to be larger than Afghanistan, but got {us_data} and {afghanistan_data}"
-    
+    assert (
+        us_data > afghanistan_data
+    ), f"Expected US calories in 1961 to be larger than Afghanistan, but got {us_data} and {afghanistan_data}"
+
     # Check if the values values for the United States in 2023 are in a reasonable range
     us_data_2023 = df.loc["United States of America", "2023"]
-    assert us_data_2023 > 1000000000, \
-        f"Expected US calories in 2023 to be larger than 1 billion, but got {us_data_2023}"
-    
+    assert (
+        us_data_2023 > 1000000000
+    ), f"Expected US calories in 2023 to be larger than 1 billion, but got {us_data_2023}"
+
     # Should also not be larger than 1.8 × 10¹⁵ kcal
-    assert us_data_2023 < 1.8e15, \
-        f"Expected US calories in 2023 to be smaller than 1.8 × 10¹⁵ kcal, but got {us_data_2023}"
+    assert (
+        us_data_2023 < 1.8e15
+    ), f"Expected US calories in 2023 to be smaller than 1.8 × 10¹⁵ kcal, but got {us_data_2023}"
 
 
 if __name__ == "__main__":
