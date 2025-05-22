@@ -58,7 +58,7 @@ class TestCalculateFoodShocks:
     def actual_calorie_data(self):
         """Load actual calorie data if available for integration testing."""
         try:
-            data_path = project_root / "results" / "calories.csv"
+            data_path = project_root / "results" / "calories_by_countries.csv"
             if data_path.exists():
                 df = pd.read_csv(data_path, index_col=0)
                 # Remove regions and groups for cleaner testing
