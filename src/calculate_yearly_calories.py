@@ -101,13 +101,18 @@ def aggregate_calories_by_country(df, calorie_cols):
 
     # Convert all columns to numeric, so we can do the interpolation
     df_agg[calorie_cols] = df_agg[calorie_cols].apply(pd.to_numeric, errors='coerce')
+
+    # Rename/remove some of the countries for clarity
+    # Remove "China" beccause this refers to Taiwan and the mainland China
+    df_agg = df_agg[df_agg['Area'] != 'China']
+    # Rename "China; Taiwan Province of" to "Taiwan"
+    df_agg.loc[df_agg['Area'] == 'China, Taiwan Province of', 'Area'] = 'Taiwan'
+    # Rename China, mainland to "China"
+    df_agg.loc[df_agg['Area'] == 'China, mainland', 'Area'] = 'China'
+
     # Make the index the country names
     df_agg.set_index('Area', inplace=True)
-    # If a country has data gap between two years, do a linear interpolation
-    # to fill the gap
-    # This will only interpolate values that have at least one non-NaN value before and after
-    df_agg = df_agg.interpolate(method='linear', limit_area='inside', axis=1)
-    
+
     return df_agg.rename(columns=column_mapping)
 
 def main():
