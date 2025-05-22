@@ -48,7 +48,7 @@ CALORIE_VALUES = {
 
 def test_calories_values():
     # Read in the calories data from the CSV file in results
-    df = pd.read_csv("results/calories.csv", index_col=0)
+    df = pd.read_csv("results/calories_by_countries.csv", index_col=0)
     # Filter for Afghanistan and the 1961 column
     afghanistan_data = df.loc["Afghanistan", "1961"]
 
