@@ -8,6 +8,7 @@ This test suite validates:
 4. Data consistency and output format validation
 5. Realistic shock magnitude assessment
 """
+
 import sys
 import pytest
 import pandas as pd
