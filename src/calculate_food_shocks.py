@@ -30,14 +30,7 @@ def calculate_changes_savgol(data, window_length=11, polyorder=3):
     for country in data.index:
         # Extract yield data for the country
         yields = data.loc[country]
-        
-        # Skip if country has too many NaN values
-        if yields.isna().sum() > len(yields) / 2:
-            continue
-        
-        # Fill NaN values with interpolation for the filter to work
-        yields = yields.interpolate(method='linear', limit_direction='both')
-        
+               
         # Apply Savitzky-Golay filter to get the smoothed baseline
         smoothed_yields = savgol_filter(yields, window_length, polyorder)
         
