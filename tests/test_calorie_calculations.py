@@ -16,8 +16,7 @@ sys.path.append(str(project_root / "src"))
 # Import the module to test (assuming it's in the src directory)
 from calculate_yearly_calories import (
     calculate_calories,
-    aggregate_calories_by_country,
-    CALORIE_VALUES,
+    aggregate_calories_by_country
 )
 
 
