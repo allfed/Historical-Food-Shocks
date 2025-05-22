@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Test suite for calculate_food_shocks.py
 
@@ -19,7 +18,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root / "src"))
 
-from calculate_food_shocks import calculate_changes_savgol, main
+from calculate_food_shocks import calculate_changes_savgol
 
 
 class TestCalculateFoodShocks:
