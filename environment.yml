@@ -1,4 +1,4 @@
-name: food_shocks
+name: food-shocks
 channels:
   - conda-forge
   - defaults

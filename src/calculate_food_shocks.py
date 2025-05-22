@@ -46,97 +46,33 @@ def main():
     """
     Main function to run the analysis
     """
-    # Set path to input file
-    print(os.getcwd())
-    input_file = os.path.join("results", "calories.csv")
+    for selection in ["countries", "regions", "groups_of_countries"]:
+        # Set path to input file
+        input_file = os.path.join("results", "calories_by_" + selection + ".csv")
 
-    # Load data
-    print(f"Loading data from {input_file}...")
-    data = pd.read_csv(input_file, index_col=0)
+        # Load data
+        print(f"Loading data from {input_file}...")
+        data = pd.read_csv(input_file, index_col=0)
 
-    # Countries with clearly incorrect data or so low production that they are not relevant
-    countries_to_remove = [
-        "Antigua and Barbuda",  # too small production
-        "Vanuatu",  # too small production
-        "Micronesia",  # too small production
-        "Micronesia (Federated States of)",  # too small production
-        "Saint Kitts and Nevis",  # too small production
-        "Bahamas",  # too small production
-        "Barbados",  # too small production
-        "China, Hong Kong SAR",  # too small production
-        "China, Macao SAR",  # too small production
-    ]
-    # Remove countries with clearly incorrect data
-    data = data[~data.index.isin(countries_to_remove)]
+        # Calculate percentage changes using Savitzky-Golay filter
+        print("Calculating yield changes using Savitzky-Golay filter...")
+        # Set the window length and polynomial order for the Savitzky-Golay filter
+        # Using 15 years, because this is similar to the approach in Anderson et al. (2023)
+        # This way we can smooth out the data and get a better estimate of the changes
+        window_length = 15  # Must be odd
+        polyorder = 3  # Must be less than window_length
+        # Calculate percentage changes
+        pct_changes = calculate_changes_savgol(
+            data, window_length=window_length, polyorder=polyorder
+        )
 
-    # Also save the regions and groups of countries in separate files
-    regions = [
-        "Africa",
-        "Americas",
-        "Asia",
-        "Caribbean",
-        "Central America",
-        "Central Asia",
-        "Eastern Africa",
-        "Eastern Asia",
-        "Eastern Europe",
-        "Europe",
-        "Middle Africa",
-        "Northern Africa",
-        "Northern Europe",
-        "Oceania",
-        "Polynesia",
-        "South-eastern Asia",
-        "Southern Africa",
-        "Southern Asia",
-        "Southern Europe",
-        "Western Africa",
-        "Western Asia",
-        "Western Europe",
-        "World",
-        "South America",
-    ]
+        # Save results
+        output_file = os.path.join("results", "yield_changes_by_" + selection + ".csv")
+        pct_changes.to_csv(output_file)
+        print(f"Results saved to {output_file}")
 
-    groups_of_countries = [
-        "European Union (27)",
-        "Land Locked Developing Countries",
-        "Least Developed Countries",
-        "Low Income Food Deficit Countries",
-        "Net Food Importing Developing Countries",
-        "Australia and New Zealand",  # to avoid double counting
-        "Small Island Developing States",
-    ]
-    # Create two seperate dataframes for regions and groups of countries
-    regions_df = data[data.index.isin(regions)]
-    groups_df = data[data.index.isin(groups_of_countries)]
-    # Save the regions and groups of countries in separate files
-    regions_df.to_csv(os.path.join("results", "calories_by_regions.csv"))
-    groups_df.to_csv(os.path.join("results", "calories_by_groups_of_countries.csv"))
-    # Remove regions and groups of countries from the data
-    data = data[~data.index.isin(regions)]
-    data = data[~data.index.isin(groups_of_countries)]
-
-    # Calculate percentage changes using Savitzky-Golay filter
-    print("Calculating yield changes using Savitzky-Golay filter...")
-    # Set the window length and polynomial order for the Savitzky-Golay filter
-    # Using 15 years, because this is similar to the approach in Anderson et al. (2023)
-    # This way we can smooth out the data and get a better estimate of the changes
-    window_length = 15  # Must be odd
-    polyorder = 3  # Must be less than window_length
-    # Calculate percentage changes
-    pct_changes = calculate_changes_savgol(
-        data, window_length=window_length, polyorder=polyorder
-    )
-
-    # Save results
-    output_file = os.path.join("results", "yield_changes.csv")
-    pct_changes.to_csv(output_file)
-    print(f"Results saved to {output_file}")
-
-    return pct_changes
 
 
 if __name__ == "__main__":
-    pct_changes = main()
-    # Save a csv in the results folder
+    main()
     print("Analysis complete.")
