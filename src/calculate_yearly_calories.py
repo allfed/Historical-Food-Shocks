@@ -13,7 +13,7 @@ import pandas as pd
 DATA_DIR = "data"
 RESULTS_DIR = "results"
 INPUT_FILE = "fao_crop_production_comprehensive.csv"
-OUTPUT_FILE = "calories.csv"
+OUTPUT_FILE = "calories_by_countries.csv"
 
 # Define calorie values for each crop (kcal per 100g)
 CALORIE_VALUES = {
@@ -141,6 +141,69 @@ def main():
     df_calories, calorie_cols = calculate_calories(df)
 
     df_agg = aggregate_calories_by_country(df_calories, calorie_cols)
+
+
+    # Countries with clearly incorrect data or so low production that they are not relevant
+    countries_to_remove = [
+        "Antigua and Barbuda",  # too small production
+        "Vanuatu",  # too small production
+        "Micronesia",  # too small production
+        "Micronesia (Federated States of)",  # too small production
+        "Saint Kitts and Nevis",  # too small production
+        "Bahamas",  # too small production
+        "Barbados",  # too small production
+        "China, Hong Kong SAR",  # too small production
+        "China, Macao SAR",  # too small production
+    ]
+    # Remove countries with clearly incorrect data
+    df_agg = df_agg[~df_agg.index.isin(countries_to_remove)]
+
+    # Also save the regions and groups of countries in separate files
+    regions = [
+        "Africa",
+        "Americas",
+        "Asia",
+        "Caribbean",
+        "Central America",
+        "Central Asia",
+        "Eastern Africa",
+        "Eastern Asia",
+        "Eastern Europe",
+        "Europe",
+        "Middle Africa",
+        "Northern Africa",
+        "Northern Europe",
+        "Oceania",
+        "Polynesia",
+        "South-eastern Asia",
+        "Southern Africa",
+        "Southern Asia",
+        "Southern Europe",
+        "Western Africa",
+        "Western Asia",
+        "Western Europe",
+        "World",
+        "South America",
+    ]
+
+    groups_of_countries = [
+        "European Union (27)",
+        "Land Locked Developing Countries",
+        "Least Developed Countries",
+        "Low Income Food Deficit Countries",
+        "Net Food Importing Developing Countries",
+        "Australia and New Zealand",  # to avoid double counting
+        "Small Island Developing States",
+    ]
+    # Create two seperate dataframes for regions and groups of countries
+    regions_df = df_agg[df_agg.index.isin(regions)]
+    groups_df = df_agg[df_agg.index.isin(groups_of_countries)]
+    # Save the regions and groups of countries in separate files
+    regions_df.to_csv(os.path.join("results", "calories_by_regions.csv"))
+    groups_df.to_csv(os.path.join("results", "calories_by_groups_of_countries.csv"))
+    # Remove regions and groups of countries from the data
+    df_agg = df_agg[~df_agg.index.isin(regions)]
+    df_agg = df_agg[~df_agg.index.isin(groups_of_countries)]
 
     # Save results
     output_path = os.path.join(RESULTS_DIR, OUTPUT_FILE)
