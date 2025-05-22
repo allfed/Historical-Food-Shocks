@@ -87,7 +87,7 @@ If you encounter any issues, feel free to open an issue in the repository or con
 %%{ init: { 'flowchart': { 'curve': 'natural' } } }%%
 flowchart TD
     subgraph id_pre [Pre-processing]
-    direction LR
+    direction TB
     id_pre_1[Import FAO data] --> id_pre_2[Clean and format data]
     id_pre_2 --> id_pre_3[Calculate total calories]
     end
