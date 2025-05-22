@@ -1,4 +1,3 @@
-import os
 import sys
 import pytest
 import pandas as pd
@@ -6,7 +5,6 @@ import tempfile
 import zipfile
 import shutil
 from pathlib import Path
-from unittest.mock import patch, MagicMock
 
 # Add src directory to path to import the main script
 project_root = Path(__file__).parent.parent

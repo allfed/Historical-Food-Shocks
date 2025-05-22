@@ -1,16 +1,12 @@
-#!/usr/bin/env python3
 """
 Pytest tests for calorie calculation script.
 This module provides tests to verify the accuracy of calorie calculations,
 focusing on unit conversions and aggregation logic.
 """
-import os
 import sys
 import pytest
 import pandas as pd
-import numpy as np
 from pathlib import Path
-from io import StringIO
 
 
 # Add src directory to path to import the main script
