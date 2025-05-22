@@ -142,18 +142,58 @@ def main():
 
     df_agg = aggregate_calories_by_country(df_calories, calorie_cols)
 
-
-    # Countries with clearly incorrect data or so low production that they are not relevant
+    # Remove countries with less than 1 million population
+    # or an area below 10.000 km2, because the data is not reliable
     countries_to_remove = [
-        "Antigua and Barbuda",  # too small production
-        "Vanuatu",  # too small production
-        "Micronesia",  # too small production
-        "Micronesia (Federated States of)",  # too small production
-        "Saint Kitts and Nevis",  # too small production
-        "Bahamas",  # too small production
-        "Barbados",  # too small production
-        "China, Hong Kong SAR",  # too small production
-        "China, Macao SAR",  # too small production
+        "Antigua and Barbuda",
+        "Vanuatu",
+        "Micronesia",
+        "Micronesia (Federated States of)",
+        "Saint Kitts and Nevis",
+        "Bahamas",
+        "Barbados",
+        "China, Hong Kong SAR",
+        "China, Macao SAR",
+        "Bahrain",
+        "Belize",
+        "Bhutan",
+        "Brunei Darussalam",
+        "Cabo Verde",
+        "Comoros",
+        "Cook Islands",
+        "Djibouti",
+        "Dominica",
+        "Eswatini",
+        "Faroe Islands",
+        "Fiji",
+        "French Guiana",
+        "French Polynesia",
+        "Grenada",
+        "Guadeloupe",
+        "Kiribati",
+        "Kuwait",
+        "Luxembourg",
+        "Maldives",
+        "Malta",
+        "Martinique",
+        "Mauritius",
+        "Melanesia",
+        "Montenegro",
+        "Nauru",
+        "New Caledonia",
+        "Niue",
+        "Réunion",
+        "Saint Lucia",
+        "Saint Vincent and the Grenadines",
+        "Samoa",
+        "Sao Tome and Principe",
+        "Seychelles",
+        "Solomon Islands",
+        "Trinidad and Tobago",
+        "Tuvalu",
+        "Tokelau",
+        "Tonga",
+
     ]
     # Remove countries with clearly incorrect data
     df_agg = df_agg[~df_agg.index.isin(countries_to_remove)]
@@ -184,6 +224,7 @@ def main():
         "Western Europe",
         "World",
         "South America",
+        "Northern America",
     ]
 
     groups_of_countries = [
