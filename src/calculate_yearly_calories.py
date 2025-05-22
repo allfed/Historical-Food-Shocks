@@ -89,9 +89,34 @@ def aggregate_calories_by_country(df, calorie_cols):
     df_agg = df.groupby("Area")[calorie_cols].sum().reset_index()
 
     # Clean up column names
-    column_mapping = {
-        col: col.replace("Y", "").replace("_calories", "") for col in calorie_cols
-    }
+    column_mapping = {col: col.replace('Y', '').replace('_calories', '') 
+                     for col in calorie_cols}
+    
+    # If a country has 0 production for a year, set it to nan
+    # Because if a country has 0 production, it means no data for that year
+    # And we don't to confuse it with 0 calories
+    # Also print all the countries that have 0 production
+    for col in calorie_cols:
+        df_agg[col] = df_agg[col].replace(0, pd.NA)
+        if df_agg[col].isna().all():
+            print(f"Country {df_agg['Area'].unique()} has 0 production for {col}")
+
+    # Convert all columns to numeric, so we can do the interpolation
+    df_agg[calorie_cols] = df_agg[calorie_cols].apply(pd.to_numeric, errors='coerce')
+
+    # Rename/remove some of the countries for clarity
+    # Remove "China" beccause this refers to Taiwan and the mainland China
+    df_agg = df_agg[df_agg['Area'] != 'China']
+    # Rename "China; Taiwan Province of" to "Taiwan"
+    df_agg.loc[df_agg['Area'] == 'China, Taiwan Province of', 'Area'] = 'Taiwan'
+    # Rename China, mainland to "China"
+    df_agg.loc[df_agg['Area'] == 'China, mainland', 'Area'] = 'China'
+    # Remove Singapore, because the data is not reliable
+    df_agg = df_agg[df_agg['Area'] != 'Singapore']
+
+    # Make the index the country names
+    df_agg.set_index('Area', inplace=True)
+
     return df_agg.rename(columns=column_mapping)
 
 
@@ -119,7 +144,7 @@ def main():
 
     # Save results
     output_path = os.path.join(RESULTS_DIR, OUTPUT_FILE)
-    df_agg.to_csv(output_path, index=False)
+    df_agg.to_csv(output_path)
 
 
 if __name__ == "__main__":

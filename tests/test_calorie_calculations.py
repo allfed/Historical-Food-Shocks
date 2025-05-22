@@ -84,18 +84,14 @@ China,Potatoes,500,520
         )
 
         # Get actual value
-        usa_row = result_df[result_df["Area"] == "USA"]
-        assert usa_row["2020"].values[0] == pytest.approx(
-            expected_usa_2020
-        ), "Aggregated calories for USA in 2020 are incorrect"
-
+        usa_row = result_df.loc['USA']
+        assert usa_row['2020'] == pytest.approx(expected_usa_2020), \
+            "Aggregated calories for USA in 2020 are incorrect"
+        
         # Check column renaming
-        assert (
-            "2020" in result_df.columns
-        ), "Year column '2020' not found in aggregated data"
-        assert (
-            "Y2020_calories" not in result_df.columns
-        ), "Original column name not properly replaced"
+        assert '2020' in result_df.columns, "Year column '2020' not found in aggregated data"
+        assert 'Y2020_calories' not in result_df.columns, "Original column name not properly replaced"
+
 
     def test_edge_cases(self):
         """Test edge cases like zero production or missing calorie values."""
