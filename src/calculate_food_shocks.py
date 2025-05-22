@@ -46,35 +46,33 @@ def main():
     """
     Main function to run the analysis
     """
-    # Set path to input file
-    print(os.getcwd())
-    input_file = os.path.join("results", "calories.csv")
+    for selection in ["countries", "regions", "groups_of_countries"]:
+        # Set path to input file
+        input_file = os.path.join("results", "calories_by_" + selection + ".csv")
 
-    # Load data
-    print(f"Loading data from {input_file}...")
-    data = pd.read_csv(input_file, index_col=0)
+        # Load data
+        print(f"Loading data from {input_file}...")
+        data = pd.read_csv(input_file, index_col=0)
 
-    # Calculate percentage changes using Savitzky-Golay filter
-    print("Calculating yield changes using Savitzky-Golay filter...")
-    # Set the window length and polynomial order for the Savitzky-Golay filter
-    # Using 15 years, because this is similar to the approach in Anderson et al. (2023)
-    # This way we can smooth out the data and get a better estimate of the changes
-    window_length = 15  # Must be odd
-    polyorder = 3  # Must be less than window_length
-    # Calculate percentage changes
-    pct_changes = calculate_changes_savgol(
-        data, window_length=window_length, polyorder=polyorder
-    )
+        # Calculate percentage changes using Savitzky-Golay filter
+        print("Calculating yield changes using Savitzky-Golay filter...")
+        # Set the window length and polynomial order for the Savitzky-Golay filter
+        # Using 15 years, because this is similar to the approach in Anderson et al. (2023)
+        # This way we can smooth out the data and get a better estimate of the changes
+        window_length = 15  # Must be odd
+        polyorder = 3  # Must be less than window_length
+        # Calculate percentage changes
+        pct_changes = calculate_changes_savgol(
+            data, window_length=window_length, polyorder=polyorder
+        )
 
-    # Save results
-    output_file = os.path.join("results", "yield_changes.csv")
-    pct_changes.to_csv(output_file)
-    print(f"Results saved to {output_file}")
+        # Save results
+        output_file = os.path.join("results", "yield_changes_by_" + selection + ".csv")
+        pct_changes.to_csv(output_file)
+        print(f"Results saved to {output_file}")
 
-    return pct_changes
 
 
 if __name__ == "__main__":
-    pct_changes = main()
-    # Save a csv in the results folder
+    main()
     print("Analysis complete.")
