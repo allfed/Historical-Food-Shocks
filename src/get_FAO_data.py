@@ -33,7 +33,7 @@ def extract_and_load_fao_data(zip_path, csv_filename):
                     )
                     csv_filename = available_files[0]
                 else:
-                    raise FileNotFoundError(f"No CSV files found in ZIP.")
+                    raise FileNotFoundError("No CSV files found in ZIP.")
 
             # Read the CSV into a pandas DataFrame
             with z.open(csv_filename) as f:
