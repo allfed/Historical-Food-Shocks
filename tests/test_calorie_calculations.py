@@ -73,8 +73,8 @@ China,Potatoes,500,520
         expected_usa_2020 = (300 * 1_000_000 * 356 / 100) + (100 * 1_000_000 * 360 / 100)
         
         # Get actual value
-        usa_row = result_df[result_df['Area'] == 'USA']
-        assert usa_row['2020'].values[0] == pytest.approx(expected_usa_2020), \
+        usa_row = result_df.loc['USA']
+        assert usa_row['2020'] == pytest.approx(expected_usa_2020), \
             "Aggregated calories for USA in 2020 are incorrect"
         
         # Check column renaming

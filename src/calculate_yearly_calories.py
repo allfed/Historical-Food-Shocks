@@ -109,6 +109,8 @@ def aggregate_calories_by_country(df, calorie_cols):
     df_agg.loc[df_agg['Area'] == 'China, Taiwan Province of', 'Area'] = 'Taiwan'
     # Rename China, mainland to "China"
     df_agg.loc[df_agg['Area'] == 'China, mainland', 'Area'] = 'China'
+    # Remove Singapore, because the data is not reliable
+    df_agg = df_agg[df_agg['Area'] != 'Singapore']
 
     # Make the index the country names
     df_agg.set_index('Area', inplace=True)

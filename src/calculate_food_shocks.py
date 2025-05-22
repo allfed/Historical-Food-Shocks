@@ -56,7 +56,6 @@ def main():
 
     # Countries with clearly incorrect data or so low production that they are not relevant
     countries_to_remove = [
-        "Singapore",  # data says that they did only produce a few thousand calories in the 1990s
         "Antigua and Barbuda",  # too small production
         "Vanuatu",  # too small production
         "Micronesia",  # too small production
