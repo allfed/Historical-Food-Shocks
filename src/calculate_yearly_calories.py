@@ -117,7 +117,7 @@ def aggregate_calories_by_country(df, calorie_cols):
     # Make the index the country names
     df_agg.set_index("Area", inplace=True)
 
-    # South Sudan and Sudan only have data for the last 13 years. 
+    # South Sudan and Sudan only have data for the last 13 years.
     # So we need to fill the missing years with the data from Sudan (former)
     # This is not perfect, but it's better than leaving them empty
     # Add the data from Sudan (former) to South Sudan
