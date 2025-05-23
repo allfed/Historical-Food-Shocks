@@ -117,6 +117,15 @@ def aggregate_calories_by_country(df, calorie_cols):
     # Make the index the country names
     df_agg.set_index("Area", inplace=True)
 
+    # South Sudan and Sudan only have data for the last 13 years. 
+    # So we need to fill the missing years with the data from Sudan (former)
+    # This is not perfect, but it's better than leaving them empty
+    # Add the data from Sudan (former) to South Sudan
+    df_agg.loc["South Sudan"] = df_agg.loc["Sudan (former)"].copy()
+    # Add the data from Sudan (former) to Sudan
+    df_agg.loc["Sudan"] = df_agg.loc["Sudan (former)"].copy()
+    # Remove the data from Sudan (former)
+    df_agg = df_agg[df_agg.index != "Sudan (former)"]
     return df_agg.rename(columns=column_mapping)
 
 
@@ -144,56 +153,58 @@ def main():
 
     # Remove countries with less than 1 million population
     # or an area below 10.000 km2, because the data is not reliable
-    countries_to_remove = [
-        "Antigua and Barbuda",
-        "Vanuatu",
-        "Micronesia",
-        "Micronesia (Federated States of)",
-        "Saint Kitts and Nevis",
-        "Bahamas",
-        "Barbados",
-        "China, Hong Kong SAR",
-        "China, Macao SAR",
-        "Bahrain",
-        "Belize",
-        "Bhutan",
-        "Brunei Darussalam",
-        "Cabo Verde",
-        "Comoros",
-        "Cook Islands",
-        "Djibouti",
-        "Dominica",
-        "Eswatini",
-        "Faroe Islands",
-        "Fiji",
-        "French Guiana",
-        "French Polynesia",
-        "Grenada",
-        "Guadeloupe",
-        "Kiribati",
-        "Kuwait",
-        "Luxembourg",
-        "Maldives",
-        "Malta",
-        "Martinique",
-        "Mauritius",
-        "Melanesia",
-        "Montenegro",
-        "Nauru",
-        "New Caledonia",
-        "Niue",
-        "Réunion",
-        "Saint Lucia",
-        "Saint Vincent and the Grenadines",
-        "Samoa",
-        "Sao Tome and Principe",
-        "Seychelles",
-        "Solomon Islands",
-        "Trinidad and Tobago",
-        "Tuvalu",
-        "Tokelau",
-        "Tonga",
-    ]
+    # This is optinal, seems to be fine if we keep them
+    countries_to_remove = []
+    # countries_to_remove = [
+    #     "Antigua and Barbuda",
+    #     "Vanuatu",
+    #     "Micronesia",
+    #     "Micronesia (Federated States of)",
+    #     "Saint Kitts and Nevis",
+    #     "Bahamas",
+    #     "Barbados",
+    #     "China, Hong Kong SAR",
+    #     "China, Macao SAR",
+    #     "Bahrain",
+    #     "Belize",
+    #     "Bhutan",
+    #     "Brunei Darussalam",
+    #     "Cabo Verde",
+    #     "Comoros",
+    #     "Cook Islands",
+    #     "Djibouti",
+    #     "Dominica",
+    #     "Eswatini",
+    #     "Faroe Islands",
+    #     "Fiji",
+    #     "French Guiana",
+    #     "French Polynesia",
+    #     "Grenada",
+    #     "Guadeloupe",
+    #     "Kiribati",
+    #     "Kuwait",
+    #     "Luxembourg",
+    #     "Maldives",
+    #     "Malta",
+    #     "Martinique",
+    #     "Mauritius",
+    #     "Melanesia",
+    #     "Montenegro",
+    #     "Nauru",
+    #     "New Caledonia",
+    #     "Niue",
+    #     "Réunion",
+    #     "Saint Lucia",
+    #     "Saint Vincent and the Grenadines",
+    #     "Samoa",
+    #     "Sao Tome and Principe",
+    #     "Seychelles",
+    #     "Solomon Islands",
+    #     "Trinidad and Tobago",
+    #     "Tuvalu",
+    #     "Tokelau",
+    #     "Tonga",
+    # ]
     # Remove countries with clearly incorrect data
     df_agg = df_agg[~df_agg.index.isin(countries_to_remove)]
 
