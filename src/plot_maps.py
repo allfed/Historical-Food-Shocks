@@ -76,10 +76,10 @@ def merge_data_with_map(df, map_df):
     merged.rename(columns={0: 'food_shock'}, inplace=True)
     return merged
 
+
 def plot_map(merged, title, filename):
     """
     Plot the map with the merged data.
-
     Args:
         merged (gpd.GeoDataFrame): Merged GeoDataFrame.
         title (str): Title for the plot.
@@ -89,7 +89,10 @@ def plot_map(merged, title, filename):
     # Set the map to the Winkel Tripel projection
     merged = merged.to_crs('+proj=wintri')
     merged.plot(column='food_shock', ax=ax, legend=True,
-                legend_kwds={'label': "Food Shock [%]", 'orientation': "horizontal"},
+                legend_kwds={'label': "Food Shock [%]", 
+                            'orientation': "horizontal",
+                            'pad': 0.02,        # Distance from map
+                            'shrink': 0.6},      # Overall size
                 cmap='magma', missing_kwds={"color": "lightgrey"})
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
