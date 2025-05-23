@@ -26,14 +26,14 @@ To install the Historical-Food-Shocks package, we recommend setting up a virtual
 
 You can now use the kernel "food-shocks" to run the example notebooks or analyze the data yourself.
 
-## How to use this
+## How this works
 
 The main implementation of the analysis is provided in the `src` directory. The analysis process consists of:
 
 1. Loading and preprocessing the FAO data
-2. Calculating smoothed yield baselines using a Savitzky-Golay filter
-3. Identifying irregular fluctuations (shocks) by comparing actual yields to the smoothed baseline
-4. Aggregating crops on a calorie basis to evaluate total calorie production shocks
+2. Aggregating crops on a calorie basis to evaluate total calorie production
+3. Calculating smoothed yield baselines using a Savitzky-Golay filter
+4. Identifying irregular fluctuations (shocks) by comparing actual yields to the smoothed baseline
 
 The `scripts` directory contains Jupyter notebooks with visualization examples and use cases for the analysis.
 
@@ -45,13 +45,6 @@ You can customize the analysis by modifying parameters such as:
 - Shock threshold values (default is 5%)
 - Specific crops to include in the analysis
 - Date range for the analysis
-
-### Visualizing results
-
-The package includes visualization tools in the `scripts` directory to represent food production shocks:
-
-- Choropleth maps showing shock magnitudes across countries
-- Time series plots of shocks for specific countries or regions
 
 ## Getting the data
 
