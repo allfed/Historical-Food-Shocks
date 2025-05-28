@@ -89,15 +89,17 @@ def merge_data_with_map_count(df, map_df):
         gpd.GeoDataFrame: Merged GeoDataFrame.
     """
     # Create a new column name_short in the map DataFrame
-    map_df['name_short'] = coco.convert(map_df['ADMIN'], to='name_short', not_found=None)
+    map_df["name_short"] = coco.convert(
+        map_df["ADMIN"], to="name_short", not_found=None
+    )
 
     # Count the number of years with food shocks for each country
     df = pd.DataFrame(df[df < -5].count(axis=1))
 
     # Merge the data with the map
-    merged = map_df.merge(df, left_on='name_short', right_index=True, how='left')
+    merged = map_df.merge(df, left_on="name_short", right_index=True, how="left")
     # Rename the column to 'food_shock'
-    merged.rename(columns={0: 'food_shock_count'}, inplace=True)
+    merged.rename(columns={0: "food_shock_count"}, inplace=True)
     return merged
 
 
@@ -111,27 +113,27 @@ def plot_map_yield_shock_relative(merged, title, filename):
     """
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
-    merged = merged.to_crs('+proj=wintri')
-    vmin = merged['food_shock'].min()
+    merged = merged.to_crs("+proj=wintri")
+    vmin = merged["food_shock"].min()
     vmax = 0
     merged.plot(
-        column='food_shock',
+        column="food_shock",
         ax=ax,
         legend=True,
         legend_kwds={
-            'label': "Food Shock [%]",
-            'orientation': "horizontal",
-            'pad': 0.02,
-            'shrink': 0.6
+            "label": "Food Shock [%]",
+            "orientation": "horizontal",
+            "pad": 0.02,
+            "shrink": 0.6,
         },
-        cmap='magma',
+        cmap="magma",
         vmin=vmin,
         vmax=vmax,
-        missing_kwds={"color": "lightgrey"}
+        missing_kwds={"color": "lightgrey"},
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
-    plt.savefig(filename, bbox_inches='tight')
+    plt.savefig(filename, bbox_inches="tight")
     plt.close()
 
 
@@ -145,28 +147,26 @@ def plot_map_yield_shock_count(merged, title, filename):
     """
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
-    merged = merged.to_crs('+proj=wintri')
+    merged = merged.to_crs("+proj=wintri")
 
     merged.plot(
-        column='food_shock_count',
+        column="food_shock_count",
         ax=ax,
         legend=True,
         legend_kwds={
-            'label': "Number of Years with Food Shock",
-            'orientation': "horizontal",
-            'pad': 0.02,
-            'shrink': 0.6
+            "label": "Number of Years with Food Shock",
+            "orientation": "horizontal",
+            "pad": 0.02,
+            "shrink": 0.6,
         },
-        cmap='magma_r',
-        vmax=merged['food_shock_count'].max(),
-        missing_kwds={"color": "lightgrey"}
-
+        cmap="magma_r",
+        vmax=merged["food_shock_count"].max(),
+        missing_kwds={"color": "lightgrey"},
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
     plt.savefig(filename, bbox_inches="tight")
     plt.close()
-
 
 
 def main():
@@ -191,9 +191,17 @@ def main():
     print(f"Successfully merged data with map for {spatial_extent}")
 
     # Plot the map
-    plot_map_yield_shock_relative(merged_shock, "Largest Food Production Shock by Country (1961-2023)", "results/food_shock_by_country.png")
-    plot_map_yield_shock_count(merged_count, "Percentage of Years with Food Production Shock by Country (1961-2023)", "results/food_shock_count_by_country.png")
-    
+    plot_map_yield_shock_relative(
+        merged_shock,
+        "Largest Food Production Shock by Country (1961-2023)",
+        "results/food_shock_by_country.png",
+    )
+    plot_map_yield_shock_count(
+        merged_count,
+        "Percentage of Years with Food Production Shock by Country (1961-2023)",
+        "results/food_shock_count_by_country.png",
+    )
+
 
 if __name__ == "__main__":
     main()
