@@ -10,14 +10,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import country_converter as coco
 from pathlib import Path
-import warnings
-import os
 
-# Suppress warnings for cleaner output
-warnings.filterwarnings("ignore")
-
-# Set PROJ_LIB environment variable to fix PROJ issues
-os.environ["PROJ_LIB"] = "/home/florian/local/anaconda3/envs/food_shocks/share/proj"
 
 # Set up ALLFED plotting style
 plt.style.use(
@@ -58,7 +51,7 @@ def convert_country_names(df):
     return df
 
 
-def merge_data_with_map(df, map_df):
+def merge_data_with_map_shock(df, map_df):
     """
     Merge the DataFrame with the map DataFrame.
 
@@ -84,7 +77,31 @@ def merge_data_with_map(df, map_df):
     return merged
 
 
-def plot_map(merged, title, filename):
+def merge_data_with_map_count(df, map_df):
+    """
+    Merge the DataFrame with the map DataFrame to count the number of years with food shocks.
+
+    Args:
+        df (pd.DataFrame): DataFrame with countries in name_short format.
+        map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries.
+
+    Returns:
+        gpd.GeoDataFrame: Merged GeoDataFrame.
+    """
+    # Create a new column name_short in the map DataFrame
+    map_df['name_short'] = coco.convert(map_df['ADMIN'], to='name_short', not_found=None)
+
+    # Count the number of years with food shocks for each country
+    df = pd.DataFrame(df[df < -5].count(axis=1))
+
+    # Merge the data with the map
+    merged = map_df.merge(df, left_on='name_short', right_index=True, how='left')
+    # Rename the column to 'food_shock'
+    merged.rename(columns={0: 'food_shock_count'}, inplace=True)
+    return merged
+
+
+def plot_map_yield_shock_relative(merged, title, filename):
     """
     Plot the map with the merged data.
     Args:
@@ -94,24 +111,62 @@ def plot_map(merged, title, filename):
     """
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
-    merged = merged.to_crs("+proj=wintri")
+    merged = merged.to_crs('+proj=wintri')
+    vmin = merged['food_shock'].min()
+    vmax = 0
     merged.plot(
-        column="food_shock",
+        column='food_shock',
         ax=ax,
         legend=True,
         legend_kwds={
-            "label": "Food Shock [%]",
-            "orientation": "horizontal",
-            "pad": 0.02,  # Distance from map
-            "shrink": 0.6,
-        },  # Overall size
-        cmap="magma",
-        missing_kwds={"color": "lightgrey"},
+            'label': "Food Shock [%]",
+            'orientation': "horizontal",
+            'pad': 0.02,
+            'shrink': 0.6
+        },
+        cmap='magma',
+        vmin=vmin,
+        vmax=vmax,
+        missing_kwds={"color": "lightgrey"}
+    )
+    plot_winkel_tripel_map(ax)
+    ax.set_title(title)
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()
+
+
+def plot_map_yield_shock_count(merged, title, filename):
+    """
+    Plots the map with the number of years with yield shocks.
+    Args:
+        merged (gpd.GeoDataFrame): Merged GeoDataFrame.
+        title (str): Title for the plot.
+        filename (str): Filename to save the plot.
+    """
+    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+    # Set the map to the Winkel Tripel projection
+    merged = merged.to_crs('+proj=wintri')
+
+    merged.plot(
+        column='food_shock_count',
+        ax=ax,
+        legend=True,
+        legend_kwds={
+            'label': "Number of Years with Food Shock",
+            'orientation': "horizontal",
+            'pad': 0.02,
+            'shrink': 0.6
+        },
+        cmap='magma_r',
+        vmax=merged['food_shock_count'].max(),
+        missing_kwds={"color": "lightgrey"}
+
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
     plt.savefig(filename, bbox_inches="tight")
     plt.close()
+
 
 
 def main():
@@ -124,21 +179,21 @@ def main():
     df = pd.read_csv(data_path, index_col=0)
     # Convert country names to name_short format
     df = convert_country_names(df)
-    print(df.head())
 
     # Force use of Fiona instead of pyogrio
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
     admin_map = gpd.read_file(shapefile_path, engine="fiona")
     print(f"Successfully loaded {len(admin_map)} countries using Fiona")
-    print(admin_map.head())
 
     # Merge the data with the map
-    merged = merge_data_with_map(df, admin_map)
-    print(merged.head())
+    merged_shock = merge_data_with_map_shock(df, admin_map)
+    merged_count = merge_data_with_map_count(df, admin_map)
+    print(f"Successfully merged data with map for {spatial_extent}")
 
     # Plot the map
-    plot_map(merged, "Food Shock by Country", "results/food_shock_by_country.png")
-
+    plot_map_yield_shock_relative(merged_shock, "Largest Food Production Shock by Country (1961-2023)", "results/food_shock_by_country.png")
+    plot_map_yield_shock_count(merged_count, "Percentage of Years with Food Production Shock by Country (1961-2023)", "results/food_shock_count_by_country.png")
+    
 
 if __name__ == "__main__":
     main()
