@@ -30,6 +30,11 @@ def calculate_changes_savgol(data, window_length=15, polyorder=3):
         # Extract yield data for the country
         yields = data.loc[country]
 
+        # Set the filter window length to 11 if the country is Sudan or South Sudan
+        # this is a workaround for the fact that these countries have very few data points
+        if country in ["Sudan", "South Sudan"]:
+            window_length = 11
+
         # Apply Savitzky-Golay filter to get the smoothed baseline
         smoothed_yields = savgol_filter(yields, window_length, polyorder)
 
