@@ -13,26 +13,31 @@ from pathlib import Path
 
 
 # Set up ALLFED plotting style
-plt.style.use("https://raw.githubusercontent.com/allfed/ALLFED-matplotlib-style-sheet/main/ALLFED.mplstyle")
+plt.style.use(
+    "https://raw.githubusercontent.com/allfed/ALLFED-matplotlib-style-sheet/main/ALLFED.mplstyle"
+)
 
 
 def plot_winkel_tripel_map(ax):
     """
     Add border to map and remove gridlines and ticks for ALLFED style.
-    
+
     Args:
         ax: matplotlib axis object
     """
     # Load and plot border
-    border_geojson = gpd.read_file('https://raw.githubusercontent.com/ALLFED/ALLFED-map-border/main/border.geojson', engine='fiona')
-    border_geojson.plot(ax=ax, edgecolor='black', linewidth=0.1, facecolor='none')
+    border_geojson = gpd.read_file(
+        "https://raw.githubusercontent.com/ALLFED/ALLFED-map-border/main/border.geojson",
+        engine="fiona",
+    )
+    border_geojson.plot(ax=ax, edgecolor="black", linewidth=0.1, facecolor="none")
 
     ax.set_axis_off()
 
 
 def convert_country_names(df):
     """
-    Convert country names in the DataFrame to name_short format using country_converter. Assumes that 
+    Convert country names in the DataFrame to name_short format using country_converter. Assumes that
     the DataFrame has the countries in the index.
 
     Args:
@@ -42,7 +47,7 @@ def convert_country_names(df):
         pd.DataFrame: DataFrame with countries converted to name_short format.
     """
     # Convert country names to name_short format
-    df.index = coco.convert(df.index, to='name_short', not_found=None)
+    df.index = coco.convert(df.index, to="name_short", not_found=None)
     return df
 
 
@@ -58,15 +63,17 @@ def merge_data_with_map_shock(df, map_df):
         gpd.GeoDataFrame: Merged GeoDataFrame.
     """
     # Create a new column name_short in the map DataFrame
-    map_df['name_short'] = coco.convert(map_df['ADMIN'], to='name_short', not_found=None)
+    map_df["name_short"] = coco.convert(
+        map_df["ADMIN"], to="name_short", not_found=None
+    )
 
     # Get the largest food shock for each country
     df = pd.DataFrame(df.min(axis=1))
 
     # Merge the data with the map
-    merged = map_df.merge(df, left_on='name_short', right_index=True, how='left')
+    merged = map_df.merge(df, left_on="name_short", right_index=True, how="left")
     # Rename the column to 'food_shock'
-    merged.rename(columns={0: 'food_shock'}, inplace=True)
+    merged.rename(columns={0: "food_shock"}, inplace=True)
     return merged
 
 
@@ -153,10 +160,11 @@ def plot_map_yield_shock_count(merged, title, filename):
         cmap='magma_r',
         vmax=merged['food_shock_count'].max(),
         missing_kwds={"color": "lightgrey"}
+
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
-    plt.savefig(filename, bbox_inches='tight')
+    plt.savefig(filename, bbox_inches="tight")
     plt.close()
 
 
@@ -174,7 +182,7 @@ def main():
 
     # Force use of Fiona instead of pyogrio
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
-    admin_map = gpd.read_file(shapefile_path, engine='fiona')
+    admin_map = gpd.read_file(shapefile_path, engine="fiona")
     print(f"Successfully loaded {len(admin_map)} countries using Fiona")
 
     # Merge the data with the map
