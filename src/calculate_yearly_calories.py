@@ -49,7 +49,7 @@ CALORIE_VALUES = {
     "Soya beans": 335,
     "Rape or colza seed": 494,
     "Seed cotton, unginned": 253,
-    "Coconuts, in shell": 184
+    "Coconuts, in shell": 184,
 }
 
 assert len(CALORIE_VALUES) == 27, "Expected 27 crops with calorie values defined."

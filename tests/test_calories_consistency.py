@@ -15,7 +15,7 @@ crop_dict = {
     "Sugar cane": 45000,
     "Watermelons": 63000,
     "Wheat": 2279000,
-    "Seed cotton, unginned": 52300,    
+    "Seed cotton, unginned": 52300,
 }
 
 CALORIE_VALUES = {
@@ -51,7 +51,7 @@ CALORIE_VALUES = {
     "Soya beans": 335,
     "Rape or colza seed": 494,
     "Seed cotton, unginned": 253,
-    "Coconuts, in shell": 184
+    "Coconuts, in shell": 184,
 }
 
 
@@ -96,23 +96,22 @@ def test_calorie_crops_in_fao_data():
     # Load FAO data
     fao_file = "data/fao_crop_production_comprehensive.csv"
     df = pd.read_csv(fao_file)
-    
+
     # Get crop names from FAO data
-    fao_crops = set(df['Item'].unique())
-    
+    fao_crops = set(df["Item"].unique())
+
     # Check each crop in CALORIE_VALUES
     missing_crops = []
     for crop in CALORIE_VALUES.keys():
         if crop not in fao_crops:
             missing_crops.append(crop)
-    
+
     # Print results
     if missing_crops:
         print(f"Missing crops: {missing_crops}")
         print(f"Available crops: {sorted(fao_crops)[:5]}...")  # Show first 5
-    
-    assert len(missing_crops) == 0, f"Missing crops: {missing_crops}"
 
+    assert len(missing_crops) == 0, f"Missing crops: {missing_crops}"
 
 
 if __name__ == "__main__":
