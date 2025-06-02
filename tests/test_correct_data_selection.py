@@ -19,7 +19,7 @@ class TestFAODataConsistency:
 
     @pytest.fixture
     def expected_crops(self):
-        """Fixture providing the list of 25 crops that should be present in the output."""
+        """Fixture providing the list of 27 crops that should be present in the output."""
         return {
             "Cereals": ["Maize (corn)", "Rice", "Wheat", "Barley", "Sorghum"],
             "Sugar crops": ["Sugar cane", "Sugar beet"],
@@ -29,6 +29,13 @@ class TestFAODataConsistency:
                 "Sweet potatoes",
                 "Yams",
                 "Taro",
+            ],
+            "Oil crops": [
+                "Oil palm fruit",
+                "Soya beans",
+                "Rape or colza seed",
+                "Seed cotton, unginned",
+                "Coconuts, in shell",
             ],
             "Fruits": ["Bananas", "Apples", "Oranges", "Grapes", "Watermelons"],
             "Vegetables": [

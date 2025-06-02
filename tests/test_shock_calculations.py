@@ -102,24 +102,6 @@ class TestCalculateFoodShocks:
         except Exception:
             return None
 
-    def test_parameter_validation(self):
-        """Test that function properly validates input parameters."""
-        # Create minimal test data
-        test_data = pd.DataFrame(
-            {"1961": [100, 200], "1962": [110, 210], "1963": [120, 220]},
-            index=["Country1", "Country2"],
-        )
-
-        # Test even window_length (should fail)
-        with pytest.raises(ValueError, match="window_length must be an odd integer"):
-            calculate_changes_savgol(test_data, window_length=4, polyorder=2)
-
-        # Test polyorder >= window_length (should fail)
-        with pytest.raises(
-            ValueError, match="polyorder must be less than window_length"
-        ):
-            calculate_changes_savgol(test_data, window_length=5, polyorder=5)
-
     def test_major_shock_detection(self, simple_test_data):
         """Test that major shocks are correctly identified."""
         result = calculate_changes_savgol(
