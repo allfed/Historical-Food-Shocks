@@ -18,42 +18,6 @@ crop_dict = {
     "Seed cotton, unginned": 52300,
 }
 
-CALORIE_VALUES = {
-    # Cereals
-    "Maize (corn)": 356,
-    "Rice": 360,
-    "Wheat": 334,
-    "Barley": 332,
-    "Sorghum": 343,
-    # Sugar crops
-    "Sugar cane": 30,
-    "Sugar beet": 70,
-    # Roots and tubers
-    "Potatoes": 67,
-    "Cassava, fresh": 109,
-    "Sweet potatoes": 92,
-    "Yams": 101,
-    "Taro": 86,
-    # Fruits
-    "Bananas": 60,
-    "Apples": 48,
-    "Oranges": 34,
-    "Grapes": 53,
-    "Watermelons": 17,
-    # Vegetables
-    "Tomatoes": 17,
-    "Onions and shallots, green": 31,
-    "Cucumbers and gherkins": 13,
-    "Cabbages": 19,
-    "Eggplants (aubergines)": 21,
-    # Oil crops
-    "Oil palm fruit": 158,
-    "Soya beans": 335,
-    "Rape or colza seed": 494,
-    "Seed cotton, unginned": 253,
-    "Coconuts, in shell": 184,
-}
-
 
 def test_calories_values():
     # Read in the calories data from the CSV file in results
