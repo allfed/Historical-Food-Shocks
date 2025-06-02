@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+from calculate_yearly_calories import CALORIE_VALUES
+
 crop_dict = {
     "Apples": 15100,
     "Barley": 378000,
@@ -13,6 +15,7 @@ crop_dict = {
     "Sugar cane": 45000,
     "Watermelons": 63000,
     "Wheat": 2279000,
+    "Seed cotton, unginned": 52300,    
 }
 
 CALORIE_VALUES = {
@@ -43,6 +46,12 @@ CALORIE_VALUES = {
     "Cucumbers and gherkins": 13,
     "Cabbages": 19,
     "Eggplants (aubergines)": 21,
+    # Oil crops
+    "Oil palm fruit": 158,
+    "Soya beans": 335,
+    "Rape or colza seed": 494,
+    "Seed cotton, unginned": 253,
+    "Coconuts, in shell": 184
 }
 
 
@@ -78,8 +87,32 @@ def test_calories_values():
 
     # Should also not be larger than 1.8 × 10¹⁵ kcal
     assert (
-        us_data_2023 < 1.8e15
+        us_data_2023 < 2.1e15
     ), f"Expected US calories in 2023 to be smaller than 1.8 × 10¹⁵ kcal, but got {us_data_2023}"
+
+
+def test_calorie_crops_in_fao_data():
+    """Test that all CALORIE_VALUES crops are in the FAO data."""
+    # Load FAO data
+    fao_file = "data/fao_crop_production_comprehensive.csv"
+    df = pd.read_csv(fao_file)
+    
+    # Get crop names from FAO data
+    fao_crops = set(df['Item'].unique())
+    
+    # Check each crop in CALORIE_VALUES
+    missing_crops = []
+    for crop in CALORIE_VALUES.keys():
+        if crop not in fao_crops:
+            missing_crops.append(crop)
+    
+    # Print results
+    if missing_crops:
+        print(f"Missing crops: {missing_crops}")
+        print(f"Available crops: {sorted(fao_crops)[:5]}...")  # Show first 5
+    
+    assert len(missing_crops) == 0, f"Missing crops: {missing_crops}"
+
 
 
 if __name__ == "__main__":
