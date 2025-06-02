@@ -127,6 +127,13 @@ def main():
             "Yams",
             "Taro",
         ],
+        "Oil crops": [
+            "Oil palm fruit",
+            "Soya beans",
+            "Rape or colza seed",
+            "Seed cotton, unginned",
+            "Coconuts, in shell",
+        ],
         "Fruits": ["Bananas", "Apples", "Oranges", "Grapes", "Watermelons"],
         "Vegetables": [
             "Tomatoes",

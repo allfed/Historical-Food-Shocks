@@ -44,7 +44,15 @@ CALORIE_VALUES = {
     "Cucumbers and gherkins": 13,
     "Cabbages": 19,
     "Eggplants (aubergines)": 21,
+    # Oil crops
+    "Oil palm fruit": 158,
+    "Soya beans": 335,
+    "Rape or colza seed": 494,
+    "Seed cotton, unginned": 253,
+    "Coconuts, in shell": 184
 }
+
+assert len(CALORIE_VALUES) == 27, "Expected 27 crops with calorie values defined."
 
 
 def calculate_calories(df):
