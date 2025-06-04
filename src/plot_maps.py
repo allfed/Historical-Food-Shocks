@@ -202,6 +202,16 @@ def main():
         "results/food_shock_count_by_country.png",
     )
 
+    # Save the largest food shock per country to a CSV file
+    # Together with the year of the shock
+    largest_shock = df.min(axis=1).reset_index()
+    largest_shock.columns = ["country", "largest_food_shock"]
+    # Get the year of the shock, these are the column names
+    df = df.reset_index(drop=True)
+    largest_shock["year_of_shock"] = df.columns[df.values.argmin(axis=1)]
+    largest_shock = largest_shock.set_index("country")
+    largest_shock.to_csv("results/largest_food_shock_by_country.csv")
+    print("Saved largest food shock per country to results/largest_food_shock_by_country.csv")
 
 if __name__ == "__main__":
     main()
