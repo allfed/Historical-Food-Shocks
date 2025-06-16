@@ -7,63 +7,59 @@ Antigua and Barbuda,-190.3241670000000,1978,,,,
 Argentina,-30.541717999999999,2009,Argentina, 2009, Climate, Not applicable, Severe drought caused 50% wheat yield reduction and 1.5 million cattle death, HESS - Characteristics of droughts in Argentina's core crop region, https://hess.copernicus.org/articles/25/2475/2021/
 Armenia,-27.94626500000000,2000, Armenia, 2000, Climate, not applicable, Hot and dry conditions after June affected cereal production reducing harvest below 320,000 tonne target to 295,000 tonnes despite good growing conditions until June, FAO/WFP Special Report Armenia, https://www.fao.org/4/x7953e/x7953e00.htm
 Australia,-42.24180100000000,2003,Climate, not applicable, Continuation of 2002-2003 drought which was recognized as worst drought on record by 2003, with farm GDP falling 24.3% through June 2003 and 56.1% of Australia seriously/severely rainfall deficient from March 2002-January 2003, The impact of the 2002 drought on the economy and agricultural employment, https://treasury.gov.au/publication/economic-roundup-autumn-2004/the-impact-of-the-2002-drought-on-the-economy-and-agricultural-employment
-Austria,-20.521806827986307,1965, Austria, 1965, Unknown, Not applicable, Record low cereal production and yields but specific causative factors not documented in available sources, CEIC Data Austria Agricultural Production, https://www.ceicdata.com/en/austria/agricultural-production-and-consumption
-Azerbaijan,-18.2782934050108,1999
-Bahamas,-45.973068195060776,1971
-Bahrain,-37.70972575438318,1974
-Bangladesh,-10.21053537201097,1972
-Barbados,-27.011256407195244,2016
-Belarus,-15.562262146035366,1999
-Belgium,-15.722131487182612,2016
-Belgium-Luxembourg,-15.727536515393304,1966
-Belize,-19.5668820678928,1976
-Benin,-18.125733896871377,1987
-Bhutan,-30.758652932057707,2002
-Bolivia,-29.70566403926084,1983
-Bosnia and Herzegovina,-34.90571998638232,2003
-Botswana,-80.43254905806582,1979
-Brazil,-10.804008865491372,1978
-Brunei Darussalam,-34.86757449158134,1985
-Bulgaria,-35.97848401565852,1996
-Burkina Faso,-20.95963138264411,2007
-Burundi,-14.513163983330552,2017
-Cabo Verde,-48.57086242026663,1985
-Cambodia,-49.208109753314766,1974
-Cameroon,-7.40031725871475,1987
-Canada,-24.705763709707565,2002
-Central African Republic,-14.867037975918128,2013
-Chad,-31.86897901427529,1993
-Chile,-22.20052913136709,1973
-Hong Kong,-25.07003015690114,1992
-Taiwan,-10.899290677643725,1963
-China,-7.145162835733522,2003
-Colombia,-7.386772700948192,1977
-Comoros,-37.36930084100496,2002
-Congo Republic,-9.395582542419149,1991
-Cook Islands,-34.6014710274729,2004
-Costa Rica,-11.303766553487794,2015
-Croatia,-27.73915175026886,2003
-Cuba,-23.282606223023063,1993
-Cyprus,-55.69731128518948,2008
-Czechia,-23.073441263814324,2003
-Czechia,-15.246332245801804,1965
-Cote d'Ivoire,-10.08456738354966,2011
-North Korea,-41.97069970142952,1996
-DR Congo,-27.95340091183572,2009
-Denmark,-24.032718573684765,2018
-Djibouti,-36.47290015627016,1980
-Dominica,-33.19917547729438,1980
-Dominican Republic,-16.087763757608375,1968
-Ecuador,-19.76780039870881,1991
-Egypt,-15.658638713175598,2018
-El Salvador,-15.22442487645636,1982
-Equatorial Guinea,-5.346423702254728,1998
-Eritrea,-74.19416647041943,2002
-Estonia,-32.82616360002339,2018
-Eswatini,-15.731232467336536,1983
-Ethiopia,-10.73396547770679,2000
-Ethiopia,-26.537752362004294,1985
-Faroe Islands,-15.039887986524606,1975
+Austria,-20.521806827986307,1965, Austria, 1965, Climate, Not applicable, Record low cereal production and yields due to bad weather conditions, OECD Economic Survey, https://www.oecd.org/content/dam/oecd/en/publications/reports/1967/05/oecd-economic-surveys-austria-1967_g1g16dc5/eco_surveys-aut-1967-en.pdf
+Azerbaijan,-18.2782934050108,1999, Policy,Economic,land privatization disruption and lack of agricultural credit constrained domestic production;Russian ruble devaluation in 1998 led to cheap wheat imports, FAO/WFP Crop and Food Supply Assessment Mission Azerbaijan, https://www.fao.org/4/x4100e/x4100e00.htm
+Bahamas,-45.973068195060776,1971,Policy, Not applicable, Political uncertainty and fear surrounding independence negotiations under first black Prime Minister Lynden Pindling created climate of distrust that sent international investors running and disrupted agricultural investment confidence,Bahamianology,https://bahamianology.com/a-bitterly-divided-bahamas-limps-towards-independence-1971/
+Bahrain,-37.70972575438318,1974,Unknown,Not applicable,Cannot find good explanation for the production shock. 
+Bangladesh,-10.21053537201097,1972,Conflict, Infrastructure, War devastation destroyed agricultural infrastructure - 6 million homes destroyed and 1.4 million farm families left without tools or animals to work their lands, The politics and economics of food and famine in Bangladesh in the early 1970s, https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1468-2397.2006.00448.x
+Barbados,-27.011256407195244,2016, Climate, not applicable, Drought and below-normal rainfall in first half of year linked to El Niño event significantly affected crop harvesting and planting, Barbados Agricultural Society reported in Inter Press Service, https://www.ipsnews.net/2017/07/farming-beyond-drought/
+Belarus,-15.562262146035366,1999, Economic,Climate,Russian financial crisis spillover caused 294% inflation and economic instability affecting agricultural sector; also dry and hot weather,FAO/GIEWS Foodcrops & Shortages Report September 1999,https://www.fao.org/3/x3109e/pays/euro9909.htm
+Belgium,-15.722131487182612,2016, Climate, not applicable, Floods in spring and generally very humid spring, Brussel Times, https://www.brusselstimes.com/43424/2016-awful-year-for-belgian-agricultural-production
+Belize,-19.5668820678928,1976, Unknown, not applicable, No clear reason found in the records,
+Benin,-18.125733896871377,1987, Mismanagement, not applicable, Black market distorted official numbers, UNDP, https://www.undp.org/sites/g/files/zskgke326/files/migration/africa/Food-Production-and-Consumption.pdf
+Bhutan,-30.758652932057707,2002, Unknown, not applicable, No clear reason found in the records,
+Bolivia,-29.70566403926084,1983, Climate, Economic, 1982-1983 El Niño drought caused severe agricultural losses coinciding with hyperinflation crisis, UNDRO Situation Reports and Natural Hazards and Earth System Sciences, https://reliefweb.int/report/bolivia/bolivia-drought-aug-1983-undro-situation-reports-1-13
+Bosnia and Herzegovina,-34.90571998638232,2003, Climate, Not applicable, European drought with record-setting heat extremes causing agricultural production losses, European Drought Centre, https://www.geo.uio.no/edc/droughtdb/edr/DroughtEvents/_2003_Event.php
+Botswana,-80.43254905806582,1979, Climate, not applicable, Inadequate rainfall during 1978/1979 growing season leading to severe crop failure, Agricultural production its challenges and state intervention in Botswana: a historical perspective, https://www.tandfonline.com/doi/full/10.1080/23311886.2025.2480726?af=R
+Brazil,-10.804008865491372,1978, Economic, not applicable, general economic turmoil due to high debt and inflation, UN University, https://archive.unu.edu/unupress/food/8F091e/8F091E08.htm
+Brunei Darussalam,-34.86757449158134,1985, Economic, not applicable, Oil price collapse reduced GDP by 30% affecting all sectors including food production through reduced government spending and economic activity, U.S. State Department Country Background, https://2009-2017.state.gov/outofdate/bgn/brunei/73515.htm
+Bulgaria,-35.97848401565852,1996, Climate, Not applicable, Drought reduced wheat yields from 2906 to 1866 kg/ha causing 48% production decline, FAO Global Information and Early Warning System Special Report, https://www.fao.org/4/w4932e/w4932e00.htm
+Burkina Faso,-20.95963138264411,2007, Unknown, not applicable, Most likely data issues; some sources say that agriculture improved while other say it declined
+Burundi,-14.513163983330552,2017, Climate, not applicable, Low rainfall led to failed harvests and 37% increase in food prices affecting 900,000 people, ECHO Factsheet – Burundi Crisis – March 2017, https://reliefweb.int/report/burundi/echo-factsheet-burundi-crisis-march-2017
+Cabo Verde,-48.57086242026663,1985, Climate, Not applicable, Sahel drought affecting regional rainfall and agricultural production, Sahel Drought and Famine 1968-1985 Environment & Society Portal, https://www.environmentandsociety.org/tools/keywords/sahel-drought-and-famine-1968-1985
+Cambodia,-49.208109753314766,1974,Conflict, Not applicable, Cambodian Civil War intensification with massive U.S. bombing campaigns disrupting rural agriculture and displacing farming population, Justice and Starvation in Cambodia: The Khmer Rouge Famine, https://www.cambodialpj.org/article/justice-and-starvation-in-cambodia-the-khmer-rouge-famine/
+Cameroon,-7.40031725871475,1987,Economic, not applicable, Economic crisis from mid-1980s acknowledged by government in 1987 due to fall in export commodity prices especially petroleum, Economic crisis of Cameroon - Wikipedia, https://en.wikipedia.org/wiki/Economic_crisis_of_Cameroon
+Canada,-24.705763709707565,2002, Climate, not applicable, Severe drought caused agricultural production losses of over $2 billion in 2002 (part of $3.6 billion total losses for 2001-2002),  Lessons Learned from the Canadian Drought Years 2001 and 2002, https://agriculture.canada.ca/en/agricultural-production/water/lessons-learned-canadian-drought-years-2001-2002
+Central African Republic,-14.867037975918128,2013, Conflict, not applicable, Agricultural sector contracted due to Seleka rebellion beginning March 2013 causing widespread displacement,FAO Report, https://www.fao.org/4/i3714e/i3714e.pdf
+Chad,-31.86897901427529,1993, Unknown, not applicable, no clear reason found in the records
+Chile,-22.20052913136709,1973, Policy, Economic, Land reform disrupted production while economic crisis reduced agricultural investment and imports, CIA Intelligence Memorandum: Allende's Chile Supply-Demand Gap, https://en.wikisource.org/wiki/Intelligence_Memorandum:_Allende's_Chile:_The_Widening_Supply-Demand_Gap
+Taiwan,-10.899290677643725,1963, Unknown, not applicable, no clear reason found in the records
+China,-7.145162835733522,2003, Economic, Policy, Reduced grain planting area due to low grain prices and withdrawal of government support; agricultural tax burden made farming unprofitable, Assessing the Impacts of Extreme Agricultural Droughts in China Under Climate and Socioeconomic Changes, https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017EF000768
+Colombia,-7.386772700948192,1977, Policy, Economic, Government intervention through DRI and PAN programs to address food production inadequacy and rural development needs, Agricultural Public Policies in Colombia from the 1970s through the Uribe Government, http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0041-90602017000100363
+Comoros,-37.36930084100496,2002, Conflict, not applicable, Political transition from military coup (1999) to democratic elections amid constitutional crisis and inter-island tensions, CIA Factbook, https://www.cia.gov/the-world-factbook/about/archives/2021/countries/comoros/
+Congo Republic,-9.395582542419149,1991, Policy, Not applicable, Political transition during National Conference leading to democratization and end of socialist system disrupted economic and agricultural activities, Wikipedia, https://en.m.wikipedia.org/wiki/Foreign_relations_of_the_Republic_of_the_Congo
+Cook Islands,-34.6014710274729,2004, Unknown, not applicable, no clear reason found in the records
+Costa Rica,-11.303766553487794,2015,Climate, Not applicable, El Niño-driven drought caused estimated losses of up to 60% of corn crop in affected area, UNEP Report via ReliefWeb, https://reliefweb.int/report/costa-rica/helping-farmers-beat-climate-crisis-central-americas-dry-corridor
+Croatia,-27.73915175026886,2003,Climate, not applicable, Severe drought part of European-wide event causing proclaimed natural disaster with 2 billion HRK agricultural losses, European Drought Centre Database, https://www.geo.uio.no/edc/droughtdb/edr/DroughtEvents/_2003_Event.php
+Cuba,-23.282606223023063,1993,Economic, Infrastructure, Soviet Union collapse led to 85% loss of trade relations cutting off food imports (57% of calories), fertilizers (80% drop), fuel and agricultural machinery, Cuba: A Successful Case Study of Sustainable Agriculture, https://www.iatp.org/files/Cuba_A_Successful_Case_Study_of_Sustainable_Ag.htm
+Cyprus,-55.69731128518948,2008,Climate, not applicable, Severe drought during hydrological year 2007-2008 led to decreased crop yields and almost empty water reservoirs, Agricultural Water Vulnerability under Climate Change in Cyprus, https://www.mdpi.com/2073-4433/11/6/648
+Czechia,-23.073441263814324,2003,Climate, Not applicable, European heat wave and drought - hottest summer since 1500 AD causing widespread agricultural production decline, International Journal of Climatology, https://rmets.onlinelibrary.wiley.com/doi/10.1002/joc.6557
+Cote d'Ivoire,-10.08456738354966,2011,Conflict, not applicable, Post-election crisis leading to civil conflict displaced up to 1 million people and disrupted agricultural production and food supply chains, UN News - FAO Report, https://news.un.org/en/story/2011/04/372642-cote-divoire-un-rushes-agriculture-aid-gradual-calm-begins-return
+North Korea,-41.97069970142952,1996, Climate, Mismanagement, Further floods damaged already-weakened agricultural systems following devastating 1995 floods; poor agricultural management and deforestation increased vulnerability, FAO/WFP Crop and Food Supply Assessment Mission to Democratic People's Republic of Korea, https://reliefweb.int/report/democratic-peoples-republic-korea/faowfp-crop-and-food-supply-assessment-mission-democratic
+DR Congo,-27.95340091183572,2009, Conflict, not applicable, Armed conflict caused displacement of over 1 million people forcing them to abandon agricultural activities and flee to insecure areas to find food with limited humanitarian access, Human Rights Watch World Report 2010, https://www.hrw.org/world-report/2010/country-chapters/democratic-republic-congo
+Denmark,-24.032718573684765,2018, Climate, not applicable, Severe drought caused 40% decline, Danish Agriculture & Food Council via Reuters, https://www.reuters.com/article/agriculture-drought-denmark/danish-crop-harvest-to-fall-40-percent-due-to-drought-idUSL5N1V02OH/
+Djibouti,-36.47290015627016,1980, Unknown, not applicable, no clear reason found in the records
+Dominica,-33.19917547729438,1980,Climate, not applicable, Hurricane Allen devastated banana production following Hurricane David in 1979; production fell from pre-crisis levels and required external financial support for recovery, Economy of Dominica - Wikipedia, https://en.wikipedia.org/wiki/Economy_of_Dominica
+Dominican Republic,-16.087763757608375,1968, Unknown, not applicable, no clear reason found in the records
+Ecuador,-19.76780039870881,1991, Pest/Disease, Not applicable, Cholera epidemic beginning February 28, 1991, spread rapidly from coast to highlands and Amazon, causing food safety crisis and disrupting food systems through contaminated water and seafood,Cholera in Ecuador: Current Relevance of Past Lessons Learnt,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3125035/
+Egypt,-15.658638713175598,2018, Unknown, not applicable, no clear reason found in the records
+El Salvador,-15.22442487645636,1982,Conflict, Not applicable, Civil war intensified with peak violence in 1982-1983,Economía LACEA Journal, https://economia.lse.ac.uk/articles/10.31389/eco.414
+Equatorial Guinea,-5.346423702254728,1998, Unknown, not applicable, no clear reason found in the records
+Eritrea,-74.19416647041943,2002,Climate, Conflict, Poor rainfall and consecutive drought compounded by ongoing effects of 1998-2000 border war with Ethiopia, FAO/WFP Crop and Food Supply Assessment Mission, https://reliefweb.int/report/eritrea/drought-hits-eritreas-harvest-humanitarian-situation-worsening-faowfp-crop-and-food
+Estonia,-32.82616360002339,2018, Climate, not applicable, Extreme drought and heat caused 30% cereal yield decline, Statistics Estonia, https://www.stat.ee/en/uudised/news-release-2019-012
+Eswatini,-15.731232467336536,1983, Climate, not applicable, Severe El Niño-induced drought affecting Southern Africa region, Geophysical Research Letters, https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005gl022436
+Ethiopia,-26.537752362004294,1985, Policy, Climate, Forced villagization program disrupted agricultural production during planting/harvest seasons; drought contributed but was secondary to political factors, 1983–1985 famine in Ethiopia - Wikipedia, https://en.wikipedia.org/wiki/1983–1985_famine_in_Ethiopia
+Faroe Islands,-15.039887986524606,1975, Unknown, not applicable, no clear reason found in the records
 Fiji,-28.336213261397685,2010
 Finland,-33.729915430104896,1987
 France,-17.163868114813724,1976
@@ -206,7 +202,6 @@ Vanuatu,-25.029713154872525,1972
 Venezuela,-18.083002664278983,1976
 Vietnam,-6.846769645937837,1978
 Yemen,-36.77324201655405,1991
-Yugoslav SFR,-12.679460226587544,1965
 Zambia,-42.70459146609269,1992
 Zimbabwe,-70.08546915559639,1992
 
