@@ -141,37 +141,36 @@ Papua New Guinea,-9.433750221982024,2006, Unknown, not applicable, no clear reas
 Paraguay,-26.57341254495033,2012, Climate, not applicable, Severe drought from late 2011 through early 2012 caused 30-50% decrease in agricultural production across 8 of 17 departments; government declared 90-day food emergency in January 2012, USDA Foreign Agricultural Service, https://ipad.fas.usda.gov/highlights/2012/02/Paraguay_Drought/
 Peru,-22.4157757883977,1992, Economic, Not applicable, Hyperinflation and economic crisis led to 26% agricultural production decline from 1990/91 to 1991/92, Agricultural Production in Peru (1950-1995), https://www.fao.org/4/x9447e/x9447e08.htm
 Philippines,-13.488074716785212,1998, Climate, Not applicable, Severe El Niño drought affected 70% of the country causing major agricultural losses with rainfall falling to half of historical levels,Philippine Journal of Development - ENSO in the Philippines, https://pidswebs.pids.gov.ph/CDN/PUBLICATIONS/pidspjd09-1enso.pdf
-Poland,-20.84028500602209,1980
-Portugal,-19.315192367513472,2005
-Puerto Rico,-35.025735778053715,1999
-Qatar,-29.257212080414213,1983
-South Korea,-25.67646748231749,1980
-Moldova,-49.47504972915633,2020
-Romania,-47.06914202756283,2007
-Russia,-26.91897541758619,2010
-Rwanda,-25.482783331123755,1994
-Reunion,-16.746290264260683,1971
-Samoa,-45.6800691495148,2015
-Sao Tome and Principe,-45.63727557901342,2016
-Saudi Arabia,-51.299558410930125,1973
-Senegal,-35.78897518079773,1972
-Serbia,-27.927914043058067,2017
-Seychelles,-14.611239735534111,1991
-Sierra Leone,-34.72593972110935,2000
-Slovakia,-28.417717517296285,2000
-Slovenia,-22.46940943041042,2003
-Solomon Islands,-27.24069507667076,2010
-Somalia,-43.62332030574424,2011
-South Africa,-50.96770921848108,1992
-South Sudan,-8.33200429707496,2017
-Spain,-25.72454849020758,1995
-Sri Lanka,-34.02699993377565,2017
-Sudan,-15.487894023940411,2020
-Sudan,-38.41688092959066,1990
-Suriname,-16.370953350625424,1990
-Sweden,-35.744593965074,2018
-Switzerland,-14.729278301166298,1987
-Syria,-49.462703021182826,1973
+Poland,-20.84028500602209,1980, Mismanagement, Policy, Crisis due to structural imbalances from Gierek's modernization program combined with policy failures in agricultural pricing and investment allocation leading to food shortages and declining agricultural production, The Roots of the Polish Economic Crisis, https://www.marxists.org/archive/mandel/1982/01/polcrisis.html
+Portugal,-19.315192367513472,2005, Climate, not applicable, Severe drought caused 45% slump in grain output and 20% fall in wine production, Reuters, https://www.reuters.com/article/portugal-drought-idUSL5E8E23KC20120303
+Puerto Rico,-35.025735778053715,1999, Unknown, not applicable, no clear reason found in the records
+Qatar,-29.257212080414213,1983, Unknown, not applicable, no clear reason found in the records
+South Korea,-25.67646748231749,1980, Climate, not applicable, Unusually cold summer slashed rice harvest from 5.5 to 4 million metric tons, Christian Science Monitor, https://www.csmonitor.com/1981/0317/031750.html
+Moldova,-49.47504972915633,2020, Climate, not applicable, Severe drought with only 218mm precipitation between September 2019-August 2020 (normal is 552mm), crop yields decreased 30% on average, UN Moldova, https://moldova.un.org/en/124025-republic-moldova-drought-responsecrop-assessment-report
+Romania,-47.06914202756283,2007, Climate, not applicable, Severe drought destroyed over 60% of crops - worst harvest since 1940, Agriculture in Romania - Wikipedia, https://en.wikipedia.org/wiki/Agriculture_in_Romania
+Russia,-26.91897541758619,2010, Climate, not applicable, Flash drought and heat wave,Agricultural and food security impacts from the 2010 Russia flash drought, https://www.sciencedirect.com/science/article/pii/S2212094721000736
+Rwanda,-25.482783331123755,1994, Conflict, Not applicable, Genocide against Tutsi and civil war destroyed agricultural system and displaced population, FAO/WFP Special Report on Rwanda - July 1996, https://www.fao.org/4/w2151e/w2151e00.htm
+Reunion,-16.746290264260683,1971, Natural Disaster, not applicable, Tropical Storm Dolly brought heavy rainfall (774mm) in February damaging crops and flooding coastal roads, 1971–72 South-West Indian Ocean cyclone season - Wikipedia, https://en.wikipedia.org/wiki/1971–72_South-West_Indian_Ocean_cyclone_season
+Samoa,-45.6800691495148,2015, Climate, not applicable, El Niño-induced drought reduced rainfall and impacted food production, Pacific: Drought - 2015-2017 | ReliefWeb, https://reliefweb.int/disaster/dr-2015-000127-fji
+Sao Tome and Principe,-45.63727557901342,2016, Unknown, not applicable, no clear reason found in the records
+Saudi Arabia,-51.299558410930125,1973, Unknown, not applicable, no clear reason found in the records
+Senegal,-35.78897518079773,1972,Senegal, 1972, Climate, not applicable, Severe drought as part of the Great Sahelian drought (1968-1974) that devastated agriculture across the Sahel region,Droughts in the Sahel - Wikipedia, https://en.wikipedia.org/wiki/Droughts_in_the_Sahel
+Serbia,-27.927914043058067,2017, Climate, not applicable, Persistent drought in July-August 2017 affected spring crops (corn soya sunflower sugar beets) with yields declining 30-60% and total losses reaching USD 1.5 billion, USDA Foreign Agricultural Service, https://fas.usda.gov/data/serbia-grain-and-feed-annual-3
+Seychelles,-14.611239735534111,1991, Unknown, not applicable, no clear reason found in the records
+Sierra Leone,-34.72593972110935,2000, Conflict, not applicable, Civil war disrupted agriculture with production at only 45% of pre-war levels due to displacement and destruction of infrastructure, FAO/GIEWS Foodcrops & Shortages, https://www.fao.org/3/x7009e/pays/sil0004e.htm
+Slovakia,-28.417717517296285,2000, Economic, not applicable, Price scissors effect from transition - input prices rose 350% while output prices only reached 160% of 1989 levels creating severe agricultural losses during economic transformation, REU Technical Series - 61, https://www.fao.org/4/x3413e/x3413e19.htm
+Slovenia,-22.46940943041042,2003, Climate, not applicable, Severe summer drought - most severe drought conditions after 1950 in all agricultural parts,Analysis of meteorological drought in Slovenia with two drought indices, https://www.researchgate.net/publication/239924715_Analysis_of_meteorological_drought_in_Slovenia_with_two_drought_indices
+Solomon Islands,-27.24069507667076,2010, Natural Disaster, not applicable, Tropical Cyclone Ului (Category 4) in March 2010 caused flooding and damages to food gardens and infrastructure across six provinces, IFRC Relief Web, https://reliefweb.int/disaster/tc-2010-000060-slb 
+Somalia,-43.62332030574424,2011, Climate, Conflict, Two-year drought (worst in decades) caused widespread crop failure and livestock losses up to 60%; exacerbated by Al-Shabaab conflict restricting humanitarian access, The 2011 Somalia famine: Context causes and complications - ScienceDirect, https://www.sciencedirect.com/science/article/abs/pii/S221191241200003X
+South Africa,-50.96770921848108,1992, Climate, not applicable, El Niño-driven severe drought with widespread crop failures and reduced agricultural production, Springer Paper, https://link.springer.com/article/10.1007/s00704-021-03741-7
+South Sudan,-8.33200429707496,2017, Conflict, not applicable, Famine declared in February 2017 due to protracted violence preventing agricultural activities and humanitarian access in Unity State, Joint FAO/UNICEF/WFP statement on famine in South Sudan, https://www.fao.org/newsroom/detail/joint-fao-unicef-wfp-statement-on-famine-in-south-sudan/en
+Spain,-25.72454849020758,1995, Climate, not applicable, Severe drought (1991-1995 multi-year event,European Drought Centre - Drought Database, https://www.geo.uio.no/edc/droughtdb/edr/DroughtEvents/_1991_Event.php
+Sri Lanka,-34.02699993377565,2017, Climate, Natural Disaster, Severe drought (worst in 40 years) from late 2016 continuing into 2017 followed by heavy flooding in May,FAO/WFP Crop and Food Security Assessment Mission, https://reliefweb.int/report/sri-lanka/special-report-faowfp-crop-and-food-security-assessment-mission-sri-lanka-22-june
+Sudan,-15.487894023940411,2020, Natural Disaster, not applicable, Devastating floods from July-September 2020 affected 2.2 million hectares of cropland and destroyed 1.1 million tonnes of grain (mostly sorghum). Blue Nile reached record levels not seen since 1912, FAO 2020 Flood Impact Rapid Assessment, https://reliefweb.int/report/sudan/sudan-2020-flood-impact-rapid-assessment-september-2020
+Suriname,-16.370953350625424,1990, Conflict, not applicable, Civil War, Suriname interior war, https://en.wikipedia.org/wiki/Surinamese_Interior_War
+Sweden,-35.744593965074,2018, Climate, not applicable, Severe drought and heat wave causing crop failures with yields 50% lower than normal and livestock feed shortages, 2018 European heat wave, https://en.wikipedia.org/wiki/2018_European_heat_wave
+Switzerland,-14.729278301166298,1987, Unknown, not applicable, no clear reason found in the records
+Syria,-49.462703021182826,1973, Conflict, Climate, War mobilization and poor harvest reduced agricultural output, CIA Report: Syria Economic Impact of the October War, https://www.cia.gov/readingroom/document/cia-rdp85t00875r001900020077-2
 Tajikistan,-12.930476353530166,2001
 Thailand,-14.201375713422909,1972
 Timor-Leste,-26.471783962152863,2011
