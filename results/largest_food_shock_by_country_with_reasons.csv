@@ -171,30 +171,29 @@ Suriname,-16.370953350625424,1990, Conflict, not applicable, Civil War, Suriname
 Sweden,-35.744593965074,2018, Climate, not applicable, Severe drought and heat wave causing crop failures with yields 50% lower than normal and livestock feed shortages, 2018 European heat wave, https://en.wikipedia.org/wiki/2018_European_heat_wave
 Switzerland,-14.729278301166298,1987, Unknown, not applicable, no clear reason found in the records
 Syria,-49.462703021182826,1973, Conflict, Climate, War mobilization and poor harvest reduced agricultural output, CIA Report: Syria Economic Impact of the October War, https://www.cia.gov/readingroom/document/cia-rdp85t00875r001900020077-2
-Tajikistan,-12.930476353530166,2001
-Thailand,-14.201375713422909,1972
-Timor-Leste,-26.471783962152863,2011
-Togo,-14.817965495002577,1977
-Tokelau,-55.3552549263796,1963
-Tonga,-22.11152400479016,2005
-Trinidad and Tobago,-54.289894081756096,2008
-Tunisia,-59.82548520737594,2002
-Turkmenistan,-31.89893180294274,2007
-Tuvalu,-54.45430939862603,1976
-Türkiye,-17.399678408142563,1989
-USSR,-23.84349252845489,1975
-Uganda,-21.64734594359965,1979
-Ukraine,-20.810455614535943,2007
-United Arab Emirates,-52.54547675624298,1972
-United Kingdom,-13.459257700491351,2020
-Tanzania,-18.79206182652833,2003
-United States,-30.95852972255513,1983
-Uruguay,-33.305169025441415,2018
-Uzbekistan,-11.825981445600023,2018
-Vanuatu,-25.029713154872525,1972
-Venezuela,-18.083002664278983,1976
-Vietnam,-6.846769645937837,1978
-Yemen,-36.77324201655405,1991
-Zambia,-42.70459146609269,1992
-Zimbabwe,-70.08546915559639,1992
+Tajikistan,-12.930476353530166,2001, Climate, Infrastructure, Severe drought for second consecutive year (2000-2001) with rainfall 60% of normal causing near-complete failure of rainfed wheat and 18% decline in irrigated wheat production, Special Report: FAO/WFP Crop and Food Supply Assessment Mission to Tajikistan, https://www.fao.org/4/Y1534e/Y1534e00.htm
+Thailand,-14.201375713422909,1972,Climate, Not applicable, Drought in northeastern Thailand causing significant rice production decline, Rice Economy in Northeast Thailand: Current Status and Challenges, https://ap.fftc.org.tw/article/1863
+Timor-Leste,-26.471783962152863,2011, Unknown, not applicable, no clear reason found in the records
+Togo,-14.817965495002577,1977, Climate, not applicable, Drought led to agricultural production decline and famine with yield drops of 60-80% for cereals and 20-80% for legumes affecting over 40,000 hectares, Surveys in Geophysics, https://link.springer.com/article/10.1007/s10712-022-09748-7
+Tokelau,-55.3552549263796,1963, Unknown, not applicable, no clear reason found in the records
+Tonga,-22.11152400479016,2005, Unknown, not applicable, no clear reason found in the records
+Trinidad and Tobago,-54.289894081756096,2008, Unknown, not applicable, no clear reason found in the records
+Tunisia,-59.82548520737594,2002, Climate, not applicable, Severe drought caused worst agricultural crisis since mid-15th century with wheat production at lowest levels, Vegetation Drought Analysis in Tunisia: A Geospatial Investigation, http://www.heraldopenaccess.us/openaccess/vegetation-drought-analysis-in-tunisia-a-geospatial-investigation
+Turkmenistan,-31.89893180294274,2007, Mismanagement, not applicable, Collapse of falsified grain production statistics from Niyazov era exposed actual production shortfalls, Wheat Production in Turkmenistan: Reality and Expectations,https://link.springer.com/chapter/10.1007/978-3-319-33239-0_13
+Tuvalu,-54.45430939862603,1976, Climate, Not applicable, La Niña-induced drought affecting agricultural production, UNDP, https://info.undp.org/docs/pdc/Documents/TUV/00042981_Tuvalu%20SLM%20-%20Prodoc.pdf
+Türkiye,-17.399678408142563,1989, Climate, Not applicable, Severe drought affecting southeastern Anatolia region with significantly reduced precipitation and crop failures, EURASIAN RESEARCH, https://www.eurasian-research.org/publication/severe-droughts-in-turkey-causes-and-solutions/
+Uganda,-21.64734594359965,1979, Mismanagement, Conflict, Economic collapse under Idi Amin's regime led to severe food production decline - farmers abandoned cash crops due to unpaid wages and turned to subsistence agriculture while war with Tanzania destroyed infrastructure, Washington Post, https://www.washingtonpost.com/archive/politics/1979/05/29/idi-amin-squandered-the-wealth-of-uganda/7511e07b-8be8-45f3-895c-5a7f4e5ebc39/
+Ukraine,-20.810455614535943,2007, Climate, not applicable, Drought, FAO, https://www.fao.org/4/ah873e/ah873e06.htm
+United Arab Emirates,-52.54547675624298,1972, Unknown, not applicable, no clear reason found in the records
+United Kingdom,-13.459257700491351,2020, Climate, Policy, Challenging weather conditions (the extremely wet autumn and winter of 2019 and the spring drought of 2020) along with the coronavirus (COVID-19) pandemic caused widespread crop failures and reduced agricultural output, Agriculture in the United Kingdom 2020, https://assets.publishing.service.gov.uk/media/6215ff49e90e0710b9a8bdff/AUK2020_22feb22.pdf
+Tanzania,-18.79206182652833,2003, Climate, not applicable, Drought reduced yields, The New Humanitarian, https://www.thenewhumanitarian.org/report/43945/tanzania-food-crop-production-down-10-percent
+United States,-30.95852972255513,1983, Climate, not applicable, Severe drought affected the Midwest and Great Plains causing crop failures and reduced yields, Iowa PBS, https://www.iowapbs.org/iowapathways/artifact/1511/causes-1980s-farm-crisis
+Uruguay,-33.305169025441415,2018, Climate, not applicable, Severe drought during summer 2017-2018 led to 43% decline in soybean production from 3 to 1.7 million tonnes, Weather Underground 2018 Report, https://www.wunderground.com/cat6/most-expensive-weather-disaster-2018-39-billion-drought-argentina-and-uruguay
+Uzbekistan,-11.825981445600023,2018, Economy, Mismanagement, Declining importance of agricultural sector and problems with getting fertilizer and maintaining irrigation, World Bank, https://documents1.worldbank.org/curated/en/515031601287108231/pdf/Recent-Agricultural-Growth-in-Uzbekistan-Assessment-and-Forecast.pdf
+Vanuatu,-25.029713154872525,1972, Natural Disaster, not applicable, Three major storms in one year hitting the island, Disaster and Agriculture in the Pacific Islands, https://nab.vu/sites/default/files/nab/documents/14/01/2013%20-%2007:47/1999_spdrp_pacific_disasters_agriculture.pdf
+Venezuela,-18.083002664278983,1976, Economic, not applicable, Oil boom leads to dutch disese and makes agriculture less worthwhile, Venzuela Analysis, https://venezuelanalysis.com/analysis/74/
+Vietnam,-6.846769645937837,1978, Natural Disaster, not applicable, Storms and floods disrupt agriculture, Wikipedia, https://en.wikipedia.org/wiki/Agriculture_in_Vietnam
+Yemen,-36.77324201655405,1991, Mismanagement, Economic, Overuse of groundwater and switch to cash instead of food crops, FU Berlin, https://refubium.fu-berlin.de/bitstream/handle/fub188/7151/1_chapter_1.pdf?sequence=2&isAllowed=y
+Zambia,-42.70459146609269,1992, Climate, not applicable, Drought in large parts of Africa, FAO, https://www.fao.org/4/w8885e/w8885e00.htm
+Zimbabwe,-70.08546915559639,1992, Climate, not applicable, Drought in Zimbabwe, Nordic Journal, https://njas.fi/njas/article/download/700/523/
 
