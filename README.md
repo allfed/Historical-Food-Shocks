@@ -62,7 +62,7 @@ The repository comes with recent versions of the FAO data, but if you need the m
 
 If you encounter any issues, feel free to open an issue in the repository or contact the maintainers.
 
-## Flowchart
+## Flowchart for shock detection
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'natural' } } }%%
