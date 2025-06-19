@@ -107,8 +107,8 @@ def plot_swarm_by_category(data):
         y='largest_food_shock',
         order=category_order,
         palette=palette,
-        size=8,  # Increased from 6 to 8
-        alpha=0.7,
+        size=10,
+        alpha=0.9,
         ax=ax
     )
     
