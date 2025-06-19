@@ -1,0 +1,22 @@
+I am researching the primary causes of major food production shocks across different countries and years. For each country-year combination I provide, please search for and identify the main driver(s) of the food production decline.
+Search Strategy:
+Search for explicit food production shocks, agricultural crises, or crop failures for the specified country and year
+Also search for broader crises (economic, political, environmental) that may have impacted food production
+Focus on sources published in or after the specified year
+Prioritize scientific papers, UN/FAO reports, and peer-reviewed sources
+Categories to use (examples are not exhaustive):
+Conflict - wars, civil unrest, territorial disputes
+Economic - financial crises, currency devaluation, market collapse
+Climate - droughts, extreme temperatures, late cold spells
+Pest/Disease - crop diseases, locust invasions, livestock epidemics
+Policy - agricultural policy changes, land reforms, trade restrictions
+Infrastructure - irrigation failure, transport breakdown, storage losses
+Mismanagement - soil degradation, overexploitation, poor planning
+Natural Disaster - storms, tsunamis, earthquakes, volcanoes
+Other - specify the cause
+Unknown - insufficient information found (make sure that you consider this category if little data is available)
+You can use up to two categories for your description, but try to keep it to one and only use two if it is really clear. If you don’t have a secondary reason, just write “not applicable” in the field. 
+Output format (like a csv, all in one row): Country, Year, Category (main), Category (secondary), Reason (concise), Source Name, Source Link (full link, verify it works)
+Important: Verify that your sources specifically discuss food production impacts for the given year, not just general crises. Keep your output as short as possible. Don’t put in formatted in line links into the csv output. 
+The country and year to investigate:
+
