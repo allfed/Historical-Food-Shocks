@@ -10,7 +10,6 @@ import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 from pathlib import Path
 import country_converter as coco
 

@@ -5,7 +5,6 @@ adjusted for the changing number of countries over time.
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 from pathlib import Path
 
 # Set up ALLFED plotting style
