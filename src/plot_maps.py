@@ -169,6 +169,133 @@ def plot_map_yield_shock_count(merged, title, filename):
     plt.close()
 
 
+def plot_map_shock_categories(map_df, data_path="results/largest_food_shock_by_country_with_reasons.csv"):
+    """
+    Create a map showing countries colored by their main food shock category.
+    
+    Args:
+        map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries
+        data_path (str): Path to CSV file containing shock categories
+    """
+    # Load the shock category data
+    shock_data = pd.read_csv(data_path)
+    
+    # Convert country names to name_short format for matching
+    shock_data['name_short'] = coco.convert(
+        shock_data['country'], to='name_short', not_found=None
+    )
+    
+    # Create name_short column in map DataFrame
+    map_df_copy = map_df.copy()
+    map_df_copy['name_short'] = coco.convert(
+        map_df_copy['ADMIN'], to='name_short', not_found=None
+    )
+    
+    # Merge the data
+    merged = map_df_copy.merge(
+        shock_data[['name_short', 'Category (main)']], 
+        on='name_short', 
+        how='left'
+    )
+    
+    # Define pastel colors for each category
+    # Using colorblind-friendly pastel palette
+    category_colors = {
+        'Economic': '#FFB6C1',               # Light pink
+        'Policy': '#87CEEB',                 # Sky blue
+        'Climate': '#FFA07A',                # Light salmon (reddish)
+        'Conflict': '#DDA0DD',               # Plum
+        'Natural Disaster': '#F0E68C',       # Khaki/yellow
+        'Pest/Disease': '#90EE90',           # Light green
+        'Infrastructure': '#E6E6FA',         # Lavender
+        'Mismanagement': '#D2B48C',          # Tan/brown
+        'Unknown': '#D3D3D3',                # Light gray
+    }
+    
+    # Get unique categories from the data to ensure we have all of them
+    unique_categories = merged['Category (main)'].dropna().unique()
+    
+    # Add any missing categories with a default color
+    for cat in unique_categories:
+        if cat not in category_colors:
+            category_colors[cat] = '#E6E6FA'  # Lavender as default
+    
+    # Create figure
+    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+    
+    # Convert to Winkel Tripel projection
+    merged = merged.to_crs('+proj=wintri')
+    
+    # Plot countries with no data in light gray
+    merged.plot(
+        ax=ax,
+        color='#F5F5F5',  # Very light gray for missing data
+        edgecolor='white',
+        linewidth=0.5
+    )
+    
+    # Plot each category separately to ensure proper legend
+    for category, color in category_colors.items():
+        # Select countries with this category
+        category_data = merged[merged['Category (main)'] == category]
+        
+        if not category_data.empty:
+            category_data.plot(
+                ax=ax,
+                color=color,
+                edgecolor='white',
+                linewidth=0.5,
+                label=category
+            )
+    
+    # Add border and styling
+    plot_winkel_tripel_map(ax)
+    
+    # Create custom legend
+    # Get only categories that appear in the data
+    present_categories = [cat for cat in category_colors.keys() 
+                         if cat in merged['Category (main)'].values]
+    
+    # Create legend handles
+    from matplotlib.patches import Patch
+    legend_elements = [Patch(facecolor=category_colors[cat], 
+                            edgecolor='white', 
+                            label=cat) 
+                      for cat in present_categories]
+    
+    # Add "No Data" to legend
+    legend_elements.append(Patch(facecolor='#F5F5F5', 
+                                edgecolor='white', 
+                                label='No Data'))
+    
+    # Position legend
+    ax.legend(handles=legend_elements, 
+             loc='lower center', 
+             bbox_to_anchor=(0.5, -0.15),
+             ncol=4,
+             frameon=False,
+             fontsize=10)
+    
+    # Set title
+    ax.set_title('Reason for Largest Crop Production Shock by Country (1961-2023)', 
+                fontsize=14, 
+                pad=20)
+    
+    # Save figure
+    output_path = Path("results/figures/food_shock_categories_by_country.png")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.close()
+    
+    print(f"Saved shock category map to {output_path}")
+    
+    # Print summary statistics
+    print("\nShock Category Summary:")
+    category_counts = shock_data['Category (main)'].value_counts()
+    for category, count in category_counts.items():
+        print(f"  {category}: {count} countries")
+
+
 def main():
     """
     Main function to create all food shock maps.
@@ -201,6 +328,9 @@ def main():
         "Percentage of Years with Food Production Shock by Country (1961-2023)",
         "results/figures/food_shock_count_by_country.png",
     )
+
+    print("\nCreating shock category map...")
+    plot_map_shock_categories(admin_map)
 
     # Save the largest food shock per country to a CSV file
     # Together with the year of the shock
