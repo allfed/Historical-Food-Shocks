@@ -462,112 +462,112 @@ def print_summary_statistics(data):
 def plot_swarm_by_decade(data):
     """
     Create a swarm plot comparing shock sizes by decade with median lines.
-    
+
     This function visualizes the distribution of food production shocks across decades,
     showing individual data points as a swarm with median values highlighted.
-    
+
     Args:
         data (pd.DataFrame): Shock data containing 'year_of_shock' and 'largest_food_shock' columns
     """
     # Extract decade from year of shock
     # Handle years before 2020 as regular decades (e.g., 1990s)
     # Years 2020 and after as "2020-2023" since the data ends at 2023
-    data['decade'] = data['year_of_shock'].apply(
+    data["decade"] = data["year_of_shock"].apply(
         lambda x: f"{int(x//10)*10}s" if x < 2020 else "2020-2023"
     )
-    
+
     # Define the chronological order of decades
     # This ensures x-axis is sorted by time, not by median shock size
-    decade_order = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020-2023']
-    
+    decade_order = ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020-2023"]
+
     # Filter to only include decades that exist in the data
-    decade_order = [d for d in decade_order if d in data['decade'].values]
-    
+    decade_order = [d for d in decade_order if d in data["decade"].values]
+
     # Set up the figure with appropriate size for readability
     fig, ax = plt.subplots(figsize=(12, 8))
-    
+
     # Create swarm plot
     # Using a single color (dimgrey) for consistency with ALLFED style
     # alpha=0.7 provides some transparency to see overlapping points
     sns.swarmplot(
         data=data,
-        x='decade',
-        y='largest_food_shock',
+        x="decade",
+        y="largest_food_shock",
         order=decade_order,  # This ensures chronological ordering
-        color='dimgrey',
+        color="dimgrey",
         size=8,
         alpha=0.7,
-        ax=ax
+        ax=ax,
     )
-    
+
     # Calculate and add median lines for each decade
     for i, decade in enumerate(decade_order):
         # Extract data for current decade
-        decade_data = data[data['decade'] == decade]['largest_food_shock']
-        
+        decade_data = data[data["decade"] == decade]["largest_food_shock"]
+
         # Calculate median value
         median_val = decade_data.median()
-        
+
         # Draw horizontal line representing median
         # Line extends 0.4 units on each side of the decade position
         ax.hlines(
-            median_val,          # y-position (median value)
-            i - 0.4,            # x-start position
-            i + 0.4,            # x-end position
-            colors='red',       # Red color for visibility
-            linestyles='solid', # Solid line style
-            linewidth=2.5,      # Thick line for emphasis
-            label='Median' if i == 0 else ""  # Only label once for legend
+            median_val,  # y-position (median value)
+            i - 0.4,  # x-start position
+            i + 0.4,  # x-end position
+            colors="red",  # Red color for visibility
+            linestyles="solid",  # Solid line style
+            linewidth=2.5,  # Thick line for emphasis
+            label="Median" if i == 0 else "",  # Only label once for legend
         )
-        
+
         # Add text label showing the median value
         # Position slightly to the right of the median line
         ax.text(
-            i + 0.45,           # x-position (slightly right of line end)
-            median_val,         # y-position (at median value)
-            f'{median_val:.1f}%',  # Text showing median with 1 decimal
-            va='center',        # Vertical alignment
-            ha='left',          # Horizontal alignment
-            fontsize=9,         # Slightly smaller font
-            color='red'         # Match line color
+            i + 0.45,  # x-position (slightly right of line end)
+            median_val,  # y-position (at median value)
+            f"{median_val:.1f}%",  # Text showing median with 1 decimal
+            va="center",  # Vertical alignment
+            ha="left",  # Horizontal alignment
+            fontsize=9,  # Slightly smaller font
+            color="red",  # Match line color
         )
-    
+
     # Customize plot appearance
-    ax.set_xlabel('Decade', fontsize=12)
-    ax.set_ylabel('Largest Food Production Shock (%)', fontsize=12)
-    ax.set_title('Distribution of Largest Food Shocks by Decade', fontsize=14, pad=20)
-    
+    ax.set_xlabel("Decade", fontsize=12)
+    ax.set_ylabel("Largest Food Production Shock (%)", fontsize=12)
+    ax.set_title("Distribution of Largest Food Shocks by Decade", fontsize=14, pad=20)
+
     # Rotate x-axis labels for better readability
-    plt.xticks(rotation=45, ha='right')
-    
+    plt.xticks(rotation=45, ha="right")
+
     # Add grid for easier value reading
     # Only on y-axis to avoid cluttering
-    ax.grid(True, axis='y', alpha=0.3)
+    ax.grid(True, axis="y", alpha=0.3)
     ax.xaxis.grid(False)
-    
+
     # Add a subtle box around the plot area
-    ax.spines['top'].set_visible(True)
-    ax.spines['right'].set_visible(True)
-    
+    ax.spines["top"].set_visible(True)
+    ax.spines["right"].set_visible(True)
+
     # Add legend if median lines were drawn
     if len(decade_order) > 0:
-        ax.legend(loc='upper right', frameon=False)
-    
+        ax.legend(loc="upper right", frameon=False)
+
     # Adjust layout to prevent label cutoff
     plt.tight_layout()
-    
+
     # Save figure with high resolution
     output_path = Path("results/figures/shock_swarm_by_decade.png")
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    plt.savefig(output_path, bbox_inches='tight', dpi=300)
+    plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
-    
+
     print(f"Saved decade swarm plot to {output_path}")
-    
+
     # Print summary statistics for each decade
     print("\nSummary statistics by decade:")
     for decade in decade_order:
-        decade_data = data[data['decade'] == decade]['largest_food_shock']
+        decade_data = data[data["decade"] == decade]["largest_food_shock"]
         print(f"\n{decade}:")
         print(f"  Count: {len(decade_data)}")
         print(f"  Median: {decade_data.median():.1f}%")
@@ -582,28 +582,28 @@ def main():
     """
     print("Loading shock data with continent information...")
     data = load_shock_data_with_continents()
-    
+
     print("Creating swarm plot by category...")
     plot_swarm_by_category(data)
-    
+
     print("Creating swarm plot by decade...")
     plot_swarm_by_decade(data)
-    
+
     print("Creating stacked bar plot by continent (percentage)...")
     plot_stacked_bar_by_continent(data)
 
     print("Creating stacked bar plot by continent (absolute counts)...")
     plot_stacked_bar_by_continent_absolute(data)
-    
+
     print("Creating stacked bar plot by decade (percentage)...")
     plot_stacked_bar_by_decade(data)
-    
+
     print("Creating stacked bar plot by decade (absolute counts)...")
     plot_stacked_bar_by_decade_absolute(data)
-    
+
     # Print summary statistics
     print_summary_statistics(data)
-    
+
     print("\nAll plots saved successfully!")
 
 
