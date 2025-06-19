@@ -272,7 +272,7 @@ def plot_map_shock_categories(map_df, data_path="results/largest_food_shock_by_c
     ax.legend(handles=legend_elements, 
              loc='lower center', 
              bbox_to_anchor=(0.5, -0.15),
-             ncol=4,
+             ncol=5,
              frameon=False,
              fontsize=10)
     
