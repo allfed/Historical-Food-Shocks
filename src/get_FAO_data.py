@@ -94,12 +94,7 @@ def main():
     """
     Main function to process all crop production data.
 
-    Download the FAO data for the most produced
-    Cereals (Maize, Rice, Wheat, Barley, Sorghum),
-    Sugar crops (Sugar cane, Sugar beet)
-    Roots and tubers (Potatoes, Cassava, Sweet potatoes, Yams, Taro),
-    Fruits (Bananas, Apples, Oranges, Grapes, Watermelons),
-    Vegetables (Tomatoes, Onions, Cucumbers and gherkins, Cabbages, Eggplants)
+    Download the FAO data for the most produced crops.
 
     These are the top crops according to FAO data
     https://openknowledge.fao.org/server/api/core/bitstreams/df90e6cf-4178-4361-97d4-5154a9213877/content

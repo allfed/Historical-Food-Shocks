@@ -194,14 +194,31 @@ def main():
     plot_map_yield_shock_relative(
         merged_shock,
         "Largest Food Production Shock by Country (1961-2023)",
-        "results/food_shock_by_country.png",
+        "results/figures/food_shock_by_country.png",
     )
     plot_map_yield_shock_count(
         merged_count,
         "Percentage of Years with Food Production Shock by Country (1961-2023)",
-        "results/food_shock_count_by_country.png",
+        "results/figures/food_shock_count_by_country.png",
     )
 
+    # Save the largest food shock per country to a CSV file
+    # Together with the year of the shock
+    largest_shock = df.min(axis=1).reset_index()
+    largest_shock.columns = ["country", "largest_food_shock"]
+    # Get the year of the shock, handling NaN values correctly
+    # For each row, find the column (year) with the minimum value, ignoring NaNs
+    def get_min_year(row):
+        if row.isnull().all():
+            return None
+        return row.idxmin()
+
+    # Reset index for alignment
+    df_reset = df.reset_index(drop=True)
+    largest_shock["year_of_shock"] = df_reset.apply(get_min_year, axis=1)
+    largest_shock = largest_shock.set_index("country")
+    largest_shock.to_csv("results/largest_food_shock_by_country.csv")
+    print("Saved largest food shock per country to results/largest_food_shock_by_country.csv")
 
 if __name__ == "__main__":
     main()
