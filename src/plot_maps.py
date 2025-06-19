@@ -194,12 +194,12 @@ def main():
     plot_map_yield_shock_relative(
         merged_shock,
         "Largest Food Production Shock by Country (1961-2023)",
-        "results/food_shock_by_country.png",
+        "results/figures/food_shock_by_country.png",
     )
     plot_map_yield_shock_count(
         merged_count,
         "Percentage of Years with Food Production Shock by Country (1961-2023)",
-        "results/food_shock_count_by_country.png",
+        "results/figures/food_shock_count_by_country.png",
     )
 
     # Save the largest food shock per country to a CSV file
