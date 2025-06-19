@@ -27,8 +27,9 @@ To install the Historical-Food-Shocks package, we recommend setting up a virtual
 You can now use the kernel "food-shocks" to run the example notebooks or analyze the data yourself.
 
 ## How this works
-
 The main implementation of the analysis is provided in the `src` directory. The analysis process consists of:
+
+### Determining the largest shock
 
 1. Loading and preprocessing the FAO data
 2. Aggregating crops on a calorie basis to evaluate total calorie production
@@ -36,6 +37,12 @@ The main implementation of the analysis is provided in the `src` directory. The 
 4. Identifying irregular fluctuations (shocks) by comparing actual yields to the smoothed baseline
 
 The `scripts` directory contains Jupyter notebooks with visualization examples and use cases for the analysis.
+### Finding the reasons for the largest shocks
+
+We used Claude 4 Sonnet to look for reasons for food shocks with the prompt saved in the docs folder. The results from Claude were verified by hand and sorted into a number of categories. The result file was then used to create the figures that display the shock categories. 
+
+### Calculating frequency of large shocks
+To be added
 
 ### Running the analysis with custom parameters
 
