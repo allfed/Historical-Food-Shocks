@@ -3,7 +3,7 @@ setuptools>=61.2.0
 pytest==8.3.5
 numpy==2.2.6
 matplotlib==3.10.3
-requests==2.32.3
+requests==2.32.4
 tqdm==4.67.1
 scipy==1.15.2
 seaborn==0.13.2
