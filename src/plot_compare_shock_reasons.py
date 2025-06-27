@@ -1,7 +1,7 @@
 """
-Create comparative plots analyzing food shocks by their reasons/categories.
+Create comparative plots analyzing crop shocks by their reasons/categories.
 
-This script reads the calculated largest food shocks with their categorized reasons
+This script reads the calculated largest crop shocks with their categorized reasons
 and creates visualizations comparing shock magnitudes and distributions across
 categories, continents, and decades.
 """
@@ -28,7 +28,7 @@ def load_shock_data_with_continents():
         pd.DataFrame: Shock data with continent information added
     """
     # Load shock data
-    shock_data = pd.read_csv("results/largest_food_shock_by_country_with_reasons.csv")
+    shock_data = pd.read_csv("results/largest_crop_shock_by_country_with_reasons.csv")
     
     # Load shapefile to get continent information
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
@@ -184,8 +184,8 @@ def plot_swarm_by_category(data):
 
     # Customize plot
     ax.set_xlabel("Shock Category", fontsize=12)
-    ax.set_ylabel("Largest Food Production Shock (%)", fontsize=12)
-    ax.set_title("Distribution of Largest Food Shocks by Category", fontsize=14, pad=20)
+    ax.set_ylabel("Largest crop Production Shock (%)", fontsize=12)
+    ax.set_title("Distribution of Largest crop Shocks by Category", fontsize=14, pad=20)
 
     # Rotate x-axis labels for better readability
     plt.xticks(rotation=45, ha="right")
@@ -520,11 +520,11 @@ def plot_swarm_by_decade(data):
     """
     Create a swarm plot comparing shock sizes by decade with median lines.
 
-    This function visualizes the distribution of food production shocks across decades,
+    This function visualizes the distribution of crop production shocks across decades,
     showing individual data points as a swarm with median values highlighted.
 
     Args:
-        data (pd.DataFrame): Shock data containing 'year_of_shock' and 'largest_food_shock' columns
+        data (pd.DataFrame): Shock data containing 'year_of_shock' and 'largest_crop_shock' columns
     """
     # Extract decade from year of shock
     # Handle years before 2020 as regular decades (e.g., 1990s)
@@ -591,8 +591,8 @@ def plot_swarm_by_decade(data):
 
     # Customize plot appearance
     ax.set_xlabel("Decade", fontsize=12)
-    ax.set_ylabel("Largest Food Production Shock (%)", fontsize=12)
-    ax.set_title("Distribution of Largest Food Shocks by Decade", fontsize=14, pad=20)
+    ax.set_ylabel("Largest Crop Production Shock (%)", fontsize=12)
+    ax.set_title("Distribution of Largest Crop Shocks by Decade", fontsize=14, pad=20)
 
     # Rotate x-axis labels for better readability
     plt.xticks(rotation=45, ha="right")
