@@ -28,7 +28,7 @@ def load_shock_data_with_continents():
         pd.DataFrame: Shock data with continent information added
     """
     # Load shock data
-    shock_data = pd.read_csv("results/largest_crop_shock_by_country_with_reasons.csv")   
+    shock_data = pd.read_csv("results/largest_crop_shock_by_country_with_reasons.csv")
 
     # Load shapefile to get continent information
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
