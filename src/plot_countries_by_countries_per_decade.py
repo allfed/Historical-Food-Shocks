@@ -1,5 +1,5 @@
 """
-Create a bar plot showing the proportion of countries with food shocks per decade,
+Create a bar plot showing the proportion of countries with crop shocks per decade,
 adjusted for the changing number of countries over time.
 """
 
@@ -17,7 +17,7 @@ def main():
     """Create bar plot of shock proportions adjusted for country counts."""
 
     # Load the shock data
-    shock_data = pd.read_csv("results/largest_food_shock_by_country_with_reasons.csv")
+    shock_data = pd.read_csv("results/largest_crop_shock_by_country_with_reasons.csv")
 
     # Load country count data
     country_counts = pd.read_csv("data/number-of-countries.csv")
@@ -99,7 +99,7 @@ def main():
     ax.set_xlabel("Decade", fontsize=12)
     ax.set_ylabel("Percentage of Countries with Largest Shock (%)", fontsize=12)
     ax.set_title(
-        "Proportion of Countries Experiencing Their Largest Food Shock by Decade",
+        "Proportion of Countries Experiencing Their Largest Crop Shock by Decade",
         fontsize=14,
         pad=20,
     )

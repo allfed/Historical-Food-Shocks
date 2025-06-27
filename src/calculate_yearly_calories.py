@@ -240,8 +240,8 @@ def main():
         "European Union (27)",
         "Land Locked Developing Countries",
         "Least Developed Countries",
-        "Low Income Food Deficit Countries",
-        "Net Food Importing Developing Countries",
+        "Low Income crop Deficit Countries",
+        "Net crop Importing Developing Countries",
         "Australia and New Zealand",  # to avoid double counting
         "Small Island Developing States",
     ]

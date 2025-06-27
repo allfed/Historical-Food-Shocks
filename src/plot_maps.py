@@ -1,8 +1,8 @@
 """
-Create maps showing the largest food shocks per country, region, and group of countries.
+Create maps showing the largest crop shocks per country, region, and group of countries.
 
 This script reads the calculated yield changes and creates choropleth maps
-visualizing the most severe food production shocks for each geographic entity.
+visualizing the most severe crop production shocks for each geographic entity.
 """
 
 import pandas as pd
@@ -67,39 +67,13 @@ def merge_data_with_map_shock(df, map_df):
         map_df["ADMIN"], to="name_short", not_found=None
     )
 
-    # Get the largest food shock for each country
+    # Get the largest crop shock for each country
     df = pd.DataFrame(df.min(axis=1))
 
     # Merge the data with the map
     merged = map_df.merge(df, left_on="name_short", right_index=True, how="left")
-    # Rename the column to 'food_shock'
-    merged.rename(columns={0: "food_shock"}, inplace=True)
-    return merged
-
-
-def merge_data_with_map_count(df, map_df):
-    """
-    Merge the DataFrame with the map DataFrame to count the number of years with food shocks.
-
-    Args:
-        df (pd.DataFrame): DataFrame with countries in name_short format.
-        map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries.
-
-    Returns:
-        gpd.GeoDataFrame: Merged GeoDataFrame.
-    """
-    # Create a new column name_short in the map DataFrame
-    map_df["name_short"] = coco.convert(
-        map_df["ADMIN"], to="name_short", not_found=None
-    )
-
-    # Count the number of years with food shocks for each country
-    df = pd.DataFrame(df[df < -5].count(axis=1))
-
-    # Merge the data with the map
-    merged = map_df.merge(df, left_on="name_short", right_index=True, how="left")
-    # Rename the column to 'food_shock'
-    merged.rename(columns={0: "food_shock_count"}, inplace=True)
+    # Rename the column to 'crop_shock'
+    merged.rename(columns={0: "crop_shock"}, inplace=True)
     return merged
 
 
@@ -114,14 +88,14 @@ def plot_map_yield_shock_relative(merged, title, filename):
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
     merged = merged.to_crs("+proj=wintri")
-    vmin = merged["food_shock"].min()
+    vmin = merged["crop_shock"].min()
     vmax = 0
     merged.plot(
-        column="food_shock",
+        column="crop_shock",
         ax=ax,
         legend=True,
         legend_kwds={
-            "label": "Food Shock [%]",
+            "label": "Crop Shock [%]",
             "orientation": "horizontal",
             "pad": 0.02,
             "shrink": 0.6,
@@ -130,6 +104,8 @@ def plot_map_yield_shock_relative(merged, title, filename):
         vmin=vmin,
         vmax=vmax,
         missing_kwds={"color": "lightgrey"},
+        edgecolor="white",
+        linewidth=0.4,
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
@@ -139,7 +115,7 @@ def plot_map_yield_shock_relative(merged, title, filename):
 
 def plot_map_yield_shock_count(merged, title, filename):
     """
-    Plot map showing percentage of years with food production shocks >5%.
+    Plot map showing percentage of years with crop production shocks >5%.
 
     Args:
         merged (gpd.GeoDataFrame): Merged GeoDataFrame with shock percentages.
@@ -156,7 +132,7 @@ def plot_map_yield_shock_count(merged, title, filename):
         ax=ax,
         legend=True,
         legend_kwds={
-            "label": "Percentage of Years with Food Shock >5%",
+            "label": "Percentage of Years with Crop Shock >5%",
             "orientation": "horizontal",
             "pad": 0.02,
             "shrink": 0.6,
@@ -165,6 +141,8 @@ def plot_map_yield_shock_count(merged, title, filename):
         vmin=0,  # Percentages range from 0 to 100
         vmax=50,
         missing_kwds={"color": "lightgrey"},
+        edgecolor="white",
+        linewidth=0.4,
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
@@ -174,7 +152,7 @@ def plot_map_yield_shock_count(merged, title, filename):
 
 def merge_data_with_map_count(df, map_df):
     """
-    Calculate percentage of years with food shocks >5% for each country.
+    Calculate percentage of years with crop shocks >5% for each country.
 
     Accounts for countries that didn't exist for the full time period by
     using only non-NaN values to determine existence period.
@@ -213,10 +191,10 @@ def merge_data_with_map_count(df, map_df):
 
 
 def plot_map_shock_categories(
-    map_df, data_path="results/largest_food_shock_by_country_with_reasons.csv"
+    map_df, data_path="results/largest_crop_shock_by_country_with_reasons.csv"
 ):
     """
-    Create a map showing countries colored by their main food shock category.
+    Create a map showing countries colored by their main crop shock category.
 
     Args:
         map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries
@@ -274,7 +252,7 @@ def plot_map_shock_categories(
         ax=ax,
         color="#F5F5F5",  # Very light gray for missing data
         edgecolor="white",
-        linewidth=0.5,
+        linewidth=5,
     )
 
     # Plot each category separately to ensure proper legend
@@ -327,7 +305,7 @@ def plot_map_shock_categories(
     )
 
     # Save figure
-    output_path = Path("results/figures/food_shock_categories_by_country.png")
+    output_path = Path("results/figures/crop_shock_categories_by_country.png")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
@@ -343,7 +321,7 @@ def plot_map_shock_categories(
 
 def main():
     """
-    Main function to create all food shock maps.
+    Main function to create all crop shock maps.
     """
     spatial_extent = "countries"
     # Load the data
@@ -365,22 +343,22 @@ def main():
     # Plot the map
     plot_map_yield_shock_relative(
         merged_shock,
-        "Largest Food Production Shock by Country (1961-2023)",
-        "results/figures/food_shock_by_country.png",
+        "Largest Crop Production Shock by Country (1961-2023)",
+        "results/figures/crop_shock_by_country.png",
     )
     plot_map_yield_shock_count(
         merged_count,
-        "Percentage of Years with Food Production Shock by Country (1961-2023)",
-        "results/figures/food_shock_count_by_country.png",
+        "Percentage of Years with Crop Production Shock by Country (1961-2023)",
+        "results/figures/crop_shock_count_by_country.png",
     )
 
     print("\nCreating shock category map...")
     plot_map_shock_categories(admin_map)
 
-    # Save the largest food shock per country to a CSV file
+    # Save the largest crop shock per country to a CSV file
     # Together with the year of the shock
     largest_shock = df.min(axis=1).reset_index()
-    largest_shock.columns = ["country", "largest_food_shock"]
+    largest_shock.columns = ["country", "largest_crop_shock"]
 
     # Get the year of the shock, handling NaN values correctly
     # For each row, find the column (year) with the minimum value, ignoring NaNs
@@ -393,9 +371,9 @@ def main():
     df_reset = df.reset_index(drop=True)
     largest_shock["year_of_shock"] = df_reset.apply(get_min_year, axis=1)
     largest_shock = largest_shock.set_index("country")
-    largest_shock.to_csv("results/largest_food_shock_by_country.csv")
+    largest_shock.to_csv("results/largest_crop_shock_by_country.csv")
     print(
-        "Saved largest food shock per country to results/largest_food_shock_by_country.csv"
+        "Saved largest crop shock per country to results/largest_crop_shock_by_country.csv"
     )
 
 
