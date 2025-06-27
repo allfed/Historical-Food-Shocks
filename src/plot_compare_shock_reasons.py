@@ -23,17 +23,17 @@ plt.style.use(
 def load_shock_data_with_continents():
     """
     Load the shock data and add continent information without removing historical countries.
-    
+
     Returns:
         pd.DataFrame: Shock data with continent information added
     """
     # Load shock data
     shock_data = pd.read_csv("results/largest_food_shock_by_country_with_reasons.csv")
-    
+
     # Load shapefile to get continent information
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
     world_map = gpd.read_file(shapefile_path, engine="fiona")
-    
+
     # Convert country names to name_short format for matching
     shock_data["name_short"] = coco.convert(
         shock_data["country"], to="name_short", not_found=None
@@ -41,13 +41,13 @@ def load_shock_data_with_continents():
     world_map["name_short"] = coco.convert(
         world_map["ADMIN"], to="name_short", not_found=None
     )
-    
+
     # Create a continent lookup dictionary from the shapefile
     continent_lookup = dict(zip(world_map["name_short"], world_map["CONTINENT"]))
-    
+
     # Add continent information using the lookup (preserves all rows)
     shock_data["CONTINENT"] = shock_data["name_short"].map(continent_lookup)
-    
+
     # Handle historical countries that aren't in the modern shapefile
     # by manually mapping them to their historical continent
     historical_continent_mapping = {
@@ -59,30 +59,26 @@ def load_shock_data_with_continents():
         "Belgium-Luxembourg": "Europe",
         "Czechoslovakia": "Europe",
         "Czechia": "Europe",  # When it appears as historical reference
-        
         # African historical countries
         "Ethiopia": "Africa",  # For the pre-1993 entries (before Eritrea independence)
         "Sudan": "Africa",  # For pre-2011 entries (before South Sudan independence)
-        
         # Asian historical countries
         "Democratic People's Republic of Korea": "Asia",  # Full name for North Korea
         "North Korea": "Asia",
-        
         # Pacific historical countries
         "Micronesia, Fed. Sts.": "Oceania",  # Federated States of Micronesia
-        
         # Note: Some entries appear multiple times in the data due to:
         # - Ethiopia: pre/post Eritrea independence (1993)
         # - Sudan: pre/post South Sudan independence (2011)
         # - Czechia: represents Czechoslovakia in earlier years
         # - Micronesia, Fed. Sts.: appears twice in the data
     }
-    
+
     # Apply historical mappings where continent is missing
     for country, continent in historical_continent_mapping.items():
         mask = (shock_data["country"] == country) & (shock_data["CONTINENT"].isna())
         shock_data.loc[mask, "CONTINENT"] = continent
-    
+
     # Alternative approach: Use country_converter's continent conversion
     # for any remaining countries without continent data
     missing_continent_mask = shock_data["CONTINENT"].isna()
@@ -91,23 +87,25 @@ def load_shock_data_with_continents():
         shock_data.loc[missing_continent_mask, "CONTINENT"] = coco.convert(
             shock_data.loc[missing_continent_mask, "country"],
             to="continent",
-            not_found=None
+            not_found=None,
         )
-    
+
     # Drop the temporary name_short column
     shock_data = shock_data.drop("name_short", axis=1)
-    
+
     # Print summary of continent assignment
     print(f"Total countries: {len(shock_data)}")
     print(f"Countries with continent data: {shock_data['CONTINENT'].notna().sum()}")
     print(f"Countries missing continent data: {shock_data['CONTINENT'].isna().sum()}")
-    
-    if shock_data['CONTINENT'].isna().any():
+
+    if shock_data["CONTINENT"].isna().any():
         print("\nCountries still missing continent data:")
-        missing = shock_data[shock_data['CONTINENT'].isna()][['country', 'year_of_shock']].values.tolist()
+        missing = shock_data[shock_data["CONTINENT"].isna()][
+            ["country", "year_of_shock"]
+        ].values.tolist()
         for country, year in missing:
             print(f"  - {country} ({year})")
-    
+
     return shock_data
 
 
