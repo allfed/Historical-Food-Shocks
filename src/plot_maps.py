@@ -139,34 +139,77 @@ def plot_map_yield_shock_relative(merged, title, filename):
 
 def plot_map_yield_shock_count(merged, title, filename):
     """
-    Plots the map with the number of years with yield shocks.
+    Plot map showing percentage of years with food production shocks >5%.
+    
     Args:
-        merged (gpd.GeoDataFrame): Merged GeoDataFrame.
+        merged (gpd.GeoDataFrame): Merged GeoDataFrame with shock percentages.
         title (str): Title for the plot.
         filename (str): Filename to save the plot.
     """
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
     merged = merged.to_crs("+proj=wintri")
-
+    
+    # Plot with percentage values
     merged.plot(
-        column="food_shock_count",
+        column="shock_percentage",
         ax=ax,
         legend=True,
         legend_kwds={
-            "label": "Number of Years with Food Shock",
+            "label": "Percentage of Years with Food Shock >5%",
             "orientation": "horizontal",
             "pad": 0.02,
             "shrink": 0.6,
         },
         cmap="magma_r",
-        vmax=merged["food_shock_count"].max(),
+        vmin=0,  # Percentages range from 0 to 100
+        vmax=50,
         missing_kwds={"color": "lightgrey"},
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(title)
     plt.savefig(filename, bbox_inches="tight")
     plt.close()
+
+
+def merge_data_with_map_count(df, map_df):
+    """
+    Calculate percentage of years with food shocks >5% for each country.
+    
+    Accounts for countries that didn't exist for the full time period by
+    using only non-NaN values to determine existence period.
+    
+    Args:
+        df (pd.DataFrame): DataFrame with countries in name_short format.
+        map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries.
+    
+    Returns:
+        gpd.GeoDataFrame: Merged GeoDataFrame with shock percentages.
+    """
+    # Create a new column name_short in the map DataFrame
+    map_df["name_short"] = coco.convert(
+        map_df["ADMIN"], to="name_short", not_found=None
+    )
+    
+    # Calculate shock statistics for each country
+    # Count years with shocks larger than 5% (values < -5)
+    shock_counts = (df < -5).sum(axis=1)
+    
+    # Count total years of existence (non-NaN values)
+    years_existed = df.notna().sum(axis=1)
+    
+    # Calculate percentage (avoid division by zero)
+    shock_percentage = (shock_counts / years_existed * 100).fillna(0)
+    
+    # Create DataFrame with the percentage
+    shock_stats = pd.DataFrame({
+        "shock_percentage": shock_percentage
+    })
+    
+    # Merge the data with the map
+    merged = map_df.merge(shock_stats, left_on="name_short", right_index=True, how="left")
+    
+    return merged
 
 
 def plot_map_shock_categories(
