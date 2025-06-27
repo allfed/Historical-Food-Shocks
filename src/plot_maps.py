@@ -116,7 +116,7 @@ def plot_map_yield_shock_relative(merged, title, filename):
 def plot_map_yield_shock_count(merged, title, filename):
     """
     Plot map showing percentage of years with crop production shocks >5%.
-    
+
     Args:
         merged (gpd.GeoDataFrame): Merged GeoDataFrame with shock percentages.
         title (str): Title for the plot.
@@ -125,7 +125,7 @@ def plot_map_yield_shock_count(merged, title, filename):
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     # Set the map to the Winkel Tripel projection
     merged = merged.to_crs("+proj=wintri")
-    
+
     # Plot with percentage values
     merged.plot(
         column="shock_percentage",
@@ -153,14 +153,14 @@ def plot_map_yield_shock_count(merged, title, filename):
 def merge_data_with_map_count(df, map_df):
     """
     Calculate percentage of years with crop shocks >5% for each country.
-    
+
     Accounts for countries that didn't exist for the full time period by
     using only non-NaN values to determine existence period.
-    
+
     Args:
         df (pd.DataFrame): DataFrame with countries in name_short format.
         map_df (gpd.GeoDataFrame): GeoDataFrame with country geometries.
-    
+
     Returns:
         gpd.GeoDataFrame: Merged GeoDataFrame with shock percentages.
     """
@@ -168,25 +168,25 @@ def merge_data_with_map_count(df, map_df):
     map_df["name_short"] = coco.convert(
         map_df["ADMIN"], to="name_short", not_found=None
     )
-    
+
     # Calculate shock statistics for each country
     # Count years with shocks larger than 5% (values < -5)
     shock_counts = (df < -5).sum(axis=1)
-    
+
     # Count total years of existence (non-NaN values)
     years_existed = df.notna().sum(axis=1)
-    
+
     # Calculate percentage (avoid division by zero)
     shock_percentage = (shock_counts / years_existed * 100).fillna(0)
-    
+
     # Create DataFrame with the percentage
-    shock_stats = pd.DataFrame({
-        "shock_percentage": shock_percentage
-    })
-    
+    shock_stats = pd.DataFrame({"shock_percentage": shock_percentage})
+
     # Merge the data with the map
-    merged = map_df.merge(shock_stats, left_on="name_short", right_index=True, how="left")
-    
+    merged = map_df.merge(
+        shock_stats, left_on="name_short", right_index=True, how="left"
+    )
+
     return merged
 
 
