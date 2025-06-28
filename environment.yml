@@ -15,4 +15,4 @@ dependencies:
   - geopandas=1.0.1
   - country_converter=1.2
   - fiona=1.10.1
-  - scikit-learn=1.6.3
+  - scikit-learn=1.6.0
