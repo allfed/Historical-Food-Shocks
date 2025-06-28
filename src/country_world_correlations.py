@@ -188,7 +188,7 @@ def create_heatmap(corr, sortby="World"):
         f"Spearman correlation matrix sorted by {sortby} \n (Mean correlation: {mean_corr:.4f})"
     )
     plt.savefig(
-        f"results/correlation_matrix_{sortby}.png",
+        f"results/figures/correlation_matrix_{sortby}.png",
         dpi=300,
         bbox_inches="tight",
     )
@@ -248,7 +248,7 @@ def create_map_visualization(corr_series):
         "Correlation of yield changes between each country and the rest of the world"
     )
     plt.savefig(
-        "./results/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
+        "./results/figures/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
     )
     plt.show()
 
@@ -285,10 +285,6 @@ def main():
     create_map_visualization(corr_series)
 
     print("\nAnalysis complete!")
-    print("Results saved to:")
-    print("- results/country_world_correlations_map.png")
-    print("- results/correlation_matrix_[sortby].png")
-    print("- results/country_world_correlations.csv")
 
 
 if __name__ == "__main__":
