@@ -62,7 +62,6 @@ from __future__ import division, print_function
 from builtins import reversed
 from builtins import map, zip
 from collections.abc import MutableSequence, Sequence
-import copy
 from math import ceil
 from numbers import Complex, Integral, Real
 import sys
@@ -584,7 +583,7 @@ def optimalShrinkage(X, return_covariance=False, method="rie"):
     # the eigenvalues in ascending order.
     lambda_hats = None
 
-    if method is not "kernel":
+    if method != "kernel":
         use_inverse_wishart = method == "iw"
         xis = map(lambda x: xiHelper(x, q, E), eigvals)
         Gammas = map(
