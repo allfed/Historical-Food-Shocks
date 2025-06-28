@@ -179,7 +179,7 @@ def create_heatmap(corr, sortby="World"):
 
     # plot heatmap of corr_RMT
     plt.figure(figsize=(12, 8))
-    sns.heatmap(sorted_corr, cmap="RdBu", vmin=-1, vmax=1, center=0)
+    sns.heatmap(sorted_corr, cmap="RdYlBu_r", vmin=-1, vmax=1, center=0)
     plt.xticks(fontsize=4)
     plt.xlabel("")
     plt.ylabel("")
@@ -238,7 +238,7 @@ def create_map_visualization(corr_series):
             "pad": 0.02,
             "shrink": 0.6,
         },
-        cmap="RdBu_r",
+        cmap="RdYlBu_r",
         vmin=-1,
         vmax=1,
         missing_kwds={"color": "lightgrey"},

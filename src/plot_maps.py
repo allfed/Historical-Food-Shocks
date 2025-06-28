@@ -222,15 +222,15 @@ def plot_map_shock_categories(
     # Define pastel colors for each category
     # Using colorblind-friendly pastel palette
     category_colors = {
-        "Economic": "#FFB6C1",  # Light pink
-        "Policy": "#87CEEB",  # Sky blue
-        "Climate": "#FFA07A",  # Light salmon (reddish)
-        "Conflict": "#DDA0DD",  # Plum
-        "Natural Disaster": "#F0E68C",  # Khaki/yellow
-        "Pest/Disease": "#90EE90",  # Light green
-        "Infrastructure": "#E6E6FA",  # Lavender
-        "Mismanagement": "#D2B48C",  # Tan/brown
-        "Unknown": "#D3D3D3",  # Light gray
+        "Economic": "#F0B323",      # Warm amber
+        "Policy": "#8B4B8C",        # Deep purple
+        "Climate": "#DC582A",       # Burnt orange
+        "Conflict": "#C41E3A",      # Deep red
+        "Natural Disaster": "#3D87CB", # Strong blue
+        "Pest/Disease": "#006B3C",  # Dark teal green
+        "Infrastructure": "#6A5ACD", # Slate blue
+        "Mismanagement": "#A0522D", # Sienna brown
+        "Unknown": "#808080",       # Medium gray
     }
 
     # Get unique categories from the data to ensure we have all of them
