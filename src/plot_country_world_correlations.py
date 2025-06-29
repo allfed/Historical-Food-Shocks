@@ -269,7 +269,7 @@ def create_map_visualization(corr_series):
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(
-        "Correlation of yield changes between each country and the rest of the world"
+        "Correlation of crop production changes between each country and the rest of the world"
     )
     plt.savefig(
         "./results/figures/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
