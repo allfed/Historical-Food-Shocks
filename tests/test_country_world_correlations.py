@@ -20,7 +20,7 @@ from unittest.mock import patch, MagicMock
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root / "src"))
 
-from country_world_correlations import (
+from plot_country_world_correlations import (
     load_data,
     calculate_country_world_correlations,
     calculate_correlation_matrix,

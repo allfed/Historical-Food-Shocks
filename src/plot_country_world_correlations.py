@@ -179,11 +179,11 @@ def create_heatmap(corr, sortby="World"):
 
     # plot heatmap of corr_RMT
     plt.figure(figsize=(12, 8))
-    sns.heatmap(sorted_corr, cmap="RdYlBu_r", vmin=-1, vmax=1, center=0)
-    plt.xticks(fontsize=4)
+    sns.heatmap(sorted_corr, cmap="RdBu", vmin=-1, vmax=1, center=0)
+    plt.xticks(fontsize=3)
     plt.xlabel("")
     plt.ylabel("")
-    plt.yticks(fontsize=4)
+    plt.yticks(fontsize=3)
     plt.title(
         f"Spearman correlation matrix sorted by {sortby} \n (Mean correlation: {mean_corr:.4f})"
     )
@@ -192,7 +192,6 @@ def create_heatmap(corr, sortby="World"):
         dpi=300,
         bbox_inches="tight",
     )
-    plt.show()
 
 
 def create_map_visualization(corr_series):
@@ -238,10 +237,12 @@ def create_map_visualization(corr_series):
             "pad": 0.02,
             "shrink": 0.6,
         },
-        cmap="RdYlBu_r",
-        vmin=-1,
-        vmax=1,
+        cmap="RdBu",
+        vmin=-0.75,
+        vmax=0.75,
         missing_kwds={"color": "lightgrey"},
+        edgecolor="white",
+        linewidth=0.4,
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(
@@ -250,7 +251,6 @@ def create_map_visualization(corr_series):
     plt.savefig(
         "./results/figures/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
     )
-    plt.show()
 
 
 def main():

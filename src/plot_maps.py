@@ -100,7 +100,7 @@ def plot_map_yield_shock_relative(merged, title, filename):
             "pad": 0.02,
             "shrink": 0.6,
         },
-        cmap="magma",
+        cmap="YlOrBr_r",
         vmin=vmin,
         vmax=vmax,
         missing_kwds={"color": "lightgrey"},
@@ -137,7 +137,7 @@ def plot_map_yield_shock_count(merged, title, filename):
             "pad": 0.02,
             "shrink": 0.6,
         },
-        cmap="magma_r",
+        cmap="YlOrBr_r",
         vmin=0,  # Percentages range from 0 to 100
         vmax=50,
         missing_kwds={"color": "lightgrey"},
@@ -222,16 +222,17 @@ def plot_map_shock_categories(
     # Define pastel colors for each category
     # Using colorblind-friendly pastel palette
     category_colors = {
-        "Economic": "#F0B323",      # Warm amber
-        "Policy": "#8B4B8C",        # Deep purple
-        "Climate": "#DC582A",       # Burnt orange
-        "Conflict": "#C41E3A",      # Deep red
-        "Natural Disaster": "#3D87CB", # Strong blue
-        "Pest/Disease": "#006B3C",  # Dark teal green
-        "Infrastructure": "#6A5ACD", # Slate blue
-        "Mismanagement": "#A0522D", # Sienna brown
-        "Unknown": "#808080",       # Medium gray
+        "Economic": "#F0B323",         # Warm amber (kept original - works well)
+        "Policy": "#755549",           # Deep brown (your specified color)
+        "Climate": "#e67f54",          # Coral orange (your specified color)
+        "Conflict": "#C41E3A",         # Deep red (kept original - fits perfectly)
+        "Natural Disaster": "#6197d0", # Sky blue (your specified color)
+        "Pest/Disease": "#006B3C",     # Dark teal green (kept original)
+        "Infrastructure": "#8B7355",   # Tan brown
+        "Mismanagement": "#9B5A75",    # Dusty rose
+        "Unknown": "#808080",          # Medium gray (kept original)
     }
+
 
     # Get unique categories from the data to ensure we have all of them
     unique_categories = merged["Category (main)"].dropna().unique()

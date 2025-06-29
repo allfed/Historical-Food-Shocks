@@ -117,15 +117,15 @@ def get_category_colors():
         dict: Category to color mapping
     """
     return {
-        "Economic": "#F0B323",      # Warm amber
-        "Policy": "#8B4B8C",        # Deep purple
-        "Climate": "#DC582A",       # Burnt orange
-        "Conflict": "#C41E3A",      # Deep red
-        "Natural Disaster": "#3D87CB", # Strong blue
-        "Pest/Disease": "#006B3C",  # Dark teal green
-        "Infrastructure": "#6A5ACD", # Slate blue
-        "Mismanagement": "#A0522D", # Sienna brown
-        "Unknown": "#808080",       # Medium gray
+        "Economic": "#F0B323",         # Warm amber (kept original - works well)
+        "Policy": "#755549",           # Deep brown (your specified color)
+        "Climate": "#e67f54",          # Coral orange (your specified color)
+        "Conflict": "#C41E3A",         # Deep red (kept original - fits perfectly)
+        "Natural Disaster": "#6197d0", # Sky blue (your specified color)
+        "Pest/Disease": "#006B3C",     # Dark teal green (kept original)
+        "Infrastructure": "#8B7355",   # Tan brown
+        "Mismanagement": "#9B5A75",    # Dusty rose
+        "Unknown": "#808080",          # Medium gray (kept original)
     }
 
 
