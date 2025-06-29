@@ -163,36 +163,58 @@ def calculate_correlation_matrix(
 
 def create_heatmap(corr, sortby="World"):
     """
-    Create and display a heatmap of the correlation matrix.
-
+    Create and display a heatmap of the correlation matrix with shortened country names.
+    
     Args:
         corr (pandas.DataFrame): Correlation matrix with countries/regions as index and columns.
-        sortby (str, optional): Country/region name to sort the matrix by.
-            Defaults to "World".
-
+        sortby (str, optional): Country/region name to sort the matrix by. Defaults to "World".
+    
     Returns:
         None: Displays the heatmap and saves it to file.
     """
+    # Sort the correlation matrix by the specified column
     sorted_indices = corr[sortby].sort_values(ascending=False).index
     sorted_corr = corr.loc[sorted_indices, sorted_indices]
+    
+    # Convert country names to short versions (ISO3 codes)
+    # Keep original name if conversion fails
+    cc = coco.CountryConverter()
+    short_names = []
+    for name in sorted_corr.index:
+        try:
+            # Try to convert to name_short, fallback to original if not found
+            short_name = cc.convert(name, to='name_short')
+            # If conversion returns 'not found' or the original name, keep original
+            if short_name == 'not found' or short_name == name:
+                short_names.append(name)
+            else:
+                short_names.append(short_name)
+        except:
+            # If any error occurs, keep the original name
+            short_names.append(name)
+    
+    # Calculate mean correlation excluding the "World" row/column
     mean_corr = sorted_corr.drop("World").values.mean()
-
-    # plot heatmap of corr_RMT
+    
+    # Create the heatmap
     plt.figure(figsize=(12, 8))
     sns.heatmap(sorted_corr, cmap="RdBu", vmin=-1, vmax=1, center=0)
-    plt.xticks(fontsize=4)
+    
+    ticklabel_size = 3
+    # Force all ticks to display with shortened country names
+    plt.xticks(range(len(sorted_corr.columns)), short_names, 
+               rotation=45, ha='right', fontsize=ticklabel_size)
+    plt.yticks(range(len(sorted_corr.index)), short_names, 
+               rotation=0, fontsize=ticklabel_size)
+    
+    # Remove axis labels and set title
     plt.xlabel("")
     plt.ylabel("")
-    plt.yticks(fontsize=4)
-    plt.title(
-        f"Spearman correlation matrix sorted by {sortby} \n (Mean correlation: {mean_corr:.4f})"
-    )
-    plt.savefig(
-        f"results/correlation_matrix_{sortby}.png",
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.show()
+    plt.title(f"Spearman correlation matrix sorted by {sortby}\n(Mean correlation: {mean_corr:.4f})")
+    
+    # Save with tight layout to prevent label cutoff
+    plt.savefig(f"results/figures/correlation_matrix_{sortby}.png",
+                dpi=300, bbox_inches="tight")
 
 
 def create_map_visualization(corr_series):
@@ -238,19 +260,20 @@ def create_map_visualization(corr_series):
             "pad": 0.02,
             "shrink": 0.6,
         },
-        cmap="RdBu_r",
-        vmin=-1,
-        vmax=1,
+        cmap="RdBu",
+        vmin=-0.75,
+        vmax=0.75,
         missing_kwds={"color": "lightgrey"},
+        edgecolor="white",
+        linewidth=0.4,
     )
     plot_winkel_tripel_map(ax)
     ax.set_title(
-        "Correlation of yield changes between each country and the rest of the world"
+        "Correlation of crop production changes between each country and the rest of the world"
     )
     plt.savefig(
-        "./results/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
+        "./results/figures/country_world_correlations_map.png", dpi=300, bbox_inches="tight"
     )
-    plt.show()
 
 
 def main():
@@ -285,10 +308,6 @@ def main():
     create_map_visualization(corr_series)
 
     print("\nAnalysis complete!")
-    print("Results saved to:")
-    print("- results/country_world_correlations_map.png")
-    print("- results/correlation_matrix_[sortby].png")
-    print("- results/country_world_correlations.csv")
 
 
 if __name__ == "__main__":

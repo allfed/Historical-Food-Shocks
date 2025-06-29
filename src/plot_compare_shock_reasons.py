@@ -117,15 +117,15 @@ def get_category_colors():
         dict: Category to color mapping
     """
     return {
-        "Economic": "#FFB6C1",  # Light pink
-        "Policy": "#87CEEB",  # Sky blue
-        "Climate": "#FFA07A",  # Light salmon (reddish)
-        "Conflict": "#DDA0DD",  # Plum
-        "Natural Disaster": "#F0E68C",  # Khaki/yellow
-        "Pest/Disease": "#90EE90",  # Light green
-        "Infrastructure": "#E6E6FA",  # Lavender
-        "Mismanagement": "#D2B48C",  # Tan/brown
-        "Unknown": "#D3D3D3",  # Light gray
+        "Economic": "#F0B323",         # Warm amber (kept original - works well)
+        "Policy": "#755549",           # Deep brown (your specified color)
+        "Climate": "#e67f54",          # Coral orange (your specified color)
+        "Conflict": "#C41E3A",         # Deep red (kept original - fits perfectly)
+        "Natural Disaster": "#6197d0", # Sky blue (your specified color)
+        "Pest/Disease": "#006B3C",     # Dark teal green (kept original)
+        "Infrastructure": "#8B7355",   # Tan brown
+        "Mismanagement": "#9B5A75",    # Dusty rose
+        "Unknown": "#808080",          # Medium gray (kept original)
     }
 
 
