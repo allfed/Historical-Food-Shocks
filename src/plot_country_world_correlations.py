@@ -52,17 +52,6 @@ def load_data():
 
     print(f"Loaded calorie data for {len(calories_countries)} countries")
 
-    # Only keep the main continents in the regions DataFrame
-    continents = [
-        "Africa",
-        "Asia",
-        "Europe",
-        "Northern America",
-        "South America",
-        "Oceania",
-    ]
-    yield_changes_regions = yield_changes_regions.loc[continents]
-
     return (
         calories_countries,
         world_calories,
