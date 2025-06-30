@@ -14,25 +14,25 @@ for i, country1 in enumerate(countries):
         if country1 == 'World' or country2 == 'World':
             continue
 
-        # If this contains continents, skip those which have
-        # Subclasses available (e.g. remove "Africa" if it has "North Africa", "West Africa", etc.)
-        # Just continue for those cases
-        if 'Africa' == country1 or 'Africa' == country2:
-            continue
-        if 'Asia' == country1 or 'Asia' == country2:
-            continue
-        if 'Europe' == country1 or 'Europe' == country2:
-            continue
-        if "Americas" == country1 or "Americas" == country2:
-            continue
+        # # If this contains continents, skip those which have
+        # # Subclasses available (e.g. remove "Africa" if it has "North Africa", "West Africa", etc.)
+        # # Just continue for those cases
+        # if 'Africa' == country1 or 'Africa' == country2:
+        #     continue
+        # if 'Asia' == country1 or 'Asia' == country2:
+        #     continue
+        # if 'Europe' == country1 or 'Europe' == country2:
+        #     continue
+        # if "Americas" == country1 or "Americas" == country2:
+        #     continue
 
         # Keep correlations above threshold (adjust 0.3 as needed)
-        if pd.notna(corr) and abs(corr) >= 0.35:
-            edges.append({
-                'Source': country1,
-                'Target': country2,
-                'Weight': corr
-            })
+     #   if pd.notna(corr) and abs(corr) >= 0:
+        edges.append({
+            'Source': country1,
+            'Target': country2,
+            'Weight': corr
+        })
 
 # Save edge list for Gephi
 edge_df = pd.DataFrame(edges)

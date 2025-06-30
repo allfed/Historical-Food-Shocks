@@ -1,58 +1,16 @@
 Source,Target,Weight
-Caribbean,Eastern Africa,-0.361856072778182
-Caribbean,Eastern Asia,0.4989982635434179
-Caribbean,Eastern Europe,0.4800021253752815
-Caribbean,Middle Africa,-0.3863011177687453
-Caribbean,Northern Europe,0.4899174401155073
-Caribbean,Oceania,0.4328854144013866
-Caribbean,Polynesia,-0.4642474358647708
-Caribbean,Western Asia,-0.3590840325990586
-Caribbean,Western Europe,0.4691557888184405
-Central America,Eastern Asia,0.3508596489274551
-Central America,Northern Europe,0.3682127387024153
-Central America,Western Europe,0.3680948057000852
-Eastern Africa,Eastern Asia,-0.4372449783146275
-Eastern Africa,Eastern Europe,-0.3800952793380676
-Eastern Africa,Middle Africa,0.4170816937644252
-Eastern Africa,Polynesia,0.4363277290763676
-Eastern Africa,Southern Africa,0.3908180138300557
-Eastern Africa,Western Africa,0.3637320834199758
-Eastern Africa,Western Asia,0.4293449212972331
-Eastern Asia,Eastern Europe,0.5328410943343769
-Eastern Asia,Middle Africa,-0.4571285498175453
-Eastern Asia,Northern Europe,0.5298116792352701
-Eastern Asia,Oceania,0.472056795126461
-Eastern Asia,Polynesia,-0.5328424041468516
-Eastern Asia,Western Asia,-0.4355234267174667
-Eastern Asia,Western Europe,0.4913370573984814
-Eastern Europe,Middle Africa,-0.4079625352218923
-Eastern Europe,Northern America,0.3633047301096779
-Eastern Europe,Northern Europe,0.5287157827134801
-Eastern Europe,Oceania,0.4662776466600531
-Eastern Europe,Polynesia,-0.4940279878111144
-Eastern Europe,Southern Europe,0.364738165524842
-Eastern Europe,Western Asia,-0.3768142038272679
-Eastern Europe,Western Europe,0.5099445768466897
-Middle Africa,Northern Europe,-0.3731492848062838
-Middle Africa,Polynesia,0.4484535303970096
-Middle Africa,Southern Africa,0.353082120193227
-Middle Africa,Western Asia,0.4189019085350486
-Northern Africa,Southern Africa,0.4945134121777742
-Northern Africa,Southern Europe,0.3887550192488945
-Northern America,Northern Europe,0.4447552073166302
-Northern America,Oceania,0.3723223969142897
-Northern America,Southern Europe,0.5156247040418329
-Northern America,Western Europe,0.5103165142217955
-Northern Europe,Oceania,0.4925057197773136
-Northern Europe,Polynesia,-0.479008070808181
-Northern Europe,Southern Europe,0.4562787829084151
-Northern Europe,Western Europe,0.5712717139400466
-Oceania,Polynesia,-0.4302931054829227
-Oceania,Southern Europe,0.3796938907363883
-Oceania,Western Europe,0.4905790153005708
-Polynesia,Western Asia,0.4359109498086291
-Polynesia,Western Europe,-0.429914443229634
-Southern Africa,Western Africa,0.3689112406405375
-Southern Africa,Western Asia,0.3986396216639059
-Southern Europe,Western Europe,0.5328358397578243
-Western Africa,Western Asia,0.3679016580928396
+Africa,Asia,-0.1425948402408282
+Africa,Europe,-0.1537361985019382
+Africa,Northern America,-0.1381569693065003
+Africa,South America,0.0730686557842699
+Africa,Oceania,-0.1407728472523157
+Asia,Europe,0.5204150516098597
+Asia,Northern America,0.4676775347154025
+Asia,South America,-0.247345964330936
+Asia,Oceania,0.476532588173482
+Europe,Northern America,0.5042185691324736
+Europe,South America,-0.2666718389446066
+Europe,Oceania,0.5137654942096882
+Northern America,South America,-0.2396480037036527
+Northern America,Oceania,0.4617018262837561
+South America,Oceania,-0.2441855230976714
