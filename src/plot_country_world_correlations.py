@@ -126,7 +126,7 @@ def calculate_country_world_correlations(
 
 
 def calculate_correlation_matrix(
-    yield_changes_countries, yield_changes_world, RMT=True
+    yield_changes_countries, yield_changes_regions, yield_changes_world, RMT=True, spatial_focus="countries"
 ):
     """
     Calculate correlation matrix between all countries and world yield changes.
@@ -144,11 +144,19 @@ def calculate_correlation_matrix(
         pandas.DataFrame: Correlation matrix with countries and world as both index and columns.
             If RMT=True, the matrix is filtered using the clipped function from pyRMT.
     """
-    # Drop NAs and add world row
-    yield_changes_countries.dropna(inplace=True)
-    yield_changes_countries.loc["World"] = yield_changes_world
+    if spatial_focus == "countries":
+        # Drop NAs and add world row
+        yield_changes_countries.dropna(inplace=True)
+        yield_changes_countries.loc["World"] = yield_changes_world
 
-    corr = yield_changes_countries.T.corr()
+        corr = yield_changes_countries.T.corr()
+    elif spatial_focus == "regions":
+        # Use regions instead of countries
+        yield_changes_regions.dropna(inplace=True)
+        yield_changes_regions.loc["World"] = yield_changes_world
+
+        corr = yield_changes_regions.T.corr()
+
     index = corr.index
     columns = corr.columns
 
@@ -311,8 +319,10 @@ def main():
     )
 
     corr = calculate_correlation_matrix(
-        yield_changes_countries, yield_changes_world, RMT=True
+        yield_changes_countries, yield_changes_regions, yield_changes_world, RMT=True, spatial_focus="regions"
     )
+    # Save the correlation matrix to CSV
+    corr.to_csv("./results/correlation_matrix.csv")
 
     # Create visualizations
     create_heatmap(corr)

@@ -57,21 +57,6 @@ def load_shock_data_with_continents():
         "Yugoslavia": "Europe",
         "Serbia and Montenegro": "Europe",
         "Belgium-Luxembourg": "Europe",
-        "Czechoslovakia": "Europe",
-        "Czechia": "Europe",  # When it appears as historical reference
-        # African historical countries
-        "Ethiopia": "Africa",  # For the pre-1993 entries (before Eritrea independence)
-        "Sudan": "Africa",  # For pre-2011 entries (before South Sudan independence)
-        # Asian historical countries
-        "Democratic People's Republic of Korea": "Asia",  # Full name for North Korea
-        "North Korea": "Asia",
-        # Pacific historical countries
-        "Micronesia, Fed. Sts.": "Oceania",  # Federated States of Micronesia
-        # Note: Some entries appear multiple times in the data due to:
-        # - Ethiopia: pre/post Eritrea independence (1993)
-        # - Sudan: pre/post South Sudan independence (2011)
-        # - Czechia: represents Czechoslovakia in earlier years
-        # - Micronesia, Fed. Sts.: appears twice in the data
     }
 
     # Apply historical mappings where continent is missing
@@ -89,6 +74,19 @@ def load_shock_data_with_continents():
             to="continent",
             not_found=None,
         )
+
+    # Replace the wrongly assigned "America" continent with North America and South America
+    countries_to_correct = {
+        "Grenada": "North America",
+        "Dominica": "North America",
+        "Martinique": "North America",
+        "Barbados": "North America",
+        "Guadeloupe": "North America",
+        "French Guiana": "South America",
+    }
+    for country, continent in countries_to_correct.items():
+        mask = (shock_data["country"] == country) & (shock_data["CONTINENT"] == "America")
+        shock_data.loc[mask, "CONTINENT"] = continent
 
     # Drop the temporary name_short column
     shock_data = shock_data.drop("name_short", axis=1)
