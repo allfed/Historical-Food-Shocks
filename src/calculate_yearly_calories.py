@@ -248,7 +248,9 @@ def main():
     # For the regions dataframe, add the "Central Asia" region to the "Europe" region
     # for years 1992 and after, then remove "Central Asia" from the dataframe.
     # This is to maintain consistency with historical data, as Central Asia was previously counted as part of Europe (USSR).
-    df_agg.loc["Europe", df_agg.columns >= "1992"] += df_agg.loc["Central Asia", df_agg.columns >= "1992"]
+    df_agg.loc["Europe", df_agg.columns >= "1992"] += df_agg.loc[
+        "Central Asia", df_agg.columns >= "1992"
+    ]
     df_agg = df_agg.drop("Central Asia")
 
     # Create two seperate dataframes for regions and groups of countries
