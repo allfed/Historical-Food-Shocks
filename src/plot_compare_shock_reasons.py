@@ -85,7 +85,9 @@ def load_shock_data_with_continents():
         "French Guiana": "South America",
     }
     for country, continent in countries_to_correct.items():
-        mask = (shock_data["country"] == country) & (shock_data["CONTINENT"] == "America")
+        mask = (shock_data["country"] == country) & (
+            shock_data["CONTINENT"] == "America"
+        )
         shock_data.loc[mask, "CONTINENT"] = continent
 
     # Drop the temporary name_short column

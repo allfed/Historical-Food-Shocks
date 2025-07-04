@@ -126,7 +126,11 @@ def calculate_country_world_correlations(
 
 
 def calculate_correlation_matrix(
-    yield_changes_countries, yield_changes_regions, yield_changes_world, RMT=True, spatial_focus="countries"
+    yield_changes_countries,
+    yield_changes_regions,
+    yield_changes_world,
+    RMT=True,
+    spatial_focus="countries",
 ):
     """
     Calculate correlation matrix between all countries and world yield changes.
@@ -319,7 +323,11 @@ def main():
     )
 
     corr = calculate_correlation_matrix(
-        yield_changes_countries, yield_changes_regions, yield_changes_world, RMT=True, spatial_focus="regions"
+        yield_changes_countries,
+        yield_changes_regions,
+        yield_changes_world,
+        RMT=True,
+        spatial_focus="regions",
     )
     # Save the correlation matrix to CSV
     corr.to_csv("./results/correlation_matrix.csv")
