@@ -326,9 +326,12 @@ def main():
     spatial_extent = "countries"
     # Load the data
     data_path = Path("results") / f"yield_changes_by_{spatial_extent}.csv"
-    df = pd.read_csv(data_path, index_col=0)
+    df_all_shocks = pd.read_csv(data_path, index_col=0)
     # Convert country names to name_short format
-    df = convert_country_names(df)
+    df_all_shocks = convert_country_names(df_all_shocks)
+
+    # Get the largest crop shock for each country
+    df_biggest = pd.read_csv("results/largest_crop_shock_by_country.csv", index_col=0)
 
     # Force use of Fiona instead of pyogrio
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
@@ -336,8 +339,8 @@ def main():
     print(f"Successfully loaded {len(admin_map)} countries using Fiona")
 
     # Merge the data with the map
-    merged_shock = merge_data_with_map_shock(df, admin_map)
-    merged_count = merge_data_with_map_count(df, admin_map)
+    merged_shock = merge_data_with_map_shock(df_biggest, admin_map)
+    merged_count = merge_data_with_map_count(df_all_shocks, admin_map)
     print(f"Successfully merged data with map for {spatial_extent}")
 
     # Plot the map
