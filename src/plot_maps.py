@@ -326,9 +326,12 @@ def main():
     spatial_extent = "countries"
     # Load the data
     data_path = Path("results") / f"yield_changes_by_{spatial_extent}.csv"
-    df = pd.read_csv(data_path, index_col=0)
+    df_all_shocks = pd.read_csv(data_path, index_col=0)
     # Convert country names to name_short format
-    df = convert_country_names(df)
+    df_all_shocks = convert_country_names(df_all_shocks)
+
+    # Get the largest crop shock for each country
+    df_biggest = pd.read_csv("results/largest_crop_shock_by_country.csv", index_col=0)
 
     # Force use of Fiona instead of pyogrio
     shapefile_path = Path("data") / "ne_110m_admin_0_countries.shp"
@@ -336,8 +339,8 @@ def main():
     print(f"Successfully loaded {len(admin_map)} countries using Fiona")
 
     # Merge the data with the map
-    merged_shock = merge_data_with_map_shock(df, admin_map)
-    merged_count = merge_data_with_map_count(df, admin_map)
+    merged_shock = merge_data_with_map_shock(df_biggest, admin_map)
+    merged_count = merge_data_with_map_count(df_all_shocks, admin_map)
     print(f"Successfully merged data with map for {spatial_extent}")
 
     # Plot the map
@@ -354,27 +357,6 @@ def main():
 
     print("\nCreating shock category map...")
     plot_map_shock_categories(admin_map)
-
-    # Save the largest crop shock per country to a CSV file
-    # Together with the year of the shock
-    largest_shock = df.min(axis=1).reset_index()
-    largest_shock.columns = ["country", "largest_crop_shock"]
-
-    # Get the year of the shock, handling NaN values correctly
-    # For each row, find the column (year) with the minimum value, ignoring NaNs
-    def get_min_year(row):
-        if row.isnull().all():
-            return None
-        return row.idxmin()
-
-    # Reset index for alignment
-    df_reset = df.reset_index(drop=True)
-    largest_shock["year_of_shock"] = df_reset.apply(get_min_year, axis=1)
-    largest_shock = largest_shock.set_index("country")
-    largest_shock.to_csv("results/largest_crop_shock_by_country.csv")
-    print(
-        "Saved largest crop shock per country to results/largest_crop_shock_by_country.csv"
-    )
 
 
 if __name__ == "__main__":
