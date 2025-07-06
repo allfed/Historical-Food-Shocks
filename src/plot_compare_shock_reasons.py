@@ -142,10 +142,10 @@ def plot_swarm_by_category(data):
     # Get color palette
     category_colors = get_category_colors()
 
-    # Order categories by median shock size (most severe first)
+    # Order categories by mean shock size (most severe first)
     category_order = (
         data.groupby("Category (main)")["largest_food_shock"]
-        .median()
+        .mean()
         .sort_values()
         .index.tolist()
     )
@@ -165,14 +165,14 @@ def plot_swarm_by_category(data):
         ax=ax,
     )
 
-    # Add median lines
+    # Add mean lines
     for i, category in enumerate(category_order):
         cat_data = data[data["Category (main)"] == category]["largest_food_shock"]
-        median_val = cat_data.median()
+        mean_val = cat_data.mean()
 
         # Draw median line
         ax.hlines(
-            median_val,
+            mean_val,
             i - 0.4,
             i + 0.4,
             colors="black",
