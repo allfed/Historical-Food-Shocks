@@ -193,17 +193,13 @@ def create_heatmap(corr, sortby="World"):
     cc = coco.CountryConverter()
     short_names = []
     for name in sorted_corr.index:
-        try:
-            # Try to convert to name_short, fallback to original if not found
-            short_name = cc.convert(name, to="name_short")
-            # If conversion returns 'not found' or the original name, keep original
-            if short_name == "not found" or short_name == name:
-                short_names.append(name)
-            else:
-                short_names.append(short_name)
-        except:
-            # If any error occurs, keep the original name
+        # Try to convert to name_short, fallback to original if not found
+        short_name = cc.convert(name, to="name_short")
+        # If conversion returns 'not found' or the original name, keep original
+        if short_name == "not found" or short_name == name:
             short_names.append(name)
+        else:
+            short_names.append(short_name)
 
     # Calculate mean correlation excluding the "World" row/column
     mean_corr = sorted_corr.drop("World").values.mean()
