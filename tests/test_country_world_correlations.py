@@ -14,7 +14,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 # Add src directory to path to import the main script
 project_root = Path(__file__).parent.parent
@@ -23,7 +23,6 @@ sys.path.append(str(project_root / "src"))
 from plot_country_world_correlations import (
     load_data,
     calculate_country_world_correlations,
-    calculate_correlation_matrix,
 )
 
 
