@@ -106,7 +106,7 @@ def calculate_largest_shock():
 
     # Print summary statistics
     valid_shocks = largest_shock[largest_shock["largest_crop_shock"].notna()]
-    print(f"\nSummary:")
+    print("\nSummary:")
     print(f"Total countries processed: {len(largest_shock)}")
     print(f"Countries with valid shocks: {len(valid_shocks)}")
     print(f"Average shock magnitude: {valid_shocks['largest_crop_shock'].mean():.2f}%")
