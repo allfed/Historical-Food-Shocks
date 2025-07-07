@@ -170,7 +170,6 @@ class TestCountryWorldCorrelations:
                 # Check that CSV was saved
                 assert mock_csv.called
 
-
     def test_correlation_calculation_edge_cases(self):
         """Test correlation calculations with edge cases."""
         # Test with empty data
@@ -182,4 +181,3 @@ class TestCountryWorldCorrelations:
             empty_calories, empty_yield_changes, empty_world_calories
         )
         assert corr_series.empty
-
