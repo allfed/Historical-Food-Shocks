@@ -4,7 +4,7 @@
 
 ## What this is and what it can be used for
 
-Historical-Food-Shocks analyzes the frequency and magnitude of food production shocks at the country level. This project aims to demonstrate that food production shocks meeting the Global Catastrophic Food Failure (GCFF) threshold of 5% occur regularly at national scales, suggesting that global-scale events of similar magnitude are plausible and require preparation.
+Historical-Food-Shocks analyzes the frequency and magnitude of food production shocks at the country level. This project aims to demonstrate that food production shocks meeting the requirements of a the Global Catastrophic Food Failure (GCFF) regularly at national scales, suggesting that global-scale events of similar magnitude are plausible and require preparation.
 
 The analysis uses data from the Food and Agriculture Organization of the United Nations (FAO) to estimate how much each year's yield deviates from expected trends, focusing on major crops that account for approximately two-thirds of global calorie production.
 
