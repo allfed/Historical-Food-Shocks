@@ -26,17 +26,24 @@ def calculate_changes_savgol(data, window_length=15, polyorder=3):
     for country in data.index:
         # Extract yield data for the country
         yields = data.loc[country]
+        # Only process non-NaN values
+        valid_mask = yields.notna()
+        valid_yields = yields[valid_mask]
 
         # Set the filter window length to 11 if the country is Sudan or South Sudan
         # this is a workaround for the fact that these countries have very few data points
-        if country in ["Sudan", "South Sudan"]:
+        if country in ["Sudan", "South Sudan", "Serbia and Montenegro"]:
             window_length = 11
 
+        if country in ["China, Macao SAR"]:
+            # Skip those countries because of no data
+            continue
+
         # Apply Savitzky-Golay filter to get the smoothed baseline
-        smoothed_yields = savgol_filter(yields, window_length, polyorder)
+        smoothed_yields = savgol_filter(valid_yields, window_length, polyorder)
 
         # Calculate percentage changes
-        pct_change = ((yields - smoothed_yields) / smoothed_yields) * 100
+        pct_change = ((valid_yields - smoothed_yields) / smoothed_yields) * 100
 
         # Store in results DataFrame
         pct_changes.loc[country] = pct_change
