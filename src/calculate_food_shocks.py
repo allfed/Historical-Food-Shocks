@@ -30,14 +30,16 @@ def calculate_changes_savgol(data, window_length=15, polyorder=3):
         valid_mask = yields.notna()
         valid_yields = yields[valid_mask]
 
-        # Set the filter window length to 11 if the country is Sudan or South Sudan
-        # this is a workaround for the fact that these countries have very few data points
-        if country in ["Sudan", "South Sudan", "Serbia and Montenegro"]:
-            window_length = 11
-
-        if country in ["China, Macao SAR"]:
-            # Skip those countries because of no data
+        # If the nan dropping removes all data entries, skip this country
+        if len(valid_yields) <= 2:
+            print(f"Skipping {country} due to lack of valid data")
             continue
+
+        # If the length of the data is smaller than the window length, make the window smaller
+        # This should be the first odd integer which is smaller then the window length
+        if len(valid_yields) < window_length:
+            window_length = len(valid_yields) if len(valid_yields) % 2 == 1 else len(valid_yields) - 1
+            print(f"Adjusted window length for {country}: {window_length}")
 
         # Apply Savitzky-Golay filter to get the smoothed baseline
         smoothed_yields = savgol_filter(valid_yields, window_length, polyorder)
