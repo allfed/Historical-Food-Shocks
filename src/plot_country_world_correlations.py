@@ -103,7 +103,7 @@ def calculate_country_world_correlations(
         )
 
         window_length = 15  # Set the window length for Savitzky-Golay filter
-        
+
         # Set the filter window length to 11 if the country is Sudan or South Sudan
         # this is a workaround for the fact that these countries have very few data points
         if country in ["Sudan", "South Sudan", "Serbia and Montenegro"]:

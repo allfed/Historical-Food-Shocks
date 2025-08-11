@@ -8,7 +8,9 @@ import country_converter as coco
 from pathlib import Path
 
 
-def convert_country_names_preserving_historical(country_names, preserve_historical=True):
+def convert_country_names_preserving_historical(
+    country_names, preserve_historical=True
+):
     """
     Convert country names to standard format while preserving specific historical entities.
 
@@ -36,7 +38,9 @@ def convert_country_names_preserving_historical(country_names, preserve_historic
         else:
             # Apply standard country converter
             converted_name = coco.convert(name, to="name_short", not_found=None)
-            converted_names.append(converted_name if converted_name is not None else name)
+            converted_names.append(
+                converted_name if converted_name is not None else name
+            )
 
     return converted_names
 
