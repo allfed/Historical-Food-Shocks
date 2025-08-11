@@ -78,5 +78,5 @@ def calculate_global_production_impact():
 # Run the calculation
 if __name__ == "__main__":
     result = calculate_global_production_impact()
-    print(f"\n=== Final Answer ===")
+    print("\n=== Final Answer ===")
     print(f"Global food production decreases by {result:.2f}%")
