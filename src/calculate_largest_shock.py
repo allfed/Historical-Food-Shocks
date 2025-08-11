@@ -8,6 +8,39 @@ import country_converter as coco
 from pathlib import Path
 
 
+def convert_country_names_preserving_historical(country_names, preserve_historical=True):
+    """
+    Convert country names to standard format while preserving specific historical entities.
+
+    Args:
+        country_names (list or pd.Index): Country names to convert
+        preserve_historical (bool): Whether to preserve historical entities
+
+    Returns:
+        list: Converted country names with historical entities preserved
+    """
+    # Define historical entities that should be preserved as-is
+    historical_entities = {
+        "Ethiopia PDR",
+        "USSR",
+        "Yugoslav SFR",
+        "Sudan (former)",
+        # Add other historical entities as needed
+    }
+
+    converted_names = []
+    for name in country_names:
+        if preserve_historical and name in historical_entities:
+            # Keep historical entity as-is
+            converted_names.append(name)
+        else:
+            # Apply standard country converter
+            converted_name = coco.convert(name, to="name_short", not_found=None)
+            converted_names.append(converted_name if converted_name is not None else name)
+
+    return converted_names
+
+
 def calculate_largest_shock():
     """
     Main function to create all crop shock maps.
@@ -18,12 +51,12 @@ def calculate_largest_shock():
     # Load the yield changes data
     yield_data_path = Path("results") / f"yield_changes_by_{spatial_extent}.csv"
     df = pd.read_csv(yield_data_path, index_col=0)
-    df.index = coco.convert(df.index, to="name_short", not_found=None)
+    df.index = convert_country_names_preserving_historical(df.index)
 
     # Load the actual calories data for validation
     calories_data_path = Path("results") / f"calories_by_{spatial_extent}.csv"
     calories_df = pd.read_csv(calories_data_path, index_col=0)
-    calories_df.index = coco.convert(calories_df.index, to="name_short", not_found=None)
+    calories_df.index = convert_country_names_preserving_historical(calories_df.index)
 
     # Initialize results storage
     results = []

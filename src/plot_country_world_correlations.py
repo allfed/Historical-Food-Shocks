@@ -102,9 +102,20 @@ def calculate_country_world_correlations(
             index=pd.Index([f"World_minus_{country}"], name="Area"),
         )
 
+        window_length = 15  # Set the window length for Savitzky-Golay filter
+        
+        # Set the filter window length to 11 if the country is Sudan or South Sudan
+        # this is a workaround for the fact that these countries have very few data points
+        if country in ["Sudan", "South Sudan", "Serbia and Montenegro"]:
+            window_length = 11
+
+        if country in ["China, Macao SAR"]:
+            # Skip those countries because of no data
+            continue
+
         # Calculate yield changes for world minus country using the same method
         world_minus_country_yield_changes = calculate_changes_savgol(
-            world_minus_country_df, window_length=15, polyorder=3
+            world_minus_country_df, window_length=window_length, polyorder=3
         ).iloc[0]
 
         # Calculate correlation
