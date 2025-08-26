@@ -131,13 +131,13 @@ def get_category_colors():
 
 def plot_swarm_by_category(data):
     """
-    Create a swarm plot comparing shock sizes by main category.
+    Create a swarm plot comparing shock sizes by main category with labels for the most severe shock in each category.
 
     Args:
         data (pd.DataFrame): Shock data with categories
     """
     # Set up the figure
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(14, 9))  # Slightly larger to accommodate labels
 
     # Get color palette
     category_colors = get_category_colors()
@@ -160,17 +160,18 @@ def plot_swarm_by_category(data):
         y="largest_food_shock",
         order=category_order,
         palette=palette,
-        size=10,
-        alpha=0.9,
+        size=9.5,
         ax=ax,
     )
 
-    # Add mean lines
+    # Add mean lines and find most severe shocks for labeling
+    most_severe_shocks = {}
+    
     for i, category in enumerate(category_order):
-        cat_data = data[data["Category (main)"] == category]["largest_food_shock"]
-        mean_val = cat_data.mean()
+        cat_data = data[data["Category (main)"] == category]
+        mean_val = cat_data["largest_food_shock"].mean()
 
-        # Draw median line
+        # Draw mean line
         ax.hlines(
             mean_val,
             i - 0.4,
@@ -179,17 +180,70 @@ def plot_swarm_by_category(data):
             linestyles="solid",
             linewidth=2,
         )
+        
+        # Find the most severe shock (minimum value) in this category
+        most_severe_idx = cat_data["largest_food_shock"].idxmin()
+        most_severe_row = cat_data.loc[most_severe_idx]
+        
+        # Store information for labeling
+        most_severe_shocks[category] = {
+            'x_pos': i,
+            'y_pos': most_severe_row["largest_food_shock"],
+            'country': most_severe_row["country"],
+            'year': int(most_severe_row["year_of_shock"]),
+            'value': most_severe_row["largest_food_shock"]
+        }
+
+    # Add labels for the most severe shock in each category
+    for category, shock_info in most_severe_shocks.items():
+        # Create label text with country and year
+        label_text = f"{shock_info['country']}\n({shock_info['year']})"
+        
+        # Position label slightly below and to the right of the point
+        # Adjust positioning based on shock severity to avoid overlaps
+        x_offset = 0.15
+        y_offset = -2.5  # Move label below the point
+        
+        # For very severe shocks (< -40%), move label further to avoid crowding
+        if shock_info['value'] < -40:
+            y_offset = -4.0
+            
+        ax.annotate(
+            label_text,
+            xy=(shock_info['x_pos'], shock_info['y_pos']),
+            xytext=(shock_info['x_pos'] + x_offset, shock_info['y_pos'] + y_offset),
+            fontsize=9,
+            ha='left',
+            va='top',
+            bbox=dict(
+                boxstyle="round,pad=0.3",
+                facecolor='white',
+                edgecolor='gray',
+                alpha=0.8
+            ),
+            arrowprops=dict(
+                arrowstyle="->",
+                connectionstyle="arc3,rad=0.1",
+                color='gray',
+                alpha=0.7,
+                lw=1
+            )
+        )
 
     # Customize plot
     ax.set_xlabel("Shock Category", fontsize=12)
-    ax.set_ylabel("Largest crop Production Shock (%)", fontsize=12)
-    ax.set_title("Distribution of Largest crop Shocks by Category", fontsize=14, pad=20)
+    ax.set_ylabel("Largest Crop Production Shock (%)", fontsize=12)
+    ax.set_title("Distribution of Largest Crop Shocks by Category", fontsize=14, pad=20)
 
     # Rotate x-axis labels for better readability
-    plt.xticks(rotation=45, ha="right")
+    plt.xticks(rotation=45, fontsize=13, ha="right")
 
     # Add grid for easier reading
     ax.grid(True, axis="y", alpha=0.3)
+
+    # Extend y-axis slightly to accommodate labels
+    y_min, y_max = ax.get_ylim()
+    ax.set_ylim(y_min - 8, y_max + 2)  # Add space at bottom for labels
 
     # Adjust layout
     plt.tight_layout()
@@ -200,7 +254,13 @@ def plot_swarm_by_category(data):
     plt.savefig(output_path, bbox_inches="tight", dpi=300)
     plt.close()
 
-    print(f"Saved swarm plot to {output_path}")
+    print(f"Saved swarm plot with labels to {output_path}")
+    
+    # Print summary of most severe shocks by category
+    print("\nMost severe shock in each category:")
+    for category in category_order:
+        shock_info = most_severe_shocks[category]
+        print(f"  {category}: {shock_info['value']:.1f}% - {shock_info['country']} ({shock_info['year']})")
 
 
 def plot_stacked_bar_by_continent(data):
