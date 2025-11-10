@@ -152,7 +152,7 @@ def main():
             all(r not in crop for r in crops_to_remove)
             for crops in crop_list.values()
             for crop in crops
-        ), "Crops to remove still present in crop list" 
+        ), "Crops to remove still present in crop list"
 
     # Load the data directly from the ZIP file
     full_production_data = extract_and_load_fao_data(zip_file, csv_in_zip)

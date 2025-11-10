@@ -12,10 +12,12 @@ The sequence is as follows:
    - src/plot_countries_by_countries_per_decade.py
    - src/plot_compare_shock_reasons.py
 """
+
 import os
 from pathlib import Path
 import subprocess
 import sys
+
 
 def main():
     """Run all main components of the project in sequence."""
@@ -41,6 +43,7 @@ def main():
             print(f"Error running {script}. Exiting.")
             sys.exit(result.returncode)
         print(f"Finished {script}.\n")
+
 
 if __name__ == "__main__":
     main()
