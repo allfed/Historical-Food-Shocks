@@ -39,7 +39,11 @@ def calculate_changes_savgol(data, window_length=15, polyorder=3):
         # If the length of the data is smaller than the window length, make the window smaller
         # This should be the first odd integer which is smaller then the window length
         if len(valid_yields) < window_length:
-            window_length = len(valid_yields) if len(valid_yields) % 2 == 1 else len(valid_yields) - 1
+            window_length = (
+                len(valid_yields)
+                if len(valid_yields) % 2 == 1
+                else len(valid_yields) - 1
+            )
             print(f"Adjusted window length for {country}: {window_length}")
 
         # Apply Savitzky-Golay filter to get the smoothed baseline

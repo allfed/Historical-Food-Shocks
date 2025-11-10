@@ -166,7 +166,7 @@ def plot_swarm_by_category(data):
 
     # Add mean lines and find most severe shocks for labeling
     most_severe_shocks = {}
-    
+
     for i, category in enumerate(category_order):
         cat_data = data[data["Category (main)"] == category]
         mean_val = cat_data["largest_food_shock"].mean()
@@ -180,54 +180,51 @@ def plot_swarm_by_category(data):
             linestyles="solid",
             linewidth=2,
         )
-        
+
         # Find the most severe shock (minimum value) in this category
         most_severe_idx = cat_data["largest_food_shock"].idxmin()
         most_severe_row = cat_data.loc[most_severe_idx]
-        
+
         # Store information for labeling
         most_severe_shocks[category] = {
-            'x_pos': i,
-            'y_pos': most_severe_row["largest_food_shock"],
-            'country': most_severe_row["country"],
-            'year': int(most_severe_row["year_of_shock"]),
-            'value': most_severe_row["largest_food_shock"]
+            "x_pos": i,
+            "y_pos": most_severe_row["largest_food_shock"],
+            "country": most_severe_row["country"],
+            "year": int(most_severe_row["year_of_shock"]),
+            "value": most_severe_row["largest_food_shock"],
         }
 
     # Add labels for the most severe shock in each category
     for category, shock_info in most_severe_shocks.items():
         # Create label text with country and year
         label_text = f"{shock_info['country']}\n({shock_info['year']})"
-        
+
         # Position label slightly below and to the right of the point
         # Adjust positioning based on shock severity to avoid overlaps
         x_offset = 0.15
         y_offset = -2.5  # Move label below the point
-        
+
         # For very severe shocks (< -40%), move label further to avoid crowding
-        if shock_info['value'] < -40:
+        if shock_info["value"] < -40:
             y_offset = -4.0
-            
+
         ax.annotate(
             label_text,
-            xy=(shock_info['x_pos'], shock_info['y_pos']),
-            xytext=(shock_info['x_pos'] + x_offset, shock_info['y_pos'] + y_offset),
+            xy=(shock_info["x_pos"], shock_info["y_pos"]),
+            xytext=(shock_info["x_pos"] + x_offset, shock_info["y_pos"] + y_offset),
             fontsize=9,
-            ha='left',
-            va='top',
+            ha="left",
+            va="top",
             bbox=dict(
-                boxstyle="round,pad=0.3",
-                facecolor='white',
-                edgecolor='gray',
-                alpha=0.8
+                boxstyle="round,pad=0.3", facecolor="white", edgecolor="gray", alpha=0.8
             ),
             arrowprops=dict(
                 arrowstyle="->",
                 connectionstyle="arc3,rad=0.1",
-                color='gray',
+                color="gray",
                 alpha=0.7,
-                lw=1
-            )
+                lw=1,
+            ),
         )
 
     # Customize plot
@@ -255,12 +252,14 @@ def plot_swarm_by_category(data):
     plt.close()
 
     print(f"Saved swarm plot with labels to {output_path}")
-    
+
     # Print summary of most severe shocks by category
     print("\nMost severe shock in each category:")
     for category in category_order:
         shock_info = most_severe_shocks[category]
-        print(f"  {category}: {shock_info['value']:.1f}% - {shock_info['country']} ({shock_info['year']})")
+        print(
+            f"  {category}: {shock_info['value']:.1f}% - {shock_info['country']} ({shock_info['year']})"
+        )
 
 
 def plot_stacked_bar_by_continent(data):
