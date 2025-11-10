@@ -160,5 +160,5 @@ def main(filter_method="savgol"):
 
 
 if __name__ == "__main__":
-    main()
+    main(filter_method="gaussian")
     print("Analysis complete.")
