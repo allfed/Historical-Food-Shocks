@@ -140,7 +140,7 @@ def main():
     }
 
     # Remove crops of interest that are not relevant
-    crop_removal = False
+    crop_removal = True
     if crop_removal:
         crops_to_remove = ["Seed cotton, unginned", "Soya beans", "Rape or colza seed"]
         for category, crops in crop_list.items():
