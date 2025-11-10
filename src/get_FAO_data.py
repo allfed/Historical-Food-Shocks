@@ -139,6 +139,21 @@ def main():
         ],
     }
 
+    # Remove crops of interest that are not relevant
+    crop_removal = False
+    if crop_removal:
+        crops_to_remove = ["Seed cotton, unginned", "Soya beans", "Rape or colza seed"]
+        for category, crops in crop_list.items():
+            crop_list[category] = [
+                crop for crop in crops if all(r not in crop for r in crops_to_remove)
+            ]
+        # Check if they are removed
+        assert all(
+            all(r not in crop for r in crops_to_remove)
+            for crops in crop_list.values()
+            for crop in crops
+        ), "Crops to remove still present in crop list" 
+
     # Load the data directly from the ZIP file
     full_production_data = extract_and_load_fao_data(zip_file, csv_in_zip)
 
