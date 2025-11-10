@@ -12,19 +12,15 @@ By visualizing historical shock patterns through choropleth maps, this project g
 
 ## Installation
 
-To install the Historical-Food-Shocks package, we recommend setting up a virtual environment using the following steps:
+To install the Historical-Food-Shocks package, set up a virtual environment using uv with the following steps:
 
-* Create a virtual environment using conda by running the command `conda env create -f environment.yml`. This will create an environment called "food-shocks".
+Create a virtual environment by running `uv venv` in the main folder of the repository. This creates an environment in the `.venv` directory. 
 
-* Activate the environment by running `conda activate food-shocks`.
+Activate the environment using `source .venv/bin/activate` on Unix/macOS or `.venv\Scripts\activate` on Windows. 
 
-* Install the package by running `pip install -e .` in the main folder of the repository.
+Install the package in editable mode by running `uv pip install -e .` in the main folder. This installs the package and all its dependencies.
 
-* To run the Jupyter notebooks, you'll need to create a kernel for the environment:
-  - Install the necessary tools: `conda install -c anaconda ipykernel`
-  - Create the kernel: `python -m ipykernel install --user --name=food-shocks`
-
-You can now use the kernel "food-shocks" to run the example notebooks or analyze the data yourself.
+To run the Jupyter notebooks, create a kernel for the environment. First install ipykernel with `uv pip install ipykernel`, then create the kernel using `python -m ipykernel install --user --name=food-shocks`. You can now select the "food-shocks" kernel in Jupyter to run the example notebooks or analyze the data yourself.
 
 ## How this works
 The main implementation of the analysis is provided in the `src` directory. The analysis process consists of:

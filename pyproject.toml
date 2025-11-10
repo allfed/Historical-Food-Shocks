@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "historical-food-shocks"
+version = "0.1.0"
+description = "Analysis of historical food production shocks at country level"
+readme = "README.md"
+requires-python = ">=3.13"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "ALLFED", email = "info@allfed.info"}
+]
+
+dependencies = [
+    "pandas>=2.2.3,<3",
+    "numpy>=2.2.6,<3",
+    "matplotlib>=3.10.3,<4",
+    "requests>=2.32.3,<3",
+    "tqdm>=4.67.1,<5",
+    "scipy>=1.15.0,<2",
+    "seaborn>=0.13.2,<1",
+    "geopandas>=1.0.1,<2",
+    "country_converter>=1.2,<2",
+    "fiona>=1.10.1,<2",
+    "scikit-learn>=1.6.0,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0,<9",
+    "black",
+    "flake8",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
