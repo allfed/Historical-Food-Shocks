@@ -49,6 +49,8 @@ You can customize the analysis by modifying parameters such as:
 - Specific crops to include in the analysis
 - Date range for the analysis
 
+You can also just execute `run_everything.py` to run everything in the right order.
+
 ## Getting the data
 
 The repository comes with recent versions of the FAO data, but if you need the most up-to-date information, you can download the data from the FAO:

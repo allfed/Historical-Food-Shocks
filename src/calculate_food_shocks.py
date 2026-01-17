@@ -61,7 +61,7 @@ def calculate_changes_savgol(data, window_length=15, polyorder=3):
 def calculate_changes_gaussian(data, sigma=3.0):
     """
     Calculate changes in yield for each year using a Gaussian filter
-    
+
     This method follows Anderson et al. (2023) approach. The Gaussian filter
     provides smooth baseline estimation across the entire time series without
     edge effects at the boundaries.
@@ -84,7 +84,7 @@ def calculate_changes_gaussian(data, sigma=3.0):
     for country in data.index:
         # Extract yield data for the country
         yields = data.loc[country]
-        
+
         # Only process non-NaN values
         valid_mask = yields.notna()
         valid_yields = yields[valid_mask]
@@ -105,9 +105,7 @@ def calculate_changes_gaussian(data, sigma=3.0):
         # The mode='nearest' parameter handles edge effects by extending
         # the signal using the nearest value
         smoothed_yields = gaussian_filter1d(
-            valid_yields, 
-            sigma=effective_sigma, 
-            mode='nearest'
+            valid_yields, sigma=effective_sigma, mode="nearest"
         )
 
         # Calculate percentage changes
@@ -119,7 +117,6 @@ def calculate_changes_gaussian(data, sigma=3.0):
         pct_changes.loc[country] = pct_change
 
     return pct_changes
-
 
 
 def main(filter_method="savgol"):
@@ -135,7 +132,7 @@ def main(filter_method="savgol"):
         data = pd.read_csv(input_file, index_col=0)
 
         # Apply the selected filter method
-        if filter_method == 'savgol':
+        if filter_method == "savgol":
             print("Calculating yield changes using Savitzky-Golay filter...")
             # Set the window length and polynomial order for the Savitzky-Golay filter
             # Using 15 years, because this is similar to the approach in Anderson et al.
@@ -146,16 +143,14 @@ def main(filter_method="savgol"):
             pct_changes = calculate_changes_savgol(
                 data, window_length=window_length, polyorder=polyorder
             )
-        elif filter_method == 'gaussian':
+        elif filter_method == "gaussian":
             print("Calculating yield changes using Gaussian filter...")
             # Set sigma for the Gaussian filter
             # Sigma of 3.0 provides comparable smoothing to window_length=15
             # in Savitzky-Golay (roughly 7-year effective window)
             sigma = 3.0
             # Calculate percentage changes
-            pct_changes = calculate_changes_gaussian(
-                data, sigma=sigma
-            )
+            pct_changes = calculate_changes_gaussian(data, sigma=sigma)
 
         # Save results
         output_file = os.path.join("results", "yield_changes_by_" + selection + ".csv")
