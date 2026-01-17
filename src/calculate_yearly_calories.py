@@ -146,6 +146,9 @@ def main():
     input_path = os.path.join(DATA_DIR, INPUT_FILE)
     df = pd.read_csv(input_path)
 
+    # Only keep wheat
+    # df = df[df["Item"] == "Wheat"]
+
     df_calories, calorie_cols = calculate_calories(df)
 
     df_agg = aggregate_calories_by_country(df_calories, calorie_cols)
