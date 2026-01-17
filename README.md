@@ -37,9 +37,6 @@ The `scripts` directory contains Jupyter notebooks with visualization examples a
 
 We used Claude 4 Sonnet to look for reasons for food shocks with the prompt saved in the docs folder. The results from Claude were verified by hand and sorted into a number of categories. The result file was then used to create the figures that display the shock categories. 
 
-### Calculating frequency of large shocks
-To be added
-
 ### Running the analysis with custom parameters
 
 You can customize the analysis by modifying parameters such as:
