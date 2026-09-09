@@ -1,0 +1,20 @@
+{
+  "n_countries": 199,
+  "n_severe_shocks": 133,
+  "year_min": 1961,
+  "year_max": 2023,
+  "years_with_a_shock_somewhere": 63,
+  "total_years_covered": 63,
+  "total_country_shock_events": 2888,
+  "avg_shocks_per_year": 45.8,
+  "spotlight": {
+    "country": "Botswana",
+    "name_short": "Botswana",
+    "pct": -80.4,
+    "year": 1979,
+    "category": "Climate",
+    "reason": "Inadequate rainfall during 1978/1979 growing season leading to severe crop failure",
+    "source": "Agricultural production its challenges and state intervention in Botswana: a historical perspective",
+    "source_link": "https://www.tandfonline.com/doi/full/10.1080/23311886.2025.2480726?af=R"
+  }
+}

@@ -10,6 +10,14 @@ The analysis uses data from the Food and Agriculture Organization of the United 
 
 By visualizing historical shock patterns through choropleth maps, this project grounds future catastrophic food security risks in historical data, challenging the perception that GCFF-scale events are merely theoretical.
 
+## Interactive companion site
+
+An interactive, map-based companion to the paper is published via GitHub Pages: it lets you explore
+each country's largest recorded food-production shock, filter by cause, and see the reasoning and
+sources behind each event. The source lives in `docs/` and is a static HTML/JS site (D3.js) with no
+build step. The underlying JSON/GeoJSON is generated from `results/` by `scripts/build_docs_data.py`
+(run it after regenerating the analysis to refresh the site's data).
+
 ## Installation
 
 To install the Historical-Food-Shocks package, set up a virtual environment using uv with the following steps:
