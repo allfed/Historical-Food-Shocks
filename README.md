@@ -10,6 +10,8 @@ The analysis uses data from the Food and Agriculture Organization of the United 
 
 By visualizing historical shock patterns through choropleth maps, this project grounds future catastrophic food security risks in historical data, challenging the perception that GCFF-scale events are merely theoretical.
 
+[Interactive Version](https://allfed.github.io/Historical-Food-Shocks/)
+
 ## Interactive companion site
 
 An interactive, map-based companion to the paper is published via GitHub Pages: it lets you explore
