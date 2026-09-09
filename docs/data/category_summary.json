@@ -1,0 +1,426 @@
+{
+  "colors": {
+    "Economic": "#F0B323",
+    "Policy": "#755549",
+    "Climate": "#e67f54",
+    "Conflict": "#C41E3A",
+    "Environmental Hazard": "#6197d0",
+    "Pest/Disease": "#006B3C",
+    "Infrastructure": "#8B7355",
+    "Mismanagement": "#9B5A75",
+    "Unknown": "#808080"
+  },
+  "overall": [
+    {
+      "category": "Climate",
+      "count": 97
+    },
+    {
+      "category": "Unknown",
+      "count": 36
+    },
+    {
+      "category": "Conflict",
+      "count": 20
+    },
+    {
+      "category": "Economic",
+      "count": 17
+    },
+    {
+      "category": "Environmental Hazard",
+      "count": 15
+    },
+    {
+      "category": "Mismanagement",
+      "count": 7
+    },
+    {
+      "category": "Policy",
+      "count": 7
+    },
+    {
+      "category": "Pest/Disease",
+      "count": 1
+    }
+  ],
+  "by_continent": [
+    {
+      "continent": "Africa",
+      "category": "Climate",
+      "count": 30
+    },
+    {
+      "continent": "Africa",
+      "category": "Conflict",
+      "count": 9
+    },
+    {
+      "continent": "Africa",
+      "category": "Economic",
+      "count": 2
+    },
+    {
+      "continent": "Africa",
+      "category": "Environmental Hazard",
+      "count": 1
+    },
+    {
+      "continent": "Africa",
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "continent": "Africa",
+      "category": "Pest/Disease",
+      "count": 1
+    },
+    {
+      "continent": "Africa",
+      "category": "Policy",
+      "count": 1
+    },
+    {
+      "continent": "Africa",
+      "category": "Unknown",
+      "count": 5
+    },
+    {
+      "continent": "Asia",
+      "category": "Climate",
+      "count": 20
+    },
+    {
+      "continent": "Asia",
+      "category": "Conflict",
+      "count": 5
+    },
+    {
+      "continent": "Asia",
+      "category": "Economic",
+      "count": 7
+    },
+    {
+      "continent": "Asia",
+      "category": "Environmental Hazard",
+      "count": 2
+    },
+    {
+      "continent": "Asia",
+      "category": "Mismanagement",
+      "count": 2
+    },
+    {
+      "continent": "Asia",
+      "category": "Policy",
+      "count": 3
+    },
+    {
+      "continent": "Asia",
+      "category": "Unknown",
+      "count": 8
+    },
+    {
+      "continent": "Europe",
+      "category": "Climate",
+      "count": 30
+    },
+    {
+      "continent": "Europe",
+      "category": "Economic",
+      "count": 2
+    },
+    {
+      "continent": "Europe",
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "continent": "Europe",
+      "category": "Policy",
+      "count": 1
+    },
+    {
+      "continent": "Europe",
+      "category": "Unknown",
+      "count": 3
+    },
+    {
+      "continent": "North America",
+      "category": "Climate",
+      "count": 6
+    },
+    {
+      "continent": "North America",
+      "category": "Conflict",
+      "count": 3
+    },
+    {
+      "continent": "North America",
+      "category": "Economic",
+      "count": 1
+    },
+    {
+      "continent": "North America",
+      "category": "Environmental Hazard",
+      "count": 2
+    },
+    {
+      "continent": "North America",
+      "category": "Policy",
+      "count": 1
+    },
+    {
+      "continent": "North America",
+      "category": "Unknown",
+      "count": 4
+    },
+    {
+      "continent": "Oceania",
+      "category": "Climate",
+      "count": 1
+    },
+    {
+      "continent": "Oceania",
+      "category": "Economic",
+      "count": 1
+    },
+    {
+      "continent": "Oceania",
+      "category": "Environmental Hazard",
+      "count": 2
+    },
+    {
+      "continent": "Oceania",
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "continent": "Oceania",
+      "category": "Unknown",
+      "count": 2
+    },
+    {
+      "continent": "South America",
+      "category": "Climate",
+      "count": 4
+    },
+    {
+      "continent": "South America",
+      "category": "Conflict",
+      "count": 1
+    },
+    {
+      "continent": "South America",
+      "category": "Economic",
+      "count": 3
+    },
+    {
+      "continent": "South America",
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "continent": "South America",
+      "category": "Policy",
+      "count": 1
+    },
+    {
+      "continent": "South America",
+      "category": "Unknown",
+      "count": 2
+    }
+  ],
+  "by_decade": [
+    {
+      "decade": 1960,
+      "category": "Climate",
+      "count": 3
+    },
+    {
+      "decade": 1960,
+      "category": "Conflict",
+      "count": 1
+    },
+    {
+      "decade": 1960,
+      "category": "Policy",
+      "count": 2
+    },
+    {
+      "decade": 1960,
+      "category": "Unknown",
+      "count": 5
+    },
+    {
+      "decade": 1970,
+      "category": "Climate",
+      "count": 13
+    },
+    {
+      "decade": 1970,
+      "category": "Conflict",
+      "count": 5
+    },
+    {
+      "decade": 1970,
+      "category": "Economic",
+      "count": 4
+    },
+    {
+      "decade": 1970,
+      "category": "Environmental Hazard",
+      "count": 5
+    },
+    {
+      "decade": 1970,
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "decade": 1970,
+      "category": "Policy",
+      "count": 2
+    },
+    {
+      "decade": 1970,
+      "category": "Unknown",
+      "count": 8
+    },
+    {
+      "decade": 1980,
+      "category": "Climate",
+      "count": 11
+    },
+    {
+      "decade": 1980,
+      "category": "Conflict",
+      "count": 3
+    },
+    {
+      "decade": 1980,
+      "category": "Economic",
+      "count": 2
+    },
+    {
+      "decade": 1980,
+      "category": "Environmental Hazard",
+      "count": 4
+    },
+    {
+      "decade": 1980,
+      "category": "Mismanagement",
+      "count": 2
+    },
+    {
+      "decade": 1980,
+      "category": "Unknown",
+      "count": 5
+    },
+    {
+      "decade": 1990,
+      "category": "Climate",
+      "count": 18
+    },
+    {
+      "decade": 1990,
+      "category": "Conflict",
+      "count": 5
+    },
+    {
+      "decade": 1990,
+      "category": "Economic",
+      "count": 8
+    },
+    {
+      "decade": 1990,
+      "category": "Environmental Hazard",
+      "count": 3
+    },
+    {
+      "decade": 1990,
+      "category": "Mismanagement",
+      "count": 3
+    },
+    {
+      "decade": 1990,
+      "category": "Policy",
+      "count": 2
+    },
+    {
+      "decade": 1990,
+      "category": "Unknown",
+      "count": 7
+    },
+    {
+      "decade": 2000,
+      "category": "Climate",
+      "count": 28
+    },
+    {
+      "decade": 2000,
+      "category": "Conflict",
+      "count": 3
+    },
+    {
+      "decade": 2000,
+      "category": "Economic",
+      "count": 2
+    },
+    {
+      "decade": 2000,
+      "category": "Environmental Hazard",
+      "count": 1
+    },
+    {
+      "decade": 2000,
+      "category": "Policy",
+      "count": 1
+    },
+    {
+      "decade": 2000,
+      "category": "Unknown",
+      "count": 5
+    },
+    {
+      "decade": 2010,
+      "category": "Climate",
+      "count": 22
+    },
+    {
+      "decade": 2010,
+      "category": "Conflict",
+      "count": 3
+    },
+    {
+      "decade": 2010,
+      "category": "Economic",
+      "count": 1
+    },
+    {
+      "decade": 2010,
+      "category": "Environmental Hazard",
+      "count": 2
+    },
+    {
+      "decade": 2010,
+      "category": "Mismanagement",
+      "count": 1
+    },
+    {
+      "decade": 2010,
+      "category": "Pest/Disease",
+      "count": 1
+    },
+    {
+      "decade": 2010,
+      "category": "Unknown",
+      "count": 6
+    },
+    {
+      "decade": 2020,
+      "category": "Climate",
+      "count": 2
+    }
+  ]
+}

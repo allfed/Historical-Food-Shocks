@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Historical Food Shocks — Interactive Explorer</title>
+  <meta name="description" content="An interactive companion to the paper 'Historical Food Shocks': explore 60+ years of national-scale food production crises, where they happened, and why." />
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow">ALLFED &middot; Historical Food Shocks</p>
+      <h1>A Global Catastrophic Food Failure isn&rsquo;t hypothetical &mdash; it happens locally, somewhere, almost every year.</h1>
+      <p class="lede">
+        A Global Catastrophic Food Failure (GCFF) is a collapse in food production severe enough to
+        threaten global food security. Nobody has seen one at global scale &mdash; but this paper finds
+        that shocks of that same size and speed have repeatedly hit individual countries since 1961.
+        This page lets you see them directly: where they happened, how severe they were, and what caused them.
+      </p>
+      <div class="header-links">
+        <a class="btn btn-primary" href="esd-17-151-2026.pdf">Read the full paper (PDF)</a>
+        <a class="btn" href="https://github.com/allfed/Historical-Food-Shocks">Code &amp; data on GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="spotlight-section">
+    <div class="wrap">
+      <div class="spotlight-card" id="spotlightCard" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="wrap">
+      <p class="stats-intro" id="statsIntro">That collapse wasn&rsquo;t a one-off. This has been the pattern for six decades:</p>
+      <div class="stats-grid" id="statsGrid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <section class="decades-section" aria-labelledby="decadesHeading">
+      <h2 id="decadesHeading">Six decades of shocks, decade by decade</h2>
+      <p class="section-intro">
+        Each map shows how much of that decade a country spent in shock &mdash; production more than 5% below
+        trend, the same threshold used throughout the paper. No decade, and almost no region, is spared.
+        <strong>If an event of this size and cause hit global food production all at once instead of one
+        country at a time, that is what a Global Catastrophic Food Failure would look like.</strong>
+      </p>
+      <div class="decade-grid" id="decadeGrid" aria-label="Shock intensity by decade, six small world maps"></div>
+    </section>
+
+    <section class="map-section" aria-labelledby="mapHeading">
+      <h2 id="mapHeading">Explore any country</h2>
+      <p class="section-intro">
+        Every country shown here has its own worst food-production shock on record &mdash; the year its
+        calorie production fell furthest below its expected trend. Switch views to see either how severe
+        that shock was, or what caused it. Click any country for details and sources.
+      </p>
+
+      <div class="map-controls">
+        <div class="toggle-group" role="tablist" aria-label="Map view">
+          <button type="button" class="toggle active" data-mode="magnitude" role="tab" aria-selected="true">
+            Shock size
+          </button>
+          <button type="button" class="toggle" data-mode="reason" role="tab" aria-selected="false">
+            Shock reason
+          </button>
+        </div>
+      </div>
+
+      <div class="map-layout">
+        <div class="map-wrap">
+          <svg id="map" viewBox="0 0 960 500" role="img" aria-label="World map of national food production shocks"></svg>
+          <div class="legend" id="legend"></div>
+        </div>
+        <aside class="detail-panel" id="detailPanel">
+          <p class="detail-placeholder">Click a country on the map to see its largest food-production shock on record.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="reasons-section" aria-labelledby="reasonsHeading">
+      <h2 id="reasonsHeading">What&rsquo;s behind these shocks?</h2>
+      <p class="section-intro">
+        Each event was categorized by reviewing historical reporting for that country and year (with an
+        LLM-assisted first pass, verified by hand). Climate shocks &mdash; mostly drought &mdash; dominate,
+        but conflict, economic collapse, and policy failure are all recurring causes. Click a category to
+        highlight it on the map above.
+      </p>
+      <div class="chart-controls">
+        <div class="toggle-group" role="tablist" aria-label="Group chart by">
+          <button type="button" class="toggle active" data-group="continent" role="tab" aria-selected="true">By continent</button>
+          <button type="button" class="toggle" data-group="decade" role="tab" aria-selected="false">By decade</button>
+        </div>
+        <button type="button" class="clear-filter" id="clearFilter" hidden>Clear filter &times;</button>
+      </div>
+      <div id="categoryChart" class="category-chart"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        <strong>Citation:</strong>
+        Jehn, F. et al. Historical Food Shocks. <em>Earth System Dynamics</em>.
+        See the <a href="esd-17-151-2026.pdf">PDF</a> for the full citation.
+      </p>
+      <p>
+        Data: FAOSTAT crop production statistics, 1961&ndash;2023. Country boundaries: Natural Earth.
+        Source code, methodology, and raw results: <a href="https://github.com/allfed/Historical-Food-Shocks">github.com/allfed/Historical-Food-Shocks</a>.
+      </p>
+      <p class="license">Released under the Apache-2.0 license &middot; <a href="https://allfed.info">ALLFED</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
