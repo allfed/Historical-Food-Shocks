@@ -41,9 +41,7 @@ def load_map():
         admin_map["ADMIN"], to="name_short", not_found=None
     )
     # simplify geometry to keep file size small, keep in WGS84 (lon/lat)
-    admin_map["geometry"] = admin_map["geometry"].simplify(
-        0.03, preserve_topology=True
-    )
+    admin_map["geometry"] = admin_map["geometry"].simplify(0.03, preserve_topology=True)
     return admin_map[["name_short", "ADMIN", "CONTINENT", "geometry"]]
 
 
@@ -63,7 +61,9 @@ def dedupe_by_name_short(df, name_col, name_short_col="name_short"):
 
 
 def load_shock_data():
-    df = pd.read_csv(REPO / "results" / "largest_crop_shock_by_country_with_reasons.csv")
+    df = pd.read_csv(
+        REPO / "results" / "largest_crop_shock_by_country_with_reasons.csv"
+    )
     df["name_short"] = coco.convert(df["country"], to="name_short", not_found=None)
     df = dedupe_by_name_short(df, "country")
     return df
@@ -110,29 +110,31 @@ def build_countries_geojson(admin_map, shock_df):
     for _, row in merged.iterrows():
         category = row["Category (main)"]
         color = (
-            CATEGORY_COLORS.get(category, DEFAULT_COLOR)
-            if pd.notna(category)
-            else None
+            CATEGORY_COLORS.get(category, DEFAULT_COLOR) if pd.notna(category) else None
         )
         props = {
             "name": row["ADMIN"],
             "name_short": row["name_short"],
             "continent": row["CONTINENT"],
-            "shock_pct": None
-            if pd.isna(row["largest_food_shock"])
-            else round(float(row["largest_food_shock"]), 1),
-            "shock_year": None
-            if pd.isna(row["year_of_shock"])
-            else int(row["year_of_shock"]),
+            "shock_pct": (
+                None
+                if pd.isna(row["largest_food_shock"])
+                else round(float(row["largest_food_shock"]), 1)
+            ),
+            "shock_year": (
+                None if pd.isna(row["year_of_shock"]) else int(row["year_of_shock"])
+            ),
             "category_main": None if pd.isna(category) else category,
-            "category_secondary": None
-            if pd.isna(row["Category (secondary)"])
-            else row["Category (secondary)"],
+            "category_secondary": (
+                None
+                if pd.isna(row["Category (secondary)"])
+                else row["Category (secondary)"]
+            ),
             "reason": None if pd.isna(row["Reason"]) else str(row["Reason"]).strip(),
             "source": None if pd.isna(row["Source"]) else str(row["Source"]).strip(),
-            "source_link": None
-            if pd.isna(row["Source Link"])
-            else str(row["Source Link"]).strip(),
+            "source_link": (
+                None if pd.isna(row["Source Link"]) else str(row["Source Link"]).strip()
+            ),
             "category_color": color,
         }
         features.append(
@@ -188,7 +190,9 @@ def build_category_summary(shock_df, admin_map):
 
 
 def build_headline_stats(shock_df):
-    freq = pd.read_csv(REPO / "results" / "historical_frequency_results.csv", index_col=0)
+    freq = pd.read_csv(
+        REPO / "results" / "historical_frequency_results.csv", index_col=0
+    )
     yearly_cols = pd.read_csv(
         REPO / "results" / "yield_changes_by_countries.csv", index_col=0, nrows=0
     ).columns
@@ -214,14 +218,20 @@ def build_headline_stats(shock_df):
             "name_short": worst["name_short"],
             "pct": round(float(worst["largest_food_shock"]), 1),
             "year": int(worst["year_of_shock"]),
-            "category": worst["Category (main)"]
-            if pd.notna(worst["Category (main)"])
-            else None,
-            "reason": str(worst["Reason"]).strip() if pd.notna(worst["Reason"]) else None,
-            "source": str(worst["Source"]).strip() if pd.notna(worst["Source"]) else None,
-            "source_link": str(worst["Source Link"]).strip()
-            if pd.notna(worst["Source Link"])
-            else None,
+            "category": (
+                worst["Category (main)"] if pd.notna(worst["Category (main)"]) else None
+            ),
+            "reason": (
+                str(worst["Reason"]).strip() if pd.notna(worst["Reason"]) else None
+            ),
+            "source": (
+                str(worst["Source"]).strip() if pd.notna(worst["Source"]) else None
+            ),
+            "source_link": (
+                str(worst["Source Link"]).strip()
+                if pd.notna(worst["Source Link"])
+                else None
+            ),
         },
     }
 
@@ -274,7 +284,9 @@ def main():
     (OUT_DIR / "countries.geojson").write_text(json.dumps(geojson))
 
     category_summary = build_category_summary(shock_df, admin_map)
-    (OUT_DIR / "category_summary.json").write_text(json.dumps(category_summary, indent=2))
+    (OUT_DIR / "category_summary.json").write_text(
+        json.dumps(category_summary, indent=2)
+    )
 
     yearly = load_yearly(shock_df["name_short"].dropna().unique())
     (OUT_DIR / "yearly_by_country.json").write_text(json.dumps(yearly))

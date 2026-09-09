@@ -72,7 +72,6 @@ import pandas as pd
 from sklearn.covariance import EmpiricalCovariance
 from sklearn.preprocessing import StandardScaler
 
-
 __author__ = "Gregory Giecold and Lionel Ouaknin"
 __copyright__ = "Copyright 2017-2022 Gregory Giecold and contributors"
 __credit__ = "Gregory Giecold and Lionel Ouaknin"
