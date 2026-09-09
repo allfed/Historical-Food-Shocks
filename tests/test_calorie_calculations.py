@@ -9,7 +9,6 @@ import pytest
 import pandas as pd
 from pathlib import Path
 
-
 # Add src directory to path to import the main script
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root / "src"))

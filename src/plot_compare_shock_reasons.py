@@ -13,7 +13,6 @@ import seaborn as sns
 from pathlib import Path
 import country_converter as coco
 
-
 # Set up ALLFED plotting style
 plt.style.use(
     "https://raw.githubusercontent.com/allfed/ALLFED-matplotlib-style-sheet/main/ALLFED.mplstyle"

@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 import country_converter as coco
 from pathlib import Path
 
-
 # Set up ALLFED plotting style
 plt.style.use(
     "https://raw.githubusercontent.com/allfed/ALLFED-matplotlib-style-sheet/main/ALLFED.mplstyle"
