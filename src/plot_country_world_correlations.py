@@ -321,7 +321,7 @@ def main():
         yield_changes_regions,
         yield_changes_world,
     ) = load_data()
-  
+
     # Calculate correlations
     corr_series = calculate_country_world_correlations(
         calories_countries,
