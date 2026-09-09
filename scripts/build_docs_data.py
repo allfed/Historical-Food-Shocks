@@ -299,7 +299,7 @@ def main():
 
     print("Wrote:")
     for f in OUT_DIR.glob("*.json"):
-        print(f" -", f, f.stat().st_size, "bytes")
+        print(" -", f, f.stat().st_size, "bytes")
 
 
 if __name__ == "__main__":
